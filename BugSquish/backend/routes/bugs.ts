@@ -27,4 +27,32 @@ router.route('/add').post((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req: any, res: any) => {
+    Bug.findById(req.params.id)
+        .then((bug :any) => res.json(bug))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').delete((req: any, res: any) => {
+    Bug.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Bug ticket deleted.'))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req: any, res: any) => {
+    Bug.findById(req.params.id)
+        .then((bug: any) => {
+            bug.username = req.body.username;
+            bug.title = req.body.title;
+            bug.description = req.body.description;
+            bug.project = req.body.project;
+            bug.date = Date.parse(req.body.date);
+
+            bug.save()
+                .then(() => res.json('Bug ticket updated'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 export default router;
