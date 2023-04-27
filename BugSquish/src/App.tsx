@@ -1,57 +1,34 @@
 import { useState } from 'react'
 import './App.css'
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form} from 'react-bootstrap'
+import Home from './components/Home.tsx'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
 
   return (
     <div className="App">
-      <header className='App-header'>
-        <Container fluid>
-          <Form>
-            <Row>
-              <Col md>
-                  <Form.Group controlId='formEmail'>
-                  <Form.Label>Email Address</Form.Label>
-                  <Form.Control type='email' placeholder='example@email.com' />
-                  <Form.Text className='text-muted'>
-                    We'll never save your email address...trust us!
-                  </Form.Text>
-                </Form.Group>
-              </Col>
+      <Navbar bg="dark" variant="dark" expand="lg">
+      
+        <Navbar.Brand className="mx-3" href="#home">
+          <Bug />
+          BugSquish
+        </Navbar.Brand>
+        <Navbar.Toggle className="mx-3" aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+          <Nav className="me-3">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#login">Login</Nav.Link>
+            <Nav.Link href="#signup">Sign Up</Nav.Link>
+            <Nav.Link href="#newticket">Create New Ticket</Nav.Link>
+            <Nav.Link href="#mytickets">View my Tickets</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      
+      </Navbar>
 
-              <Col md>
-                <Form.Group controlId='formPassword'>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' placeholder='Password' />
-                </Form.Group>
-              </Col>
-            </Row>
- 
-            <Button variant='success' type = 'submit'>Login</Button>
-          </Form>
-          <Card className='mb-3' style={{color: "#000"}}>
-            <Card.Img src='https://picsum.photos/200/100'/>
-            <Card.Body>
-              <Card.Title>
-                Card Example
-              </Card.Title>
-              <Card.Text>
-                This is an example of a card
-              </Card.Text>
-
-              <Button variant='primary'>Read More</Button>
-            </Card.Body>
-          </Card>
-          <Breadcrumb>
-            <Breadcrumb.Item>Test</Breadcrumb.Item>
-            <Breadcrumb.Item>Test 2</Breadcrumb.Item>
-            <Breadcrumb.Item active>Test 3</Breadcrumb.Item>
-
-          </Breadcrumb>
-        </Container>
-      </header>
+      <Home />
     </div>
   )
 }
