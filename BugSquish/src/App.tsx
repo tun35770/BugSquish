@@ -37,7 +37,7 @@ function App() {
         </Navbar> 
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<BugList />} />
           <Route path="/bugs" element={<BugList />} />
           <Route path="/create" element={<CreateBug />} />
           <Route path="/edit/:id" element={<EditBug />} />

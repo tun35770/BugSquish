@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card'
 
 const CreateBug = () => {
 
@@ -23,7 +24,6 @@ const CreateBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
-    const [date, setDate] = useState('');
     const [users, setUsers] = useState([''])
 
     const userInputRef = useRef();
@@ -56,7 +56,7 @@ const CreateBug = () => {
             title: title,
             description: description,
             project: project,
-            date: date
+            date: new Date()
         };
 
         console.log(bug);
@@ -65,9 +65,9 @@ const CreateBug = () => {
     }
 
   return (
-    <div className='mx-3'>
+    <Card className='' style={{maxWidth: '75%', margin: '3rem auto', padding:'1rem'}}>
         <h3>Create New Bug Ticket</h3>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} style={{width:'80%', margin:'0 auto'}}>
 
             <Form.Group className="mb-3" >
             <Form.Label>Title: </Form.Label>
@@ -101,8 +101,17 @@ const CreateBug = () => {
                     onChange={onChangeProject}>
                 </Form.Control>
             </Form.Group>
+
+            <Form.Group className='mb-3'>
+                <Form.Control
+                    type="submit"
+                    value="Create Bug Ticket"
+                    className="btn btn-primary"
+                    onSubmit={onSubmit}>
+                </Form.Control>
+            </Form.Group>
         </Form>
-    </div>
+    </Card>
   )
 }
 
