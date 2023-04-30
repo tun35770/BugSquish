@@ -20,7 +20,7 @@ const CreateBug = () => {
         }
     } */
 
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('defaultUsername');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
@@ -59,7 +59,17 @@ const CreateBug = () => {
             date: new Date()
         };
 
-        console.log(bug);
+        fetch('http://localhost:5000/bugs/add', {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify(bug)
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
 
         window.location.href= "/";
     }

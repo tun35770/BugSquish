@@ -16,8 +16,6 @@ const CreateUser = () => {
         username: username,
     };
 
-    console.log(user);
-
     fetch('http://localhost:5000/users/add', {
       method: 'POST',
       headers: {
