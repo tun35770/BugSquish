@@ -26,10 +26,10 @@ function App() {
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
             <Nav className="me-3">
               <Link to="/" className="nav-link">Home</Link>
-              <Link to="/create" className="mx-2">Create Bug Ticket</Link>
-              <Link to="user" className="mx-2">Create User</Link>
-              <Link to="" className="mx-2">Create New Ticket</Link>
-              <Link to="" className="mx-2">View my Tickets</Link>
+              <Link to="/create" className="nav-link">Create Bug Ticket</Link>
+              <Link to="user" className="nav-link">Create User</Link>
+              <Link to="" className="nav-link">Create New Ticket</Link>
+              <Link to="" className="nav-link">View my Tickets</Link>
             </Nav>
           </Navbar.Collapse>
         
