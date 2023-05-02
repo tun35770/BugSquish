@@ -69,7 +69,7 @@ const CreateBug = () => {
         <br/>
         <Form onSubmit={onSubmit} style={{width:'80%', margin:'0 auto'}}>
 
-            <Form.Group className="mb-3 leftAlign" >
+            <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
             <Form.Label>Title: </Form.Label>
                 <Form.Control
                 type="text"
@@ -80,7 +80,7 @@ const CreateBug = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3 leftAlign">
+            <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
             <Form.Label>Description: </Form.Label>
                 <Form.Control
                 as="textarea"
@@ -91,7 +91,7 @@ const CreateBug = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3 leftAlign">
+            <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
             <Form.Label>Project Name: </Form.Label>
                 <Form.Control
                 type="text"

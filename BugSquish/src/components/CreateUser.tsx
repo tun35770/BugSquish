@@ -46,7 +46,7 @@ const CreateUser = () => {
         {{width:'80%',
           margin:'0 auto'}}>
 
-        <Form.Group className="mb-3 leftAlign">
+        <Form.Group className="mb-3 leftAlign" controlId="formGroupUsername">
         <Form.Label>Username: </Form.Label>
             <Form.Control
               type="text"
