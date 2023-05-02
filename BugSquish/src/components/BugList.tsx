@@ -47,7 +47,7 @@ const BugList = () => {
           {{border:'2px dotted white', 
             textAlign:'left', 
             maxWidth:'35em',
-            backgroundImage: 'linear-gradient(to left, #3020a0aa, 35%, #000)',
+            backgroundImage: 'linear-gradient(to left top, #4D4855, #000)',
             color:'#fff'}}>
             <Card.Body>
               <Card.Title>

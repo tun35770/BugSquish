@@ -17,7 +17,7 @@ function App() {
       <div className="App">
         <Navbar bg="dark" variant="dark" expand="lg">
         
-          <Navbar.Brand className="mx-3" href="#home">
+          <Navbar.Brand className="mx-3" href="/">
             <Bug />
             BugSquish
           </Navbar.Brand>
