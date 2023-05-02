@@ -12,10 +12,6 @@ const CreateBug = () => {
 
     const userInputRef = useRef();
     
-    useEffect(() => {
-        setUsers(['Tom', 'Bob', 'Ryan'])
-    }, []);
-    
     function onChangeUsername(e: React.ChangeEvent<HTMLSelectElement>){
         setUsername(e.currentTarget.value);
     }
