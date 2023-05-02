@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
+import Bug from './Bug';
 
 const BugList = () => {
-  class Bug {
+  class BugType {
+    _id: string;
     username: string;
     title: string;
     description: string;
     project: string;
     date: Date;
 
-    constructor(username:string, title:string, description:string, project:string, date:Date){
+    constructor(id:string, username:string, title:string, description:string, project:string, date:Date){
+        this._id = id;
         this.username = username;
         this.title = title;
         this.description = description;
@@ -18,7 +21,7 @@ const BugList = () => {
     }
   }
 
-  const [bugs, setBugs] = useState<Bug[]>([]);
+  const [bugs, setBugs] = useState<BugType[]>([]);
 
   /*
     TODO: Implement localStorage for bugs.
@@ -39,42 +42,32 @@ const BugList = () => {
         .catch((err) => console.log(err))
   }, [])
 
+  function deleteBug(id:string){
+    fetch('http://localhost:5000/bugs/' + id, {
+            method: 'delete',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const newBugs = [...bugs].filter((bug: BugType) => bug._id !== id)
+          setBugs(newBugs);
+        })
+        .catch((err) => console.log(err))
+  }
+  
+  function bugList(){
+    return bugs.map((currentBug: BugType) => {
+      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug._id} id={currentBug._id} />
+    });
+  }
+
   return (
     <div>
-      {bugs.map((bug, idx) => {
-        return (
-          <Card key={idx} className='my-3 mx-5' style=
-          {{border:'2px dotted white', 
-            textAlign:'left', 
-            maxWidth:'35em',
-            backgroundImage: 'linear-gradient(to left top, #4D4855, #000)',
-            color:'#fff'}}>
-            <Card.Body>
-              <Card.Title>
-                {bug.title}
-              </Card.Title>
-
-              <Card.Text>
-                {bug.description}
-              </Card.Text>
-
-              <br/>
-              
-              <Card.Body style={{padding:'0', lineHeight:'1em'}}>
-                <Card.Text>
-                  <b>Project: </b>{bug.project}
-                </Card.Text>
-                <Card.Text>
-                  <b>Submitted by: </b>{bug.username}
-                </Card.Text>
-                <Card.Text>
-                  <b>{new Date(bug.date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})} </b>
-                </Card.Text>
-              </Card.Body>
-            </Card.Body>
-          </Card>
-        )
-      })}
+      {bugList()}
     </div>
   )
 }
