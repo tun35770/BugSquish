@@ -38,8 +38,9 @@ const CreateUser = () => {
       {{maxWidth: '75%', 
         margin: '3rem auto', 
         padding:'1rem',
-        backgroundColor: '#100030',
-        color:'#fff'}}>
+        backgroundImage: 'linear-gradient(to left top, #4D4855, #000)',
+        color:'#fff',
+        border:'1px solid white'}}>
       <h3>Create New User</h3>
       <br/>
       <Form onSubmit={onSubmit} style=
