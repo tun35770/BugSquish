@@ -44,7 +44,7 @@ const BugList = () => {
       {bugs.map((bug, idx) => {
         return (
           <Card key={idx} className='my-3 mx-5' style=
-          {{border:'2px solid lightblue', 
+          {{border:'2px dotted white', 
             textAlign:'left', 
             maxWidth:'35em',
             backgroundImage: 'linear-gradient(to left, #3020a0aa, 35%, #000)',
