@@ -33,7 +33,7 @@ const BugList = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          //console.log(data);
           setBugs(data);
         })
         .catch((err) => console.log(err))
@@ -43,7 +43,12 @@ const BugList = () => {
     <div>
       {bugs.map((bug, idx) => {
         return (
-          <Card key={idx} className='my-3 mx-5' style={{border:'2px solid lightblue'}}>
+          <Card key={idx} className='my-3 mx-5' style=
+          {{border:'2px solid lightblue', 
+            textAlign:'left', 
+            maxWidth:'35em',
+            backgroundImage: 'linear-gradient(to left, #3020a0aa, 35%, #000)',
+            color:'#fff'}}>
             <Card.Body>
               <Card.Title>
                 {bug.title}
@@ -52,15 +57,20 @@ const BugList = () => {
               <Card.Text>
                 {bug.description}
               </Card.Text>
-              <Card.Text>
-                {bug.project}
-              </Card.Text>
-              <Card.Text>
-                {bug.username}
-              </Card.Text>
-              <Card.Text>
-                {bug.date.toString()}
-              </Card.Text>
+
+              <br/>
+              
+              <Card.Body style={{padding:'0', lineHeight:'1em'}}>
+                <Card.Text>
+                  <b>Project: </b>{bug.project}
+                </Card.Text>
+                <Card.Text>
+                  <b>Submitted by: </b>{bug.username}
+                </Card.Text>
+                <Card.Text>
+                  <b>{new Date(bug.date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})} </b>
+                </Card.Text>
+              </Card.Body>
             </Card.Body>
           </Card>
         )

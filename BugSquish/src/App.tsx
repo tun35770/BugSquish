@@ -26,11 +26,9 @@ function App() {
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
             <Nav className="me-3">
               <Link to="/" className="nav-link">Home</Link>
-              <Link to="/bugs" className="nav-link">View Bugs</Link>
               <Link to="/create" className="nav-link">Create Bug Ticket</Link>
               <Link to="/edit" className="nav-link">Edit tickets</Link>
               <Link to="/user" className="nav-link">Create User</Link>
-              
             </Nav>
           </Navbar.Collapse>
         
@@ -38,7 +36,6 @@ function App() {
 
         <Routes>
           <Route path="/" element={<BugList />} />
-          <Route path="/bugs" element={<BugList />} />
           <Route path="/create" element={<CreateBug />} />
           <Route path="/edit/:id" element={<EditBug />} />
           <Route path="/user" element={<CreateUser />} />

@@ -1,5 +1,19 @@
 #root {
   margin: 0 auto;
   text-align: center;
+  background-image: linear-gradient(#4717f698, #4717F6);
+  min-height:100vh;
 }
 
+.primaryColor {
+  background-color: #4717f698;
+}
+
+.secondaryColor {
+  background-color: #25202c56;
+  color: #fff;
+}
+
+.leftAlign {
+  text-align: left;
+}

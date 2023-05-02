@@ -16,6 +16,7 @@ const CreateUser = () => {
         username: username,
     };
 
+    //TODO: Add error text on database error
     fetch('http://localhost:5000/users/add', {
       method: 'POST',
       headers: {
@@ -33,11 +34,19 @@ const CreateUser = () => {
 
 
   return (
-    <Card className='' style={{maxWidth: '75%', margin: '3rem auto', padding:'1rem'}}>
-      <h3>Create New Bug Ticket</h3>
-      <Form onSubmit={onSubmit} style={{width:'80%', margin:'0 auto'}}>
+    <Card className='' style=
+      {{maxWidth: '75%', 
+        margin: '3rem auto', 
+        padding:'1rem',
+        backgroundColor: '#100030',
+        color:'#fff'}}>
+      <h3>Create New User</h3>
+      <br/>
+      <Form onSubmit={onSubmit} style=
+        {{width:'80%',
+          margin:'0 auto'}}>
 
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3 leftAlign">
         <Form.Label>Username: </Form.Label>
             <Form.Control
               type="text"
@@ -47,13 +56,14 @@ const CreateUser = () => {
               onChange={onChangeUsername}>
             </Form.Control>
         </Form.Group>
-
+        <br/>
         <Form.Group className='mb-3'>
                 <Form.Control
                     type="submit"
                     value="Create User"
                     className="btn btn-primary"
-                    onSubmit={onSubmit}>
+                    onSubmit={onSubmit}
+                    style={{maxWidth:'10em'}}>
                 </Form.Control>
             </Form.Group>
         </Form>

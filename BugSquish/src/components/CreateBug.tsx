@@ -4,22 +4,6 @@ import Card from 'react-bootstrap/Card'
 
 const CreateBug = () => {
 
-    /* Class Bug {
-        username: string;
-        title: string;
-        description: string;
-        project: string;
-        date: Date;
-
-        constructor(username:string, title:string, description:string, project:string, date:Date){
-            this.username = username;
-            this.title = title;
-            this.description = description;
-            this.project = project;
-            this.date = date;
-        }
-    } */
-
     const [username, setUsername] = useState('defaultUsername');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -75,11 +59,17 @@ const CreateBug = () => {
     }
 
   return (
-    <Card className='' style={{maxWidth: '75%', margin: '3rem auto', padding:'1rem'}}>
+    <Card className='' style=
+        {{maxWidth: '75%', 
+          margin: '3rem auto', 
+          padding:'1rem',
+          backgroundColor: '#100030',
+          color:'#fff'}}>
         <h3>Create New Bug Ticket</h3>
+        <br/>
         <Form onSubmit={onSubmit} style={{width:'80%', margin:'0 auto'}}>
 
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3 leftAlign" >
             <Form.Label>Title: </Form.Label>
                 <Form.Control
                 type="text"
@@ -90,10 +80,10 @@ const CreateBug = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 leftAlign">
             <Form.Label>Description: </Form.Label>
                 <Form.Control
-                type="text"
+                as="textarea"
                     required
                     className="form-control"
                     value={description}
@@ -101,7 +91,7 @@ const CreateBug = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 leftAlign">
             <Form.Label>Project Name: </Form.Label>
                 <Form.Control
                 type="text"
@@ -111,13 +101,14 @@ const CreateBug = () => {
                     onChange={onChangeProject}>
                 </Form.Control>
             </Form.Group>
-
+            <br/>
             <Form.Group className='mb-3'>
                 <Form.Control
                     type="submit"
                     value="Create Bug Ticket"
                     className="btn btn-primary"
-                    onSubmit={onSubmit}>
+                    onSubmit={onSubmit}
+                    style={{maxWidth:'10em'}}>
                 </Form.Control>
             </Form.Group>
         </Form>
