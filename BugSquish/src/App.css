@@ -6,6 +6,10 @@
   min-height:100vh;
 }
 
+.title {
+  font-family: 'Montserrat';
+}
+
 .leftAlign {
   text-align: left;
 }

@@ -3,11 +3,9 @@ import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {BsXCircle, BsPencil} from 'react-icons/bs'
 
-//TODO: Adjust mobile view for cards
-
 const Bug = ( {bug, deleteBug, id} ) => {
   return (
-      <Card key={id} className='my-3 mx-5' style=
+      <Card key={id} className='my-3 mx-3' style=
       {{border:'2px dotted white', 
         textAlign:'left', 
         maxWidth:'35em',
@@ -21,9 +19,9 @@ const Bug = ( {bug, deleteBug, id} ) => {
             <Card.Title>
               {bug.title}
             </Card.Title>
-            <div>
-              <Link to={"/edit/" + id} style={{color:'#fff', marginRight:'1em'}}><BsPencil /></Link>
-              <a href="/" onClick={() => {deleteBug(id)}}><BsXCircle style={{color:'#fff'}} /></a>
+            <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
+              <Link to={"/edit/" + id} style={{color:'gold'}}><BsPencil /></Link>
+              <a href="/" onClick={() => {deleteBug(id)}}><BsXCircle style={{color:'red'}} /></a>
             </div>
           </Card.Body>
           <Card.Text>

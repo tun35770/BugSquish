@@ -17,8 +17,8 @@ function App() {
       <div className="App">
         <Navbar sticky="top" bg="dark" variant="dark" expand="lg" >
         
-          <Navbar.Brand className="mx-3" href="/" style={{color:'#fff'}}>
-            <Bug />
+          <Navbar.Brand className="mx-3 title" href="/" style={{color:'#fff'}}>
+            <Bug style={{marginBottom:'4px'}} />
             BugSquish
           </Navbar.Brand>
 
