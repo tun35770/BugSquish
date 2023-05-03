@@ -55,13 +55,12 @@ const CreateBug = () => {
     }
 
   return (
-    <Card className='' style=
+    <Card className='purple-gradient' style=
         {{maxWidth: '75%', 
           margin: '3rem auto', 
           padding:'1rem',
-          backgroundImage: 'linear-gradient(to left top, #4D4855, #000)',
-          color:'#fff',
-          border:'1px solid white'}}>
+          border:'1px solid white',
+          color:'#fff'}}>
         <h3>Create New Bug Ticket</h3>
         <br/>
         <Form onSubmit={onSubmit} style=

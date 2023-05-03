@@ -15,9 +15,9 @@ function App() {
   return (
     <Router >
       <div className="App">
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar sticky="top" bg="dark" variant="dark" expand="lg" >
         
-          <Navbar.Brand className="mx-3" href="/">
+          <Navbar.Brand className="mx-3" href="/" style={{color:'#fff'}}>
             <Bug />
             BugSquish
           </Navbar.Brand>
@@ -25,10 +25,9 @@ function App() {
           <Navbar.Toggle className="mx-2" aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
             <Nav className="me-3">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link to="/create" className="nav-link">Create Bug Ticket</Link>
-              <Link to="/edit" className="nav-link">Edit tickets</Link>
-              <Link to="/user" className="nav-link">Create User</Link>
+              <Link to="/" className="nav-link white-text">Home</Link>
+              <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
+              <Link to="/user" className="nav-link white-text">Create User</Link>
             </Nav>
           </Navbar.Collapse>
         

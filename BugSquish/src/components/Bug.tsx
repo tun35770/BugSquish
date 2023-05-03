@@ -1,6 +1,9 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import {BsXCircle, BsPencil} from 'react-icons/bs'
+
+//TODO: Adjust mobile view for cards
 
 const Bug = ( {bug, deleteBug, id} ) => {
   return (
@@ -8,13 +11,21 @@ const Bug = ( {bug, deleteBug, id} ) => {
       {{border:'2px dotted white', 
         textAlign:'left', 
         maxWidth:'35em',
-        backgroundImage: 'linear-gradient(to left top, #4D4855, #000)',
+        backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
         color:'#fff'}}>
         <Card.Body>
-          <Card.Title>
-            {bug.title}
-          </Card.Title>
-
+          <Card.Body style=
+            {{display:'flex', 
+              justifyContent:'space-between',
+              padding:'0'}}>
+            <Card.Title>
+              {bug.title}
+            </Card.Title>
+            <div>
+              <Link to={"/edit/" + id} style={{color:'#fff', marginRight:'1em'}}><BsPencil /></Link>
+              <a href="/" onClick={() => {deleteBug(id)}}><BsXCircle style={{color:'#fff'}} /></a>
+            </div>
+          </Card.Body>
           <Card.Text>
             {bug.description}
           </Card.Text>
@@ -32,10 +43,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
               <b>{new Date(bug.date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})} </b>
             </Card.Text>
           </Card.Body>
-          <Card.Text>
-              <b>ID: </b>{id}
-            </Card.Text>
-          <Link to={"/edit/" + id}>edit</Link> | <a href="/" onClick={() => {deleteBug(id)}}>delete</a>
+          
         </Card.Body>
       </Card>
     )
