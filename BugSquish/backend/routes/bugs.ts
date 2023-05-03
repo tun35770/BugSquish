@@ -13,6 +13,7 @@ router.route('/add').post((req: any, res: any) => {
     const description = req.body.description;
     const project = req.body.project;
     const date = Date.parse(req.body.date);
+    const completed = req.body.completed || false;
 
     const newBug = new Bug({
         username,
@@ -20,6 +21,7 @@ router.route('/add').post((req: any, res: any) => {
         description,
         project,
         date,
+        completed,
     });
 
     newBug.save()
@@ -47,6 +49,7 @@ router.route('/update/:id').post((req: any, res: any) => {
             bug.description = req.body.description;
             bug.project = req.body.project;
             bug.date = Date.parse(req.body.date);
+            bug.completed= req.body.completed || false;
 
             bug.save()
                 .then(() => res.json('Bug ticket updated'))

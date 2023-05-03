@@ -9,6 +9,7 @@ import BugList from './components/BugList'
 import CreateBug from './components/CreateBug'
 import CreateUser from './components/CreateUser'
 import EditBug from './components/EditBug'
+import ViewBug from './components/ViewBug.tsx'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/create" element={<CreateBug />} />
           <Route path="/edit/:id" element={<EditBug />} />
           <Route path="/user" element={<CreateUser />} />
+          <Route path="/viewbug/:id" element={<ViewBug />} />
         </Routes>
       
       </div>

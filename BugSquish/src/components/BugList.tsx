@@ -10,14 +10,16 @@ const BugList = () => {
     description: string;
     project: string;
     date: Date;
+    completed: boolean;
 
-    constructor(id:string, username:string, title:string, description:string, project:string, date:Date){
+    constructor(id:string, username:string, title:string, description:string, project:string, date:Date, completed = false){
         this._id = id;
         this.username = username;
         this.title = title;
         this.description = description;
         this.project = project;
         this.date = date;
+        this.completed = completed;
     }
   }
 
@@ -64,7 +66,7 @@ const BugList = () => {
       return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug._id} id={currentBug._id} />
     });
   }
-
+  
   return (
     <div>
       {bugList()}

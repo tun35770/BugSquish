@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from 'react'
+import { Card, Form } from 'react-bootstrap'
+import { useParams } from 'react-router-dom';
+
+const ViewBug = () => {
+
+    const { id } = useParams();
+    const [username, setUsername] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [project, setProject] = useState('');
+    const [date, setDate] = useState('');
+    const [completed, setCompleted] = useState('');
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/bugs/' + id, {
+                method: 'GET',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setUsername(data.username);
+                setDescription(data.description);
+                setTitle(data.title);
+                setProject(data.project);
+                setDate(data.date);
+                setCompleted(data.completed);
+
+                setIsLoaded(true);  
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
+    function onSubmit(e: React.FormEvent){
+        e.preventDefault();
+
+        const bug = {
+            username: username,
+            title: title,
+            description: description,
+            project: project,
+            date: new Date(),
+            completed: true,
+        };
+
+        fetch('http://localhost:5000/bugs/update/' + id, {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify(bug)
+        })
+        .then((res) => res.json())
+        .then((data) => {}/* console.log(data) */)
+        .catch((err) => console.log(err))
+
+        window.location.href= "/";
+    }
+
+  return (
+    <>
+        {isLoaded && 
+            <Card className='purple-gradient' style=
+            {{maxWidth: '75%', 
+            margin: '3rem auto', 
+            padding:'1rem',
+            border:'1px solid white',
+            color:'#fff'}}>
+            <Card.Title className="mb-3 leftAlign" style={{fontSize: '1.5em'}}> {title} </Card.Title>
+            
+            <Card.Text className="mb-3 leftAlign">
+                {description}
+            </Card.Text>
+            <br/>
+
+            <Card.Text className="mb-3 leftAlign">
+            <b>Project: </b>{project}
+            </Card.Text>
+
+            <Card.Text className="mb-3 leftAlign">
+                <b>Submitted by: </b>{username}
+            </Card.Text>
+
+            <Card.Text className="mb-3 leftAlign">
+                {completed ? 'This bug has been completed' : 'This bug has not been completed'}
+            </Card.Text>
+
+            <Card.Text className="mb-3 leftAlign">
+            <b>Date: </b> {new Date(date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
+            </Card.Text>
+
+            {!completed && 
+                <Form onSubmit={onSubmit}>
+                    <Form.Group className='mb-3'>
+                        <Form.Control
+                            type="submit"
+                            value="Mark as Complete"
+                            className="btn btn-primary"
+                            onSubmit={onSubmit}
+                            style={{maxWidth:'10em'}}>
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
+            }
+        </Card>
+        }
+    </>
+  )
+}
+
+export default ViewBug

@@ -36,7 +36,8 @@ const CreateBug = () => {
             title: title,
             description: description,
             project: project,
-            date: new Date()
+            date: new Date(),
+            completed: false,
         };
 
         fetch('http://localhost:5000/bugs/add', {

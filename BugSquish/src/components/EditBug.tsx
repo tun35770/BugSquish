@@ -10,12 +10,13 @@ const EditBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
+    const [completed, setCompleted] = useState(false);
 
     const userInputRef = useRef();
     
     useEffect(() => {
       fetch('http://localhost:5000/bugs/' + id, {
-        method: 'get',
+        method: 'GET',
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json;charset=UTF-8",
@@ -28,7 +29,7 @@ const EditBug = () => {
       setDescription(data.description);
       setTitle(data.title);
       setProject(data.project);
-
+      setCompleted(data.completed);
     })
     .catch((err) => console.log(err))
     }, []);
@@ -57,7 +58,8 @@ const EditBug = () => {
             title: title,
             description: description,
             project: project,
-            date: new Date()
+            date: new Date(),
+            completed: completed,
         };
 
         fetch('http://localhost:5000/bugs/update/' + id, {
