@@ -6,7 +6,7 @@ import {BsXCircle, BsPencil} from 'react-icons/bs'
 const Bug = ( {bug, deleteBug, id} ) => {
 
   const [isHover, setIsHover] = useState(false);
-  const borderColor = bug.completed ? 'green' : 'white';
+  const borderColor = bug.completed ? '#90ee90' : 'white';
 
   function handleMouseEnter(){
     setIsHover(true);
@@ -41,7 +41,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 justifyContent:'space-between',
                 padding:'0'}}>
               <Card.Title style={{fontSize: '1.5em'}}>
-                {bug.title}
+                {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                 <Link to={"/edit/" + id} style={{color:'gold'}}><BsPencil /></Link>
