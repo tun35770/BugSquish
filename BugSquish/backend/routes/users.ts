@@ -7,14 +7,23 @@ router.route('/').get((req: any, res: any) => {
         .catch((err: any) => res.status(400).json("Error: ' + err"));
 });
 
-router.route('/add').post((req: any, res: any) => {
+router.route('/:id').get((req: any, res: any) => {
+    User.findById(req.params.id)
+        .then((user :any) => res.json(user))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+/**Use /signup endpoint to add a user **/
+/* router.route('/add').post((req: any, res: any) => {
     const username = req.body?.username;
-    const newUser = new User({username});
+    const email = req.body?.email;
+    const password = req.body?.password;
+    const newUser = new User({username, email, password});
 
     newUser.save()
         .then(() => res.json('User added'))
         .catch((err: string) => res.json('Error: ' + err));
-});
+}); */
 
 router.route('/login').post((req: any, res: any) => {
     res.json({msg: 'login user'});
