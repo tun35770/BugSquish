@@ -13,6 +13,12 @@ router.route('/:id').get((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').delete((req: any, res: any) => {
+    User.findByIdAndDelete(req.params.id)
+        .then(() => res.json('User deleted.'))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 /**Use /signup endpoint to add a user **/
 /* router.route('/add').post((req: any, res: any) => {
     const username = req.body?.username;
