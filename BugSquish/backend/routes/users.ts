@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+import jwt from 'jsonwebtoken'
 
 router.route('/').get((req: any, res: any) => {
     User.find()
@@ -31,8 +32,29 @@ router.route('/:id').delete((req: any, res: any) => {
         .catch((err: string) => res.json('Error: ' + err));
 }); */
 
+
+const createToken = (_id:String | null) => {
+    return jwt.sign({_id}, process.env.SECRET as string, { expiresIn: '1d'});
+}
+
 router.route('/login').post((req: any, res: any) => {
-    res.json({msg: 'login user'});
+
+    const login = async(req:any, res:any) => {
+        const {username, password} = req.body;
+        
+        try {
+            const user = await User.login(username, password);
+
+            //token
+            const token = createToken(user._id);
+
+            res.status(200).json({username, token})
+        } catch (error: any) {
+            res.status(400).json({error: error.message})
+        }
+    }
+
+    login(req, res);
 });
 
 router.route('/signup').post((req: any, res: any) => {
@@ -43,7 +65,10 @@ router.route('/signup').post((req: any, res: any) => {
         try {
             const user = await User.signup(username, email, password);
 
-            res.status(200).json({username, email, user})
+            //token
+            const token = createToken(user._id);
+
+            res.status(200).json({username, email, token})
         } catch (error: any) {
             res.status(400).json({error: error.message})
         }
