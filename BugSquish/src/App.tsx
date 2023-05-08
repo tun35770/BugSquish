@@ -10,6 +10,8 @@ import CreateBug from './components/CreateBug'
 import CreateUser from './components/CreateUser'
 import EditBug from './components/EditBug'
 import ViewBug from './components/ViewBug.tsx'
+import Signup from './components/Signup.tsx'
+import Login from './components/Login.tsx'
 
 function App() {
 
@@ -28,7 +30,8 @@ function App() {
             <Nav className="me-3">
               <Link to="/" className="nav-link white-text">Home</Link>
               <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
-              <Link to="/user" className="nav-link white-text">Create User</Link>
+              <Link to="/signup" className="nav-link white-text">Sign up</Link>
+              <Link to="/login" className="nav-link white-text">Login</Link>
             </Nav>
           </Navbar.Collapse>
         
@@ -38,7 +41,8 @@ function App() {
           <Route path="/" element={<BugList />} />
           <Route path="/create" element={<CreateBug />} />
           <Route path="/edit/:id" element={<EditBug />} />
-          <Route path="/user" element={<CreateUser />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/viewbug/:id" element={<ViewBug />} />
         </Routes>
       
