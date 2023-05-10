@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import Home from './components/Home.tsx'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import { useLogout } from './hooks/useLogout.ts'
+import { useAuthContext } from './hooks/useAuthContext.ts'
 import BugList from './components/BugList'
 import CreateBug from './components/CreateBug'
 import CreateUser from './components/CreateUser'
@@ -13,7 +15,14 @@ import ViewBug from './components/ViewBug.tsx'
 import Signup from './components/Signup.tsx'
 import Login from './components/Login.tsx'
 
+
 function App() {
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+
+  const handleClick = () => {
+    logout();
+  };  
 
   return (
     <Router >
@@ -30,8 +39,20 @@ function App() {
             <Nav className="me-3">
               <Link to="/" className="nav-link white-text">Home</Link>
               <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
-              <Link to="/signup" className="nav-link white-text">Sign up</Link>
-              <Link to="/login" className="nav-link white-text">Login</Link>
+              
+              {!user && (
+                <>
+                  <Link to="/login" className="nav-link white-text">Login</Link>
+                  <Link to="/signup" className="nav-link white-text">Sign up</Link>
+                </>)}
+              {user && (
+                <div>
+                  <span className='mt-2' style={{color:'#fff'}}>{user.username}</span>
+                  <Button className="btn btn-primary" 
+                          onClick={handleClick} 
+                          style={{maxWidth:'10em', margin:'0 auto'}}
+                          >Log out</Button>
+              </div>)}
             </Nav>
           </Navbar.Collapse>
         

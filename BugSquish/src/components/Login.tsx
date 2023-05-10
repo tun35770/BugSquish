@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Card, Form } from 'react-bootstrap';
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login, error, isLoading } = useLogin();
 
     function onChangeUsername(e: React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
@@ -14,7 +16,7 @@ const Login = () => {
         setPassword(e.currentTarget.value);
     }
 
-    function onSubmit(e: React.FormEvent){
+    async function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
         const user = {
@@ -22,22 +24,7 @@ const Login = () => {
             password: password
         };
 
-        //TODO: Add error text on database error
-        fetch('http://localhost:5000/users/login', {
-            method: 'POST',
-            headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            },
-            body: JSON.stringify(user)
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            
-        })
-        .catch((err) => console.log(err))
-
+        await login(username, password);
     }
 
 
@@ -79,12 +66,15 @@ const Login = () => {
         <br/>
         <Form.Group className='mb-3'>
                 <Form.Control
+                    disabled={isLoading}
                     type="submit"
                     value="Login"
                     className="btn btn-primary"
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>
+
+                {error && <div className="error">{error}</div>}
             </Form.Group>
         </Form>
 
