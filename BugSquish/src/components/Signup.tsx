@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Card, Form } from 'react-bootstrap';
+import { useSignup } from '../hooks/useSignup'
 
 const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {signup, error, isLoading} = useSignup();
 
     function onChangeUsername(e: React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
@@ -17,31 +19,11 @@ const Signup = () => {
         setPassword(e.currentTarget.value);
     }
 
-    function onSubmit(e: React.FormEvent){
+    async function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
-        const user = {
-            username: username,
-            email: email,
-            password: password
-        };
-
         //TODO: Add error text on database error
-        fetch('http://localhost:5000/users/signup', {
-            method: 'POST',
-            headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            },
-            body: JSON.stringify(user)
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        
-        })
-        .catch((err) => console.log(err))
-
+        const response = await signup(username, email, password);
     }
 
 
@@ -94,12 +76,15 @@ const Signup = () => {
         <br/>
         <Form.Group className='mb-3'>
                 <Form.Control
+                    disabled={isLoading}
                     type="submit"
                     value="Signup"
                     className="btn btn-primary"
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>
+
+                {error && <div className="error">{error}</div>}
             </Form.Group>
         </Form>
 
