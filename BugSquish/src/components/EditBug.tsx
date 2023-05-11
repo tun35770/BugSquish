@@ -2,11 +2,12 @@ import React, { useEffect, useState, useRef} from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const EditBug = () => {
 
+    const { user } = useAuthContext();
     const { id } = useParams();
-    const [username, setUsername] = useState('defaultUsername');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
@@ -15,28 +16,28 @@ const EditBug = () => {
     const userInputRef = useRef();
     
     useEffect(() => {
-      fetch('http://localhost:5000/bugs/' + id, {
-        method: 'GET',
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
+        if(!user){
+            return;
         }
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      //console.log(data);
-      setUsername(data.username);
-      setDescription(data.description);
-      setTitle(data.title);
-      setProject(data.project);
-      setCompleted(data.completed);
-    })
-    .catch((err) => console.log(err))
-    }, []);
-    
-    function onChangeUsername(e: React.ChangeEvent<HTMLSelectElement>){
-        setUsername(e.currentTarget.value);
-    }
+
+        fetch('http://localhost:5000/bugs/' + id, {
+            method: 'GET',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+        //console.log(data);
+        setDescription(data.description);
+        setTitle(data.title);
+        setProject(data.project);
+        setCompleted(data.completed);
+        })
+        .catch((err) => console.log(err))
+    }, [user]);
 
     function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.currentTarget.value);
@@ -53,8 +54,12 @@ const EditBug = () => {
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
+        if(!user) {
+            return;
+        }
+
         const bug = {
-            username: username,
+            username: user.username ?? '',
             title: title,
             description: description,
             project: project,
@@ -67,6 +72,7 @@ const EditBug = () => {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
             },
             body: JSON.stringify(bug)
         })

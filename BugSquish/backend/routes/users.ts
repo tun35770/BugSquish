@@ -33,7 +33,7 @@ router.route('/:id').delete((req: any, res: any) => {
 }); */
 
 
-const createToken = (_id:String | null) => {
+const createToken = (_id:any) => {
     return jwt.sign({_id}, process.env.SECRET as string, { expiresIn: '1d'});
 }
 

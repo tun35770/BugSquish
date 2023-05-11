@@ -1,20 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const CreateBug = () => {
 
-    const [username, setUsername] = useState('defaultUsername');
+    const { user } = useAuthContext();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
-    const [users, setUsers] = useState([''])
-
+    const [users, setusers] = useState([''])
+    const [error, setError] = useState<String | undefined>(undefined);
     const userInputRef = useRef();
-    
-    function onChangeUsername(e: React.ChangeEvent<HTMLSelectElement>){
-        setUsername(e.currentTarget.value);
-    }
 
     function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.currentTarget.value);
@@ -31,8 +28,13 @@ const CreateBug = () => {
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
+        if(!user){
+            setError('Not logged in.');
+            return;
+        }
+
         const bug = {
-            username: username,
+            username: user.username ?? '',
             title: title,
             description: description,
             project: project,
@@ -45,6 +47,7 @@ const CreateBug = () => {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
             },
             body: JSON.stringify(bug)
         })
@@ -109,6 +112,8 @@ const CreateBug = () => {
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>
+
+                {error && <div className="error">{error}</div>}
             </Form.Group>
         </Form>
     </Card>

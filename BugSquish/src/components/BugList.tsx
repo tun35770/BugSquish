@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
 import Bug from './Bug';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const BugList = () => {
   class BugType {
@@ -23,33 +24,52 @@ const BugList = () => {
     }
   }
 
+  const { user } = useAuthContext();
+
   const [bugs, setBugs] = useState<BugType[]>([]);
 
   /*
     TODO: Implement localStorage for bugs.
   */
   useEffect(() => {
-    fetch('http://localhost:5000/bugs', {
-            method: 'GET',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => {
-          //console.log(data);
-          setBugs(data);
-        })
-        .catch((err) => console.log(err))
-  }, [])
+    
+    const fetchBugs = async () => {
+      const response = await fetch('http://localhost:5000/bugs', {
+          method: 'GET',
+          headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              'Authorization': `Bearer ${user.token}`
+          }
+      });
+
+      const json = await response.json();
+      if(response.ok){
+        setBugs(json);
+      }
+    }
+
+    if(user) {
+      fetchBugs();
+    }
+
+    else {
+      console.log('Not logged in.');
+    }
+  }, [user])
 
   function deleteBug(id:string){
+
+    if(!user){
+      return;
+    }
+    
     fetch('http://localhost:5000/bugs/' + id, {
             method: 'delete',
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
             }
         })
         .then((res) => res.json())

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const ViewBug = () => {
 
+    const { user } = useAuthContext();
     const { id } = useParams();
     const [username, setUsername] = useState('');
     const [title, setTitle] = useState('');
@@ -15,11 +17,17 @@ const ViewBug = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+
+        if(!user){
+            return;
+        }
+
         fetch('http://localhost:5000/bugs/' + id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             .then((res) => res.json())
@@ -35,10 +43,14 @@ const ViewBug = () => {
                 setIsLoaded(true);  
             })
             .catch((err) => console.log(err))
-    }, [])
+    }, [user])
 
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
+
+        if (!user){
+            return;
+        }
 
         const bug = {
             username: username,
@@ -46,7 +58,10 @@ const ViewBug = () => {
             description: description,
             project: project,
             date: new Date(),
+
+            /** ONLY VALUE BEING CHANGED */
             completed: true,
+            
         };
 
         fetch('http://localhost:5000/bugs/update/' + id, {
@@ -54,6 +69,7 @@ const ViewBug = () => {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
             },
             body: JSON.stringify(bug)
         })

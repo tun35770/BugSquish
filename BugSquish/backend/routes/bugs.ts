@@ -1,5 +1,9 @@
 const router = require('express').Router();
 let Bug = require('../models/bug.model');
+import requireAuth from '../middleware/requireAuth'
+
+//require authentication for all bug routes
+router.use(requireAuth);
 
 router.route('/').get((req: any, res: any) => {
     Bug.find()
