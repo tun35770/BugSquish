@@ -4,7 +4,7 @@ import Home from './components/Home.tsx'
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom"
 import { useLogout } from './hooks/useLogout.ts'
 import { useAuthContext } from './hooks/useAuthContext.ts'
 import BugList from './components/BugList'
@@ -59,11 +59,11 @@ function App() {
         </Navbar> 
 
         <Routes>
-          <Route path="/" element={<BugList />} />
+          <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
           <Route path="/create" element={<CreateBug />} />
           <Route path="/edit/:id" element={<EditBug />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
+          <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
           <Route path="/viewbug/:id" element={<ViewBug />} />
         </Routes>
       
