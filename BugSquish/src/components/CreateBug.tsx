@@ -9,7 +9,6 @@ const CreateBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
-    const [users, setusers] = useState([''])
     const [error, setError] = useState<String | undefined>(undefined);
     const userInputRef = useRef();
 
@@ -33,8 +32,11 @@ const CreateBug = () => {
             return;
         }
 
+        console.log(user);
+
         const bug = {
             username: user.username ?? '',
+            user_id: user.user_id,
             title: title,
             description: description,
             project: project,

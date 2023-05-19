@@ -6,13 +6,18 @@ import requireAuth from '../middleware/requireAuth'
 router.use(requireAuth);
 
 router.route('/').get((req: any, res: any) => {
-    Bug.find()
+
+    const user_id = req.user._id.toString();
+    //console.log(req.user._id);
+    Bug.find( {user_id} ).sort({createdAt: -1})
         .then((bugs: any) => res.json(bugs))
         .catch((err: any) => res.status(400).json("Error: ' + err"));
 });
 
 router.route('/add').post((req: any, res: any) => {
+
     const username = req.body.username;
+    const user_id = req.body.user_id;    
     const title = req.body.title;
     const description = req.body.description;
     const project = req.body.project;
@@ -21,6 +26,7 @@ router.route('/add').post((req: any, res: any) => {
 
     const newBug = new Bug({
         username,
+        user_id,
         title,
         description,
         project,

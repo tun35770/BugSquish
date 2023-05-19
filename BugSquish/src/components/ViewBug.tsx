@@ -57,7 +57,7 @@ const ViewBug = () => {
             title: title,
             description: description,
             project: project,
-            date: new Date(),
+            date: date,
 
             /** ONLY VALUE BEING CHANGED */
             completed: true,

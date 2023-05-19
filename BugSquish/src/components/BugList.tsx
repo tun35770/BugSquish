@@ -33,6 +33,10 @@ const BugList = () => {
   */
   useEffect(() => {
     
+    if(!user){
+      return;
+    }
+
     const fetchBugs = async () => {
       const response = await fetch('http://localhost:5000/bugs', {
           method: 'GET',
@@ -40,7 +44,7 @@ const BugList = () => {
               Accept: "application/json",
               "Content-Type": "application/json;charset=UTF-8",
               'Authorization': `Bearer ${user.token}`
-          }
+          },
       });
 
       const json = await response.json();
@@ -63,7 +67,7 @@ const BugList = () => {
     if(!user){
       return;
     }
-    
+
     fetch('http://localhost:5000/bugs/' + id, {
             method: 'delete',
             headers: {

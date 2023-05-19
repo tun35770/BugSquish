@@ -15,9 +15,12 @@ const requireAuth = async (req:any, res:any, next:any) => {
 
         //DONT TOUCH NEXT 4 LINES, typescript being stupid 0-0
         let decoded:any;
-        decoded  = jwt.verify(token, process.env.SECRET as string);
-        const id = decoded._id
-        req.user = await User.findOne( {id} ).select('_id');
+        decoded = jwt.verify(token, process.env.SECRET as string);
+        //console.log(decoded)
+        const obj = {
+            _id: decoded._id
+        }
+        req.user = await User.findOne( obj ).select('_id');
         next();
         
     } catch (error) {
@@ -25,4 +28,5 @@ const requireAuth = async (req:any, res:any, next:any) => {
         res.status(401).json({error: 'Request not authorized.'})
     }
 };
+
 export default requireAuth;
