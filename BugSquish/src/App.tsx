@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Home from './components/Home.tsx'
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
@@ -24,6 +24,24 @@ function App() {
     logout();
   };  
 
+  const parseJwt = (token:string) => {
+    try {
+      const tokenString = atob(token.split(".")[1]);
+      return JSON.parse(tokenString);
+    } catch (e){
+        console.error(e);
+    }
+  };
+
+  //check for expired token
+  if(user) {
+    const decodedJwt = parseJwt(user.token);
+    //console.log(decodedJwt)
+    if(decodedJwt.exp * 1000 < Date.now()){
+      logout();
+    }
+  }
+
   return (
     <Router >
       <div className="App">
@@ -42,7 +60,7 @@ function App() {
               {user && (
                 <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
               )}
-              
+
               {!user && (
                 <>
                   <Link to="/login" className="nav-link white-text">Login</Link>

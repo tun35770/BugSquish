@@ -93,6 +93,11 @@ const BugList = () => {
   
   return (
     <div>
+      <h1 style={{
+        marginTop: '0.5em',
+        color: '#fff',
+        fontFamily: 'Montserrat',
+      }}> Bugs</h1>
       {bugList()}
     </div>
   )
