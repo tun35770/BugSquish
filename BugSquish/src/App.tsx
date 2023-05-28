@@ -38,7 +38,10 @@ function App() {
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
             <Nav className="me-3">
               <Link to="/" className="nav-link white-text">Home</Link>
-              <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
+              
+              {user && (
+                <Link to="/create" className="nav-link white-text">Create Bug Ticket</Link>
+              )}
               
               {!user && (
                 <>
