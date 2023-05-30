@@ -44,7 +44,7 @@ const Project = ( {project, deleteProject, id} ) => {
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                 <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                <a href="/" onClick={() => {deleteProject(id)}}><BsXCircle style={{color:'red'}} /></a>
+                <a href="/projects" onClick={() => {deleteProject(id)}}><BsXCircle style={{color:'red'}} /></a>
               </div>
             </Card.Body>
             <Card.Text>

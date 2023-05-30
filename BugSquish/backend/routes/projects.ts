@@ -51,4 +51,10 @@ router.route('/:id').get((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').delete((req: any, res: any) => {
+    Project.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Project deleted.'))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 export default router;
