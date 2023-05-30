@@ -44,12 +44,13 @@ router.route('/login').post((req: any, res: any) => {
         
         try {
             const user = await User.login(username, password);
+            const email = user.email;
 
             //token
             const token = createToken(user._id);
             const user_id = user._id;
 
-            res.status(200).json({username, user_id, token})
+            res.status(200).json({username, user_id, email, token})
         } catch (error: any) {
             res.status(400).json({error: error.message})
         }
@@ -70,7 +71,7 @@ router.route('/signup').post((req: any, res: any) => {
             //token
             const token = createToken(user._id);
 
-            res.status(200).json({username, user_id, token})
+            res.status(200).json({username, user_id, email, token})
         } catch (error: any) {
             res.status(400).json({error: error.message})
         }

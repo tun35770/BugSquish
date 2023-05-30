@@ -57,7 +57,7 @@ const CreateProject = () => {
         .then((data) => console.log(data))
         .catch((err) => console.log(err))
 
-        window.location.href= "/";
+        window.location.href= "/projects";
     }
 
   return (
@@ -99,7 +99,7 @@ const CreateProject = () => {
             <Form.Group className='mb-3'>
                 <Form.Control
                     type="submit"
-                    value="Create Bug Ticket"
+                    value="Create Project"
                     className="btn btn-primary"
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>

@@ -21,7 +21,7 @@ const Login = () => {
 
         const user = {
             username: username,
-            password: password
+            password: password,
         };
 
         await login(username, password);

@@ -15,6 +15,8 @@ import ViewBug from './components/ViewBug.tsx'
 import Signup from './components/Signup.tsx'
 import Login from './components/Login.tsx'
 import CreateProject from './components/CreateProject.tsx'
+import ViewProject from './components/ViewProject.tsx'
+import ProjectList from './components/ProjectList.tsx'
 
 
 function App() {
@@ -63,6 +65,10 @@ function App() {
               )}
 
               {user && (
+                <Link to="/projects" className="nav-link white-text">My Projects</Link>
+              )}
+
+              {user && (
                 <Link to="/createproject" className="nav-link white-text">Create Project</Link>
               )}
 
@@ -91,7 +97,10 @@ function App() {
           <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
           <Route path="/viewbug/:id" element={<ViewBug />} />
+          <Route path="/projects" element={<ProjectList />} />
           <Route path="/createproject/" element={<CreateProject />} />
+          <Route path="/viewproject/:id" element={<ViewProject />} />
+
         </Routes>
       
       </div>

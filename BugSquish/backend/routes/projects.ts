@@ -45,4 +45,10 @@ router.route('/add').post((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project :any) => res.json(project))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 export default router;
