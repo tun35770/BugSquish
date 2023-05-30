@@ -10,7 +10,38 @@ const CreateBug = () => {
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
+
+    const [projects, setProjects] = useState<any[]>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
     const userInputRef = useRef();
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            const response = await fetch('http://localhost:5000/projects', {
+                method: 'GET',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                    'Authorization': `Bearer ${user.token}`
+                },
+            });
+      
+            const json = await response.json();
+            if(response.ok){
+              setProjects(json);
+              //console.log(projects);
+            }
+          }
+     
+          if(user) {
+            fetchProjects();
+            setIsLoaded(true);
+          }
+      
+          else {
+            console.log('Not logged in.');
+          }
+    }, [])
 
     function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.currentTarget.value);
@@ -20,7 +51,7 @@ const CreateBug = () => {
         setDescription(e.currentTarget.value);
     }
     
-    function onChangeProject(e: React.ChangeEvent<HTMLInputElement>){
+    function onChangeProject(e: React.ChangeEvent<HTMLSelectElement>){
         setProject(e.currentTarget.value);
     }
 
@@ -61,6 +92,7 @@ const CreateBug = () => {
     }
 
   return (
+    isLoaded && 
     <Card className='purple-gradient' style=
         {{maxWidth: '75%', 
           margin: '3rem auto', 
@@ -97,13 +129,21 @@ const CreateBug = () => {
 
             <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
             <Form.Label>Project Name: </Form.Label>
-                <Form.Control
-                type="text"
+                <select
                     required
                     className="form-control"
                     value={project}
                     onChange={onChangeProject}>
-                </Form.Control>
+                    {
+                        projects.map(proj => {
+                            return <option
+                                    key={proj.title}
+                                    value={proj.title}>{proj.title}
+                                </option>
+                        })
+                    
+                    }
+                </select>
             </Form.Group>
             <br/>
             <Form.Group className='mb-3'>
