@@ -26,9 +26,11 @@ router.route('/').get((req: any, res: any) => {
 //Routes
 import bugsRouter from './routes/bugs';
 import usersRouter from './routes/users';
+import projectsRouter from './routes/projects';
 
 app.use('/bugs', bugsRouter);
 app.use('/users', usersRouter);
+app.use('/projects', projectsRouter);
 
 app.listen(port, () => {
     console.log('Server is running on port ' + port);
