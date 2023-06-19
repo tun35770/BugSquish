@@ -7,6 +7,7 @@ const bugSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     project: {type: String, required: true },
+    project_id: {type: String, required: true},
     date: { type: Date, required: true },
     completed: { type: Boolean, required: true},
 }, {

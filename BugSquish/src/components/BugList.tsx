@@ -10,15 +10,17 @@ const BugList = () => {
     title: string;
     description: string;
     project: string;
+    project_id: string;
     date: Date;
     completed: boolean;
 
-    constructor(id:string, username:string, title:string, description:string, project:string, date:Date, completed = false){
+    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, completed = false){
         this._id = id;
         this.username = username;
         this.title = title;
         this.description = description;
         this.project = project;
+        this.project_id = project_id;
         this.date = date;
         this.completed = completed;
     }

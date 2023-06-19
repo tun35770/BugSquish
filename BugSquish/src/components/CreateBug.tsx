@@ -9,6 +9,7 @@ const CreateBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
+    const [projectId, setProjectId] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
 
     const [projects, setProjects] = useState<any[]>([]);
@@ -32,6 +33,7 @@ const CreateBug = () => {
               if(json.length > 0){
                 console.log(json);
                 setProject(json[0]["title"]);
+                setProjectId(json[0]["_id"]);
               }
               //console.log(projects);
             }
@@ -56,7 +58,10 @@ const CreateBug = () => {
     }
     
     function onChangeProject(e: React.ChangeEvent<HTMLSelectElement>){
-        setProject(e.currentTarget.value);
+        setProject(e.currentTarget.value["title"]);
+        setProjectId(e.currentTarget.value["_id"]);
+        console.log(e.currentTarget.value["title"])
+        console.log(e.currentTarget.value["_id"])
     }
 
     function onSubmit(e: React.FormEvent){
@@ -80,6 +85,7 @@ const CreateBug = () => {
             title: title,
             description: description,
             project: project,
+            project_id: projectId,
             date: new Date(),
             completed: false,
         };
@@ -148,7 +154,7 @@ const CreateBug = () => {
                         projects.map(proj => {
                             return <option
                                     key={proj.title}
-                                    value={proj.title}>{proj.title}
+                                    value={proj}>{proj.title}
                                 </option>
                         })
                     
