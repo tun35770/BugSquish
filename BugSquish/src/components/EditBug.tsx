@@ -118,16 +118,6 @@ const EditBug = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
-            <Form.Label>Project Name: </Form.Label>
-                <Form.Control
-                type="text"
-                    required
-                    className="form-control"
-                    value={project}
-                    onChange={onChangeProject}>
-                </Form.Control>
-            </Form.Group>
             <br/>
             <Form.Group className='mb-3'>
                 <Form.Control

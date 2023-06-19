@@ -29,6 +29,10 @@ const CreateBug = () => {
             const json = await response.json();
             if(response.ok){
               setProjects(json);
+              if(json.length > 0){
+                console.log(json);
+                setProject(json[0]["title"]);
+              }
               //console.log(projects);
             }
           }
@@ -63,6 +67,11 @@ const CreateBug = () => {
             return;
         }
 
+        if(!project || project.length === 0){
+            setError('Select a project to assign this bug to.')
+            return;
+        }
+
         console.log(user);
 
         const bug = {
@@ -88,11 +97,12 @@ const CreateBug = () => {
         .then((data) => console.log(data))
         .catch((err) => console.log(err))
 
-        window.location.href= "/";
+        //window.location.href= "/";
     }
 
   return (
-    isLoaded && 
+    <>
+    {isLoaded && 
     <Card className='purple-gradient' style=
         {{maxWidth: '75%', 
           margin: '3rem auto', 
@@ -159,7 +169,7 @@ const CreateBug = () => {
             </Form.Group>
         </Form>
     </Card>
-  )
+}</> )
 }
 
 export default CreateBug

@@ -27,6 +27,7 @@ const BugList = () => {
   const { user } = useAuthContext();
 
   const [bugs, setBugs] = useState<BugType[]>([]);
+  const [bugsLength, setBugsLength] = useState(0);
 
   /*
     TODO: Implement localStorage for bugs.
@@ -50,6 +51,7 @@ const BugList = () => {
       const json = await response.json();
       if(response.ok){
         setBugs(json);
+        setBugsLength(json.length);
       }
     }
 
@@ -81,6 +83,7 @@ const BugList = () => {
           console.log(data);
           const newBugs = [...bugs].filter((bug: BugType) => bug._id !== id)
           setBugs(newBugs);
+          setBugsLength(newBugs.length);
         })
         .catch((err) => console.log(err))
   }
@@ -93,12 +96,27 @@ const BugList = () => {
   
   return (
     <div>
-      <h1 style={{
-        marginTop: '0.5em',
-        color: '#fff',
-        fontFamily: 'Montserrat',
-      }}> Bugs</h1>
-      {bugList()}
+      { (bugsLength > 0) && 
+        <>
+          <h1 style={{
+            marginTop: '0.5em',
+            color: '#fff',
+            fontFamily: 'Montserrat',
+          }}> Bugs </h1>
+          {bugList()}
+        </>
+      }
+
+      { (bugsLength === 0) && 
+        <>
+          <br />
+            <h3 style={{
+                textAlign: 'left',
+                marginLeft: '1em', 
+                color:'white',
+                fontFamily: 'Montserrat'}}> No bugs to display </h3>
+        </>
+      }
     </div>
   )
 }

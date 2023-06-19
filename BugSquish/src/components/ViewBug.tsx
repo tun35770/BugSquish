@@ -112,19 +112,30 @@ const ViewBug = () => {
             <b>Date: </b> {new Date(date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
             </Card.Text>
 
-            {!completed && 
+            
                 <Form onSubmit={onSubmit}>
+                    {!completed && 
+                        <Form.Group className='mb-3'>
+                            <Form.Control
+                                type="submit"
+                                value="Mark as Complete"
+                                className="btn btn-primary"
+                                onSubmit={onSubmit}
+                                style={{maxWidth:'10em'}}>
+                            </Form.Control>
+                        </Form.Group>
+                    }
                     <Form.Group className='mb-3'>
                         <Form.Control
-                            type="submit"
-                            value="Mark as Complete"
+                            type="button"
+                            value="Back"
                             className="btn btn-primary"
-                            onSubmit={onSubmit}
+                            onClick={() => window.location.href = "/"}
                             style={{maxWidth:'10em'}}>
                         </Form.Control>
                     </Form.Group>
                 </Form>
-            }
+            
         </Card>
         }
     </>
