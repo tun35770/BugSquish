@@ -17,6 +17,7 @@ import Login from './components/Login.tsx'
 import CreateProject from './components/CreateProject.tsx'
 import ViewProject from './components/ViewProject.tsx'
 import ProjectList from './components/ProjectList.tsx'
+import EditProject from './components/EditProject.tsx'
 
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
           <Route path="/projects" element={<ProjectList />} />
           <Route path="/createproject/" element={<CreateProject />} />
           <Route path="/viewproject/:id" element={<ViewProject />} />
+          <Route path="/editproject/:id" element={<EditProject />} />
 
         </Routes>
       

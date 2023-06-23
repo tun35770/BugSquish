@@ -77,7 +77,7 @@ const CreateBug = () => {
             return;
         }
 
-        console.log(user);
+        //console.log(user);
 
         const bug = {
             username: user.username ?? '',
@@ -89,6 +89,19 @@ const CreateBug = () => {
             date: new Date(),
             completed: false,
         };
+
+        /* fetch('http://localhost:5000/projects/addbug' + projectId, {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify(bug)
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err)) */
 
         fetch('http://localhost:5000/bugs/add', {
             method: 'POST',

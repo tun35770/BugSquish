@@ -2,12 +2,13 @@
   margin: 0 auto;
   text-align: center;
   
-  background-image: linear-gradient(to left, #4d485559, #000000bc);
-  min-height:100vh;
+  background-color: #bbb7c79f;
+  min-height: 100vh;
 }
 
 .title {
   font-family: 'Montserrat';
+
 }
 
 .leftAlign {

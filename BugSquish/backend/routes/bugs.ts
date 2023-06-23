@@ -60,13 +60,22 @@ router.route('/update/:id').post((req: any, res: any) => {
             bug.title = req.body.title;
             bug.description = req.body.description;
             bug.date = Date.parse(req.body.date);
-            bug.completed= req.body.completed || false;
+            bug.completed = req.body.completed || false;
 
             bug.save()
                 .then(() => res.json('Bug ticket updated'))
                 .catch((err: any) => res.status(400).json('Error: ' + err));
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/byproject/:id').get((req: any, res: any) => {
+
+    const project_id = req.params.id.toString();
+    //console.log(req.user._id);
+    Bug.find( {project_id} ).sort({createdAt: -1})
+        .then((bugs: any) => res.json(bugs))
+        .catch((err: any) => res.status(400).json("Error: ' + err"));
 });
 
 export default router;

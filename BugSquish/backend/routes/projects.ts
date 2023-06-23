@@ -57,4 +57,18 @@ router.route('/:id').delete((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/update/:id').post((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            project.title = req.body.title;
+            project.description = req.body.description;
+            project.date = Date.parse(req.body.date);
+            
+            project.save()
+                .then(() => res.json('Project updated'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 export default router;

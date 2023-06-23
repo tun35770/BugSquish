@@ -40,6 +40,7 @@ const BugList = () => {
       return;
     }
 
+
     const fetchBugs = async () => {
       const response = await fetch('http://localhost:5000/bugs', {
           method: 'GET',
