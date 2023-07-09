@@ -38,13 +38,27 @@ const sendInviteMail = async (receiverEmail: string,
 router.use(requireAuth);
 
 //Get projects
-router.route('/').get((req: any, res: any) => {
+router.route('/').get( async (req: any, res: any) => {
 
     const user_id = req.user._id.toString();
     //console.log(req.user._id);
-    Project.find( {user_id} ).sort({createdAt: -1})
+    /* Project.find( {user_id} ).sort({createdAt: -1})
         .then((projects: any) => res.json(projects))
-        .catch((err: any) => res.status(400).json("Error: ' + err"));
+        .catch((err: any) => res.status(400).json("Error: ' + err")); */
+
+    const usersProjects = [];
+    for await (const doc of Project.find()){
+        for(let i = 0; i < doc.users.length; i++){
+            if(doc.users[i].user_id === user_id){
+                usersProjects.push(doc);
+                break;
+            }
+        }
+    }
+
+    console.log(usersProjects);
+
+    res.json(usersProjects);
 });
 
 //Create project
