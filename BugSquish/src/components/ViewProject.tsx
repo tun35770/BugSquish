@@ -118,7 +118,7 @@ const ViewProject = () => {
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
-        if (user) window.location.href = "/projects";
+        if (user) window.location.href = document.referrer;
         else      window.location.href = "/";
         
     } 
