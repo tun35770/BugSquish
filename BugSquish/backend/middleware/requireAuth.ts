@@ -20,6 +20,8 @@ const requireAuth = async (req:any, res:any, next:any) => {
         const obj = {
             _id: decoded._id
         }
+        
+        console.log(obj);
         req.user = await User.findOne( obj ).select('_id');
         next();
         

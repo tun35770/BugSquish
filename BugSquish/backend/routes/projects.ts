@@ -56,8 +56,6 @@ router.route('/').get( async (req: any, res: any) => {
         }
     }
 
-    console.log(usersProjects);
-
     res.json(usersProjects);
 });
 
@@ -154,7 +152,6 @@ router.route('/adduser/:id').post((req: any, res: any) => {
             }
 
             if(!userAlreadyExists){
-                console.log(user)
                 project.users.push(user);
 
                 project.save()
@@ -168,5 +165,36 @@ router.route('/adduser/:id').post((req: any, res: any) => {
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
+
+router.route('/addbug/:id').post((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            const newBug = req.body.bug_id;
+            project.bugs.push(newBug);
+
+            
+            project.save()
+                .then(() => res.json('Bug added to project'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/deletebug/:id').post((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            const bug = req.body.bug_id;
+            if(project.bugs.indexOf(bug) !== -1){
+                project.bugs.splice(project.bugs.indexOf(bug), 1);
+            }
+
+            
+            project.save()
+                .then(() => res.json('Bug deleted from project'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 
 export default router;

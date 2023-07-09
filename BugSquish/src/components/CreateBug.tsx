@@ -8,8 +8,7 @@ const CreateBug = () => {
     const { user } = useAuthContext();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [project, setProject] = useState('');
-    const [projectId, setProjectId] = useState('');
+    const [project, setProject] = useState<any | undefined>(undefined);
     const [error, setError] = useState<String | undefined>(undefined);
 
     const [projects, setProjects] = useState<any[]>([]);
@@ -32,8 +31,9 @@ const CreateBug = () => {
               setProjects(json);
               if(json.length > 0){
                 console.log(json);
-                setProject(json[0]["title"]);
-                setProjectId(json[0]["_id"]);
+                setProject(json[0]);
+                setIsLoaded(true);
+                //console.log(json[0]);
               }
               //console.log(projects);
             }
@@ -41,7 +41,6 @@ const CreateBug = () => {
      
           if(user) {
             fetchProjects();
-            setIsLoaded(true);
           }
       
           else {
@@ -58,10 +57,9 @@ const CreateBug = () => {
     }
     
     function onChangeProject(e: React.ChangeEvent<HTMLSelectElement>){
-        setProject(e.currentTarget.value["title"]);
-        setProjectId(e.currentTarget.value["_id"]);
-        console.log(e.currentTarget.value["title"])
-        console.log(e.currentTarget.value["_id"])
+        const project_id = e.currentTarget.value;
+        const newProject = projects.filter((proj) => proj["_id"] === project_id) [0];
+        setProject(newProject);
     }
 
     function onSubmit(e: React.FormEvent){
@@ -72,7 +70,7 @@ const CreateBug = () => {
             return;
         }
 
-        if(!project || project.length === 0){
+        if(!project || project === undefined){
             setError('Select a project to assign this bug to.')
             return;
         }
@@ -84,8 +82,8 @@ const CreateBug = () => {
             user_id: user.user_id,
             title: title,
             description: description,
-            project: project,
-            project_id: projectId,
+            project: project["title"],
+            project_id: project["_id"],
             date: new Date(),
             completed: false,
         };
@@ -162,13 +160,14 @@ const CreateBug = () => {
                 <select
                     required
                     className="form-control"
-                    value={project}
+                    value={project["_id"]}
                     onChange={onChangeProject}>
                     {
-                        projects.map(proj => {
+                        projects.map((proj, i) => {
                             return <option
-                                    key={proj.title}
-                                    value={proj}>{proj.title}
+                                    key={i}
+                                    value={proj["_id"]}>
+                                        {proj.title}
                                 </option>
                         })
                     
