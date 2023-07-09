@@ -1,6 +1,38 @@
 const router = require('express').Router();
 let Project = require('../models/project.model');
 import requireAuth from '../middleware/requireAuth'
+import nodemailer from 'nodemailer';
+
+//nodemailer for inviting users to a project
+const sendInviteMail = async (receiverEmail: string, 
+                                projectName: string,
+                                senderUsername: string, 
+                                inviteLink: string) => {
+    const transporter = nodemailer.createTransport({
+        service:'hotmail',
+        auth: {
+            user: 'bugsquish@outlook.com',
+            pass: '9K2tvhhqjmf29644!'
+        }
+    });
+
+    const info = transporter.sendMail({
+        from: 'BugSquish <BugSquish@outlook.com',
+        to: receiverEmail,
+        subject: `You've been invited to a BugSquish project`,
+        html: `<p> Hello from BugSquish, </p>
+                <p> You have been invited to the project ${projectName}
+                    by ${senderUsername}. </p>
+                <p> Click the link below to accept the invite and be added as a member of
+                    the project. </p>
+                <p> ${inviteLink} </p>`,
+    }, (err, data) => {
+        if(err)
+            console.error(err);
+        else    
+            console.log("Sent: " + data.response)
+    });
+}
 
 //require authentication for all bug routes
 router.use(requireAuth);
@@ -67,6 +99,58 @@ router.route('/update/:id').post((req: any, res: any) => {
             project.save()
                 .then(() => res.json('Project updated'))
                 .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/sendinvite/:id').post((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            /*
+            receiverEmail: string, 
+            projectName: string,
+            senderUsername: string, 
+            inviteLink: string
+            */
+           const receiverEmail = req.body.receiverEmail;
+           const projectName = project.title;
+           const senderUsername = req.body.user.username;
+           //link should bring user to a page in client that will immediately fetch adduser hook
+           const inviteLink = 'http://localhost:5173/acceptinvite/' + req.params.id;
+
+           sendInviteMail(receiverEmail, projectName, senderUsername, inviteLink)
+           .then(() => res.json('Email sent!'))
+           .catch((err) => res.status(400).json("Error: " + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/adduser/:id').post((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            const projectUsers = project.users;
+            const user = req.body;
+            let userAlreadyExists = false;
+
+            for(let i = 0; i < projectUsers.length; i++){
+                if(projectUsers[i].user_id === user["user_id"]){
+                    userAlreadyExists = true;
+                    break;
+                }
+            }
+
+            if(!userAlreadyExists){
+                console.log(user)
+                project.users.push(user);
+
+                project.save()
+                .then(() => res.json('Project updated'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+            }
+
+            else{
+                res.status(400).json('Error: User already added to project.');
+            }
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });

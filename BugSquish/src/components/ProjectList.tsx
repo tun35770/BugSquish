@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -48,6 +48,7 @@ const ProjectList = () => {
       const json = await response.json();
       if(response.ok){
         setProjects(json);
+        console.log(json)
       }
     }
 
@@ -91,12 +92,33 @@ const ProjectList = () => {
   
   return (
     <div>
-      <h1 style={{
-        marginTop: '0.5em',
-        color: '#fff',
-        fontFamily: 'Montserrat',
-      }}> My Projects</h1>
-      {projectList()}
+      { (projects.length > 0) && 
+        <>
+          <h1 style={{
+            marginTop: '0.5em',
+            color: '#fff',
+            fontFamily: 'Montserrat',
+          }}> My Projects</h1>
+          {projectList()}
+        </>
+      }
+
+      { (projects.length === 0) && 
+        <>
+          <h1 style={{
+            marginTop: '0.5em',
+            color: '#fff',
+            fontFamily: 'Montserrat',
+          }}> You have no projects</h1>
+
+          <br />
+          <Button
+            variant='primary'
+            onClick={(e)=>window.location.href='createproject'}>
+            Create your first Project
+          </Button>
+        </>
+      }
     </div>
   )
 }

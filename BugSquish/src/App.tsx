@@ -18,6 +18,8 @@ import CreateProject from './components/CreateProject.tsx'
 import ViewProject from './components/ViewProject.tsx'
 import ProjectList from './components/ProjectList.tsx'
 import EditProject from './components/EditProject.tsx'
+import InviteUser from './components/InviteUser.tsx'
+import AcceptInvite from './components/AcceptInvite.tsx'
 
 
 function App() {
@@ -73,6 +75,10 @@ function App() {
                 <Link to="/createproject" className="nav-link white-text">Create Project</Link>
               )}
 
+              {user && (
+                <Link to="/inviteuser" className="nav-link white-text">Invite user</Link>
+              )}
+
               {!user && (
                 <>
                   <Link to="/login" className="nav-link white-text">Login</Link>
@@ -102,6 +108,8 @@ function App() {
           <Route path="/createproject/" element={<CreateProject />} />
           <Route path="/viewproject/:id" element={<ViewProject />} />
           <Route path="/editproject/:id" element={<EditProject />} />
+          <Route path="/inviteuser/" element={<InviteUser />} />
+          <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
 
         </Routes>
       

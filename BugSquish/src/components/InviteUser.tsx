@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react'
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card'
+import React, { useEffect, useState } from 'react'
+import { Card, Form } from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const CreateBug = () => {
+const InviteUser = () => {
 
     const { user } = useAuthContext();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [projectId, setProjectId] = useState('');
+    const [email, setEmail] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
 
     const [projects, setProjects] = useState<any[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const userInputRef = useRef();
+
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -49,14 +47,11 @@ const CreateBug = () => {
           }
     }, [user])
 
-    function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
-        setTitle(e.currentTarget.value);
+
+    function onChangeEmail(e: React.ChangeEvent<HTMLInputElement>){
+        setEmail(e.currentTarget.value);
     }
 
-    function onChangeDescription(e: React.ChangeEvent<HTMLInputElement>){
-        setDescription(e.currentTarget.value);
-    }
-    
     function onChangeProject(e: React.ChangeEvent<HTMLSelectElement>){
         setProject(e.currentTarget.value["title"]);
         setProjectId(e.currentTarget.value["_id"]);
@@ -72,90 +67,54 @@ const CreateBug = () => {
             return;
         }
 
-        if(!project || project.length === 0){
-            setError('Select a project to assign this bug to.')
-            return;
-        }
-
         //console.log(user);
 
-        const bug = {
-            username: user.username ?? '',
-            user_id: user.user_id,
-            title: title,
-            description: description,
-            project: project,
-            project_id: projectId,
-            date: new Date(),
-            completed: false,
-        };
+        const data = {
+            receiverEmail: email,
+            user: user,
+        }
 
-        /* fetch('http://localhost:5000/projects/addbug' + projectId, {
+        fetch('http://localhost:5000/projects/sendinvite/' + projectId, {
             method: 'POST',
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
                 'Authorization': `Bearer ${user.token}`
             },
-            body: JSON.stringify(bug)
-        })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err)) */
-
-        fetch('http://localhost:5000/bugs/add', {
-            method: 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify(bug)
+            body: JSON.stringify(data)
         })
         .then((res) => res.json())
         .then((data) => {console.log(data);
-                            window.location.href= "/";})
-        .catch((err) => console.log(err))
-
-        
+                        //window.location.href= "/projects";
+                        })
+        .catch((err) => console.log(err));
     }
 
   return (
-    <>
-    {isLoaded && 
     <Card className='purple-gradient' style=
         {{maxWidth: '75%', 
           margin: '3rem auto', 
           padding:'1rem',
           border:'1px solid white',
           color:'#fff'}}>
-        <h3>Create New Bug Ticket</h3>
+        <h3>Invite a new user to your project</h3>
         <br/>
         <Form onSubmit={onSubmit} style=
             {{width:'80%',
               margin:'0 auto'}}>
 
-            <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
-            <Form.Label>Title: </Form.Label>
+            <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
+            <Form.Label>User's email: </Form.Label>
                 <Form.Control
-                type="text"
+                    type="text"
                     required
                     className="form-control"
-                    value={title}
-                    onChange={onChangeTitle}>
+                    value={email}
+                    onChange={onChangeEmail}>
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
-            <Form.Label>Description: </Form.Label>
-                <Form.Control
-                as="textarea"
-                    required
-                    className="form-control"
-                    value={description}
-                    onChange={onChangeDescription}>
-                </Form.Control>
-            </Form.Group>
+            <br/>
 
             <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
             <Form.Label>Project Name: </Form.Label>
@@ -175,11 +134,11 @@ const CreateBug = () => {
                     }
                 </select>
             </Form.Group>
-            <br/>
+
             <Form.Group className='mb-3'>
                 <Form.Control
                     type="submit"
-                    value="Create Bug Ticket"
+                    value="Send Invite"
                     className="btn btn-primary"
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>
@@ -189,7 +148,6 @@ const CreateBug = () => {
             </Form.Group>
         </Form>
     </Card>
-}</> )
-}
+)}
 
-export default CreateBug
+export default InviteUser
