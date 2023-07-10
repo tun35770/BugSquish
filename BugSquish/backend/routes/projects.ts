@@ -169,9 +169,8 @@ router.route('/adduser/:id').post((req: any, res: any) => {
 router.route('/addbug/:id').post((req: any, res: any) => {
     Project.findById(req.params.id)
         .then((project: any) => {
-            const newBug = req.body.bug_id;
+            const newBug = req.body;
             project.bugs.push(newBug);
-
             
             project.save()
                 .then(() => res.json('Bug added to project'))
@@ -181,14 +180,18 @@ router.route('/addbug/:id').post((req: any, res: any) => {
 });
 
 router.route('/deletebug/:id').post((req: any, res: any) => {
+    
     Project.findById(req.params.id)
         .then((project: any) => {
-            const bug = req.body.bug_id;
-            if(project.bugs.indexOf(bug) !== -1){
-                project.bugs.splice(project.bugs.indexOf(bug), 1);
+            
+            const bugId = req.body.bug_id;
+            for(let i = 0; i < project.bugs.length; i++){
+                if(project.bugs[i]["_id"] === bugId){
+                    project.bugs.splice(i, 1);
+                    break;
+                }
             }
 
-            
             project.save()
                 .then(() => res.json('Bug deleted from project'))
                 .catch((err: any) => res.status(400).json('Error: ' + err));

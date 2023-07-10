@@ -45,7 +45,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                 <Link to={"/edit/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                <a href="/" onClick={() => {deleteBug(id)}}><BsXCircle style={{color:'red'}} /></a>
+                <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}><BsXCircle style={{color:'red'}} /></a>
               </div>
             </Card.Body>
             <Card.Text>

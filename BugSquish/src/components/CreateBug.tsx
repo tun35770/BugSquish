@@ -80,6 +80,7 @@ const CreateBug = () => {
         const bug = {
             username: user.username ?? '',
             user_id: user.user_id,
+            user_token: user.token,
             title: title,
             description: description,
             project: project["title"],
