@@ -35,14 +35,19 @@ const ProjectList = () => {
       return;
     }
 
+    const data = {
+      user: user
+    }
+
     const fetchProjects = async () => {
       const response = await fetch('http://localhost:5000/projects', {
-          method: 'GET',
+          method: 'POST',
           headers: {
               Accept: "application/json",
               "Content-Type": "application/json;charset=UTF-8",
               'Authorization': `Bearer ${user.token}`
           },
+          body: JSON.stringify(user)
       });
 
       const json = await response.json();

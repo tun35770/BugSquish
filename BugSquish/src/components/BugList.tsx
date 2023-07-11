@@ -40,19 +40,24 @@ const BugList = () => {
       return;
     }
 
+    const data = {
+      user: user
+    }
 
     const fetchBugs = async () => {
       const response = await fetch('http://localhost:5000/bugs', {
-          method: 'GET',
+          method: 'POST',
           headers: {
               Accept: "application/json",
               "Content-Type": "application/json;charset=UTF-8",
               'Authorization': `Bearer ${user.token}`
           },
+          body: JSON.stringify(data)
       });
 
       const json = await response.json();
       if(response.ok){
+        console.log(json)
         setBugs(json);
         setBugsLength(json.length);
       }

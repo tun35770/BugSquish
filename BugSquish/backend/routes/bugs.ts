@@ -5,13 +5,34 @@ import requireAuth from '../middleware/requireAuth'
 //require authentication for all bug routes
 router.use(requireAuth);
 
-router.route('/').get((req: any, res: any) => {
+router.route('/').post((req: any, res: any) => {
+    const user = req.body.user;
+    const user_id = user.user_id;
 
-    const user_id = req.user._id.toString();
-    //console.log(req.user._id);
-    Bug.find( {user_id} ).sort({createdAt: -1})
-        .then((bugs: any) => res.json(bugs))
-        .catch((err: any) => res.status(400).json("Error: ' + err"));
+    fetch('http://localhost:5000/projects', {
+          method: 'POST',
+          headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              'Authorization': `Bearer ${user.token}`
+          },
+          body: JSON.stringify(user)
+      })
+      .then( async (response) => {
+        try{
+            const userProjects =  await response.json();
+            let userBugs: any[] = [];
+            for(let i = 0; i < userProjects.length; i++){
+                //console.log(userProjects[i].bugs)
+                userBugs = [...userBugs, ...userProjects[i].bugs];
+            }
+
+            //console.log(userBugs)
+            res.json(userBugs);
+        } catch(e){
+            res.status(400).json("Error: " + e);
+        }
+      })
 });
 
 router.route('/add').post((req: any, res: any) => {

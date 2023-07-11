@@ -56,7 +56,6 @@ const ViewProject = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 setUsername(data.username);
                 setDescription(data.description);
                 setTitle(data.title);
@@ -85,18 +84,25 @@ const ViewProject = () => {
 
     }, [user])
 
-    function deleteBug(id:string){
+    function deleteBug(id:string, project_id:string){
 
         if(!user){
             return;
         }
+
+        const data = {
+            user: user,
+            project_id: project_id
+          }
+
         fetch('http://localhost:5000/bugs/' + id, {
                 method: 'delete',
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                     'Authorization': `Bearer ${user.token}`
-                }
+                },
+                body: JSON.stringify(data)
             })
             .then((res) => res.json())
             .then((data) => {

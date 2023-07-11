@@ -38,9 +38,9 @@ const sendInviteMail = async (receiverEmail: string,
 router.use(requireAuth);
 
 //Get projects
-router.route('/').get( async (req: any, res: any) => {
+router.route('/').post( async (req: any, res: any) => {
 
-    const user_id = req.user._id.toString();
+    const user_id = req.body.user_id
     //console.log(req.user._id);
     /* Project.find( {user_id} ).sort({createdAt: -1})
         .then((projects: any) => res.json(projects))
