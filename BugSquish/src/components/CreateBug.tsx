@@ -29,7 +29,7 @@ const CreateBug = () => {
                     "Content-Type": "application/json;charset=UTF-8",
                     'Authorization': `Bearer ${user.token}`
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify(data)
             });
       
             const json = await response.json();

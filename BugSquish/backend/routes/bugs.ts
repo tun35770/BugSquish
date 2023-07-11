@@ -7,7 +7,10 @@ router.use(requireAuth);
 
 router.route('/').post((req: any, res: any) => {
     const user = req.body.user;
-    
+    const data = {
+        user: user
+    };
+
     fetch('http://localhost:5000/projects', {
           method: 'POST',
           headers: {
@@ -15,7 +18,7 @@ router.route('/').post((req: any, res: any) => {
               "Content-Type": "application/json;charset=UTF-8",
               'Authorization': `Bearer ${user.token}`
           },
-          body: JSON.stringify(req.body)
+          body: JSON.stringify(data)
       })
       .then( async (response) => {
         try{
