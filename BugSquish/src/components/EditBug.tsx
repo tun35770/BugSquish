@@ -59,7 +59,7 @@ const EditBug = () => {
         }
 
         const bug = {
-            username: user.username ?? '',
+            user: user,
             title: title,
             description: description,
             project: project,
@@ -77,7 +77,7 @@ const EditBug = () => {
             body: JSON.stringify(bug)
         })
         .then((res) => res.json())
-        .then((data) => {}/* console.log(data) */)
+        .then((data) => console.log(data) )
         .catch((err) => console.log(err))
 
         window.location.href= document.referrer;

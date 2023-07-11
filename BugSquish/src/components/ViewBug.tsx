@@ -53,10 +53,9 @@ const ViewBug = () => {
         }
 
         const bug = {
-            username: username,
+            user: user,
             title: title,
             description: description,
-            project: project,
             date: date,
 
             /** ONLY VALUE BEING CHANGED */

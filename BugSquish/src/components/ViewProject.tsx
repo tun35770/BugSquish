@@ -109,7 +109,6 @@ const ViewProject = () => {
     }
 
     function bugList(){
-        console.log(`Bugs: ${bugs}`) 
         return bugs.map((currentBug: BugType) => {
           return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug._id} id={currentBug._id} />
         });

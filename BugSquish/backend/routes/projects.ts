@@ -188,6 +188,7 @@ router.route('/deletebug/:id').post((req: any, res: any) => {
             for(let i = 0; i < project.bugs.length; i++){
                 if(project.bugs[i]["_id"] === bugId){
                     project.bugs.splice(i, 1);
+                    console.log("Bug deleted");
                     break;
                 }
             }
@@ -199,5 +200,23 @@ router.route('/deletebug/:id').post((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/updatebug/:id').post((req: any, res: any) => {
+    
+    Project.findById(req.params.id)
+        .then((project: any) => {
+            const bugId = req.body.bug_id;
+            for(let i = 0; i < project.bugs.length; i++){
+                if(project.bugs[i]["_id"] === bugId){
+                    project.bugs[i] = req.body.newBug;
+                    break;
+                }
+            }
+
+            project.save()
+                .then(() => res.json('Bug updated'))
+                .catch((err: any) => res.status(400).json('Error: ' + err));
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
 
 export default router;

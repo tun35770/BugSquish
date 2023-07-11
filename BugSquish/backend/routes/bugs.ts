@@ -88,16 +88,38 @@ router.route('/:id').delete((req: any, res: any) => {
 });
 
 router.route('/update/:id').post((req: any, res: any) => {
+    const user = req.body.user;
+    
     Bug.findById(req.params.id)
         .then((bug: any) => {
-            bug.username = req.body.username;
+            bug.username = user.username;
             bug.title = req.body.title;
             bug.description = req.body.description;
             bug.date = Date.parse(req.body.date);
-            bug.completed = req.body.completed || false;
+            bug.completed = req.body.completed ?? false;
 
             bug.save()
-                .then(() => res.json('Bug ticket updated'))
+                .then(() => {
+
+                    const data = {
+                        newBug: bug,
+                        bug_id: bug["_id"]
+                    }
+
+                    fetch('http://localhost:5000/projects/updatebug/' + bug.project_id, {
+                        method: 'POST',
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json;charset=UTF-8",
+                            'Authorization': `Bearer ${user.token}`
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(() => {
+                        res.json('Bug updated')
+                    })
+                    .catch((err:any) => res.status(400).json('Error: ' + err));
+                })
                 .catch((err: any) => res.status(400).json('Error: ' + err));
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
