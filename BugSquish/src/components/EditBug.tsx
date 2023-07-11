@@ -12,8 +12,6 @@ const EditBug = () => {
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [completed, setCompleted] = useState(false);
-
-    const userInputRef = useRef();
     
     useEffect(() => {
         if(!user){
@@ -30,7 +28,7 @@ const EditBug = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-        //console.log(data);
+        console.log(data);
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
@@ -45,10 +43,6 @@ const EditBug = () => {
 
     function onChangeDescription(e: React.ChangeEvent<HTMLInputElement>){
         setDescription(e.currentTarget.value);
-    }
-    
-    function onChangeProject(e: React.ChangeEvent<HTMLInputElement>){
-        setProject(e.currentTarget.value);
     }
 
     function onSubmit(e: React.FormEvent){
@@ -77,10 +71,13 @@ const EditBug = () => {
             body: JSON.stringify(bug)
         })
         .then((res) => res.json())
-        .then((data) => console.log(data) )
+        .then((data) => {
+            console.log(data);
+            window.location.href= document.referrer;
+        })
         .catch((err) => console.log(err))
 
-        window.location.href= document.referrer;
+        
     }
 
   return (

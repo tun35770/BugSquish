@@ -7,8 +7,7 @@ router.use(requireAuth);
 
 router.route('/').post((req: any, res: any) => {
     const user = req.body.user;
-    const user_id = user.user_id;
-
+    
     fetch('http://localhost:5000/projects', {
           method: 'POST',
           headers: {
@@ -16,7 +15,7 @@ router.route('/').post((req: any, res: any) => {
               "Content-Type": "application/json;charset=UTF-8",
               'Authorization': `Bearer ${user.token}`
           },
-          body: JSON.stringify(user)
+          body: JSON.stringify(req.body)
       })
       .then( async (response) => {
         try{
@@ -121,7 +120,6 @@ router.route('/update/:id').post((req: any, res: any) => {
 
             bug.save()
                 .then(() => {
-
                     const data = {
                         newBug: bug,
                         bug_id: bug["_id"]
