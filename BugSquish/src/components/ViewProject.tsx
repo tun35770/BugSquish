@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
+import BugList from './BugList'
 
 import { useAuthContext } from '../hooks/useAuthContext';
 import Bug from './Bug'; 
@@ -46,7 +47,7 @@ const ViewProject = () => {
             return;
         }
 
-        const fetchProject = fetch('http://localhost:5000/projects/' + id, {
+        fetch('http://localhost:5000/projects/' + id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -60,27 +61,9 @@ const ViewProject = () => {
                 setDescription(data.description);
                 setTitle(data.title);
                 setUsers(data.users);
+                setIsLoaded(true);
             })
             .catch((err) => console.log(err));
-
-            const fetchBugs = fetch('http://localhost:5000/bugs/byproject/' + id, {
-                method: 'GET',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json;charset=UTF-8",
-                    'Authorization': `Bearer ${user.token}`
-                },
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setBugs(data);
-                setBugsLength(data.length);
-                console.log(data)
-            })
-            .catch((err) => console.log(err));
-        
-            Promise.all([fetchProject, fetchBugs])
-            .then((res) => setIsLoaded(true) );
 
     }, [user])
 
@@ -165,31 +148,7 @@ const ViewProject = () => {
             
             <br />
 
-            <div>
-                { (bugsLength > 0) && 
-                    <>
-                    <h1 style={{
-                        textAlign: 'left',
-                        marginLeft: '0.5em',
-                        
-                        color: '#000',
-                        fontFamily: 'Montserrat',
-                    }}> Bugs </h1>
-                    {bugList()}
-                    </>
-                }
-
-                { (bugsLength === 0) && 
-                    <>
-                    <br />
-                        <h3 style={{
-                            textAlign: 'left',
-                            marginLeft: '1em', 
-                            color:'black',
-                            fontFamily: 'Montserrat'}}> No bugs to display </h3>
-                    </>
-                }
-            </div>
+            <BugList project_id={id}/>
         </>
         }
     </>

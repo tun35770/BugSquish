@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Bug from './Bug';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const BugList = () => {
+interface props {
+  project_id?: string | undefined
+}
+
+const BugList = ( {project_id = undefined}: props ) => {
   class BugType {
     _id: string;
     username: string;
@@ -45,21 +49,44 @@ const BugList = () => {
     }
 
     const fetchBugs = async () => {
-      const response = await fetch('http://localhost:5000/bugs', {
-          method: 'POST',
-          headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json;charset=UTF-8",
-              'Authorization': `Bearer ${user.token}`
-          },
-          body: JSON.stringify(data)
-      });
+      let fetchBugs: any;
 
-      const json = await response.json();
-      if(response.ok){
-        console.log(json)
-        setBugs(json);
-        setBugsLength(json.length);
+      if(project_id === undefined){
+        fetchBugs = fetch('http://localhost:5000/bugs', {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then((res) => res.json())
+          .then((data) => {
+              setBugs(data);
+              setBugsLength(data.length);
+              console.log(data)
+          })
+          .catch((err) => console.log(err));
+      }
+
+      //specific project
+      else {
+        fetchBugs = fetch('http://localhost:5000/bugs/byproject/' + project_id, {
+                method: 'GET',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                    'Authorization': `Bearer ${user.token}`
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                setBugs(data);
+                setBugsLength(data.length);
+                console.log(data)
+            })
+            .catch((err) => console.log(err));
       }
     }
 
@@ -117,7 +144,11 @@ const BugList = () => {
             color: '#fff',
             fontFamily: 'Montserrat',
           }}> Bugs </h1>
-          {bugList()}
+
+          <ListGroup>
+            {bugList()}
+          </ListGroup>
+          
         </>
       }
 
