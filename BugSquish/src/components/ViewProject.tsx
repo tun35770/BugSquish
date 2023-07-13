@@ -67,42 +67,6 @@ const ViewProject = () => {
 
     }, [user])
 
-    function deleteBug(id:string, project_id:string){
-
-        if(!user){
-            return;
-        }
-
-        const data = {
-            user: user,
-            project_id: project_id
-          }
-
-        fetch('http://localhost:5000/bugs/' + id, {
-                method: 'delete',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json;charset=UTF-8",
-                    'Authorization': `Bearer ${user.token}`
-                },
-                body: JSON.stringify(data)
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                const newBugs = [...bugs].filter((bug: BugType) => bug._id !== id)
-                setBugs(newBugs);
-                setBugsLength(newBugs.length);
-            })
-            .catch((err) => console.log(err))
-    }
-
-    function bugList(){
-        return bugs.map((currentBug: BugType) => {
-          return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug._id} id={currentBug._id} />
-        });
-    }
-
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
