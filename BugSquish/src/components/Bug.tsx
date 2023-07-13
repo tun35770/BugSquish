@@ -29,18 +29,16 @@ const Bug = ( {bug, deleteBug, id} ) => {
           <Card.Title className='light-text' style=
           {{fontSize: '1.25em',
             color: '#CCC',
-            width: '30%',
+            width: '20%',
             paddingRight: '0.5em',
             borderRight: '1px solid white'}}>
             {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
           </Card.Title>
 
-          <br/>
-            
           <Card.Body style=
           {{display:'flex', 
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            width:'40%',
             padding: '0',
             lineHeight:'1em'}}>
 
@@ -48,10 +46,12 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 textAlign: 'center',
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
+                marginLeft: '0',
+                width:'33%'
               }}>
 
               <Card.Text>
-                <b>Project: </b>{bug.project}
+                {bug.project}
               </Card.Text>
 
             </div>
@@ -61,10 +61,12 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 textAlign: 'center',
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
+                marginLeft: '0',
+                width:'33%'
               }}>
 
               <Card.Text>
-                <b>Submitted by: </b>{bug.username}
+                {bug.username}
               </Card.Text>
 
             </div>
@@ -74,6 +76,8 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 textAlign: 'center',  
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
+                marginLeft: '0',
+                width:'33%'
               }}>
 
               <Card.Text>
