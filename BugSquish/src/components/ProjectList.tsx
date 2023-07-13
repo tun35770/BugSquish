@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -99,20 +99,21 @@ const ProjectList = () => {
     <div>
       { (projects.length > 0) && 
         <>
-          <h1 style={{
+          <h1 className='dark-text' style={{
             marginTop: '0.5em',
-            color: '#fff',
             fontFamily: 'Montserrat',
           }}> My Projects</h1>
-          {projectList()}
+
+          <ListGroup>
+            {projectList()}
+          </ListGroup>
         </>
       }
 
       { (projects.length === 0) && 
         <>
-          <h1 style={{
+          <h1 className='dark-text' style={{
             marginTop: '0.5em',
-            color: '#fff',
             fontFamily: 'Montserrat',
           }}> You have no projects</h1>
 

@@ -139,9 +139,8 @@ const BugList = ( {project_id = undefined}: props ) => {
     <div>
       { (bugsLength > 0) && 
         <>
-          <h1 style={{
+          <h1 className='dark-text' style={{
             marginTop: '0.5em',
-            color: '#fff',
             fontFamily: 'Montserrat',
           }}> Bugs </h1>
 
@@ -155,10 +154,9 @@ const BugList = ( {project_id = undefined}: props ) => {
       { (bugsLength === 0) && 
         <>
           <br />
-            <h3 style={{
+            <h3 className='dark-text' style={{
                 textAlign: 'left',
                 marginLeft: '1em', 
-                color:'white',
                 fontFamily: 'Montserrat'}}> No bugs to display </h3>
         </>
       }

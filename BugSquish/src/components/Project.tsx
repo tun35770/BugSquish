@@ -1,60 +1,42 @@
 import React, { useState } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import {BsXCircle, BsPencil} from 'react-icons/bs'
+import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 
 const Project = ( {project, deleteProject, id} ) => {
 
-  const [isHover, setIsHover] = useState(false);
-
-  function handleMouseEnter(){
-    setIsHover(true);
-  }
-
-  function handleMouseLeave(){
-    setIsHover(false);
-  }
-
-  function projectOnClick(){
-    window.location.href= "/viewproject/" + id;
-  }
-
   return (
-    <Card className='my-3 mx-3'style=
+    <ListGroupItem className='my-3 mx-3 light-text blue-gradient'style=
     {{flexDirection:'row',
-      maxWidth:'35em',
-      backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-      color:'#fff'}}>
+      maxWidth:'35em'
+      }}>
 
-      <Card key={id} style=
-        {{border: '2px solid white',
-          borderRight: '0',
-          borderRadius: '0',
-          width: '90%',
-          textAlign:'left', 
-          backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-          color:'#fff'}}>
+      <Card className='blue-gradient' key={id} style=
+        {{width: '100%',
+          textAlign:'left'
+          }}>
           <Card.Body>
             <Card.Body style=
               {{display:'flex', 
                 justifyContent:'space-between',
                 padding:'0'}}>
-              <Card.Title style={{fontSize: '1.5em'}}>
+              <Card.Title style={{fontSize: '1.5em', color:'#CCC'}}>
                 {project.title} 
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
+                <Link to={"/viewproject/" + id} style={{color: 'white'}}> <BsEye /> </Link>
                 <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
                 <a href="/projects" onClick={() => {deleteProject(id)}}><BsXCircle style={{color:'red'}} /></a>
               </div>
             </Card.Body>
-            <Card.Text>
+            <Card.Text className='light-text'>
               {project.description}
             </Card.Text>
 
             <br/>
             
-            <Card.Body style={{padding:'0', lineHeight:'1em'}}>
-              <Card.Text>
+            <Card.Body className='light-text' style={{padding:'0', lineHeight:'1em'}}>
+              <Card.Text className='light-text'>
                 <b>Owner: </b>{project.username}
               </Card.Text>
               
@@ -62,22 +44,7 @@ const Project = ( {project, deleteProject, id} ) => {
             
           </Card.Body>
         </Card>
-
-        <Card onClick={projectOnClick} 
-              onMouseEnter={handleMouseEnter} 
-              onMouseLeave={handleMouseLeave}
-              style=
-        {{border: (isHover ? '3px solid white' : '2px solid white'),
-          borderRadius: '0',
-          width:'10%',
-          justifyContent: 'center',
-          cursor: (isHover ? 'pointer' : 'default'),
-          backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-          color:'#fff'
-          }}>
-           <b style={{fontSize: '1.5em'}}>{'>'}</b>
-        </Card>
-      </Card>
+      </ListGroupItem>
     )
 }
 

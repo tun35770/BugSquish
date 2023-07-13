@@ -1,93 +1,105 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Card, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import {BsXCircle, BsPencil} from 'react-icons/bs'
+import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 
 const Bug = ( {bug, deleteBug, id} ) => {
 
-  const [isHover, setIsHover] = useState(false);
-  const borderColor = bug.completed ? '#90ee90' : 'white';
-
-  function handleMouseEnter(){
-    setIsHover(true);
-  }
-
-  function handleMouseLeave(){
-    setIsHover(false);
-  }
-
-  function bugOnClick(){
-    window.location.href= "/viewbug/" + id;
-  }
-
   return (
-    <ListGroupItem className='my-3 mx-3'style=
-    {{flexDirection:'row',
+    <ListGroupItem className='my-0 mx-3 light-text blue-gradient' style=
+    {{display: 'flex',
+      flexDirection:'row',
       maxWidth:'80%',
-      backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-      color:'#fff'}}>
+      border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
+      }}>
 
-      <Card key={id} style=
-        {{border: (bug.completed ? '2px solid ' : '2px dotted ') + borderColor,
-          borderRight: '0',
-          borderRadius: '0',
+      <Card className='light-text' key={id} style=
+        {{display: 'flex',
+          flexDirection: 'row',
+          width: '100%',
           textAlign:'left', 
-          backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-          color:'#fff'}}>
-        <Card.Body style={{
+          backgroundImage: 'linear-gradient(#2962FF , #6088f4)'
+          }}>
+        <Card.Body className='light-text' style={{
           display:'flex',
-          flexDirection: 'row'
+          flexDirection: 'row',
+          padding: '0.5em'
         }}>
           
-            <Card.Title style=
-            {{fontSize: '1.25em',
-              maxWidth: '30%'}}>
-              {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
-            </Card.Title>
-
-          
+          <Card.Title className='light-text' style=
+          {{fontSize: '1.25em',
+            color: '#CCC',
+            width: '30%',
+            paddingRight: '0.5em',
+            borderRight: '1px solid white'}}>
+            {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
+          </Card.Title>
 
           <br/>
             
           <Card.Body style=
           {{display:'flex', 
             flexDirection: 'row',
-            padding:'0', 
+            justifyContent: 'space-between',
+            padding: '0',
             lineHeight:'1em'}}>
-            <Card.Text>
-              <b>Project: </b>{bug.project}
-            </Card.Text>
-            <Card.Text>
-              <b>Submitted by: </b>{bug.username}
-            </Card.Text>
-            <Card.Text>
-              <b>{new Date(bug.date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})} </b>
-            </Card.Text>
+
+            <div className='light-text' style={{
+                textAlign: 'center',
+                borderRight: '1px solid white',
+                padding: '0 0.5em 0 0.5em',
+              }}>
+
+              <Card.Text>
+                <b>Project: </b>{bug.project}
+              </Card.Text>
+
+            </div>
+
+
+            <div className='light-text' style={{
+                textAlign: 'center',
+                borderRight: '1px solid white',
+                padding: '0 0.5em 0 0.5em',
+              }}>
+
+              <Card.Text>
+                <b>Submitted by: </b>{bug.username}
+              </Card.Text>
+
+            </div>
+
+
+            <div  className='light-text' style={{
+                textAlign: 'center',  
+                borderRight: '1px solid white',
+                padding: '0 0.5em 0 0.5em',
+              }}>
+
+              <Card.Text>
+                <b>{new Date(bug.date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})} </b>
+              </Card.Text>
+
+            </div>
           </Card.Body>
           
-          <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-            <Link to={"/edit/" + id} style={{color:'gold'}}><BsPencil /></Link>
-            <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}><BsXCircle style={{color:'red'}} /></a>
+          <div style=
+          {{display:'flex', 
+            justifyContent: 'space-evenly',
+            padding: '0 0.5em',
+            gap:'1em', 
+            textAlign:'right'}} >
+
+            <Link to={"/viewbug/" + id} style={{color: 'white'}}> <BsEye /> </Link>
+            <Link to={"/edit/" + id} style={{color:'gold'}}> <BsPencil /> </Link>
+            <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}> <BsXCircle style={{color:'red'}} /> </a>
+         
           </div>
         </Card.Body>
       </Card>
 
-        <Card onClick={bugOnClick} 
-              onMouseEnter={handleMouseEnter} 
-              onMouseLeave={handleMouseLeave}
-              style=
-        {{border: (isHover ? '3px solid ' : '2px solid ') + borderColor,
-          borderRadius: '0',
-          width:'10%',
-          justifyContent: 'center',
-          cursor: (isHover ? 'pointer' : 'default'),
-          backgroundImage: 'linear-gradient(#4717f698, #4717F6)',
-          color:'#fff'
-          }}>
-           <b style={{fontSize: '1.5em'}}>{'>'}</b>
-        </Card>
-      </ListGroupItem>
-    )
+    </ListGroupItem>
+  )
 }
 
 export default Bug

@@ -79,20 +79,20 @@ const ViewProject = () => {
     <>
         {isLoaded && 
         <>
-            <Card className='purple-gradient' style=
+            <Card className='light-text blue-gradient' style=
                 {{maxWidth: '75%', 
                 margin: '3rem auto', 
                 padding:'1rem',
-                border:'1px solid white',
-                color:'#fff'}}>
-                <Card.Title className="mb-3 leftAlign" style={{fontSize: '1.5em'}}> {title} </Card.Title>
+                border:'1px solid white'
+                }}>
+                <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
                 
-                <Card.Text className="mb-3 leftAlign">
+                <Card.Text className="mb-3 leftAlign light-text">
                     {description}
                 </Card.Text>
                 <br/>
 
-                <Card.Text className="mb-3 leftAlign">
+                <Card.Text className="mb-3 leftAlign light-text">
                     <b>Owner: </b>{username}
                 </Card.Text>
 

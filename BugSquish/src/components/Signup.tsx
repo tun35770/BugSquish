@@ -28,7 +28,7 @@ const Signup = () => {
 
 
     return (
-    <Card className='purple-gradient' style=
+    <Card className='blue-gradient' style=
         {{maxWidth: '75%', 
         margin: '3rem auto', 
         padding:'1rem',
