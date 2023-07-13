@@ -25,6 +25,7 @@ const ProjectList = () => {
   const { user } = useAuthContext();
 
   const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   /*
     TODO: Implement localStorage for bugs.
@@ -54,6 +55,7 @@ const ProjectList = () => {
       if(response.ok){
         setProjects(json);
         console.log(json)
+        setIsLoaded(true);
       }
     }
 
@@ -96,36 +98,40 @@ const ProjectList = () => {
   }
   
   return (
-    <div>
-      { (projects.length > 0) && 
-        <>
-          <h1 className='dark-text' style={{
-            marginTop: '0.5em',
-            fontFamily: 'Montserrat',
-          }}> My Projects</h1>
+    <>
+    {isLoaded && 
+      <div>
+        { (projects.length > 0) && 
+          <>
+            <h1 className='dark-text' style={{
+              marginTop: '0.5em',
+              fontFamily: 'Montserrat',
+            }}> My Projects</h1>
 
-          <ListGroup>
-            {projectList()}
-          </ListGroup>
-        </>
-      }
+            <ListGroup>
+              {projectList()}
+            </ListGroup>
+          </>
+        }
 
-      { (projects.length === 0) && 
-        <>
-          <h1 className='dark-text' style={{
-            marginTop: '0.5em',
-            fontFamily: 'Montserrat',
-          }}> You have no projects</h1>
+        { (projects.length === 0) && 
+          <>
+            <h1 className='dark-text' style={{
+              marginTop: '0.5em',
+              fontFamily: 'Montserrat',
+            }}> You have no projects</h1>
 
-          <br />
-          <Button
-            variant='primary'
-            onClick={(e)=>window.location.href='createproject'}>
-            Create your first Project
-          </Button>
-        </>
-      }
-    </div>
+            <br />
+            <Button
+              variant='primary'
+              onClick={(e)=>window.location.href='createproject'}>
+              Create your first Project
+            </Button>
+          </>
+        }
+      </div>
+    }
+    </>
   )
 }
 

@@ -6,10 +6,11 @@ import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 const Bug = ( {bug, deleteBug, id} ) => {
 
   return (
-    <ListGroupItem className='my-0 mx-3 light-text blue-gradient' style=
+    <ListGroupItem className='my-0 light-text blue-gradient' style=
     {{display: 'flex',
       flexDirection:'row',
-      maxWidth:'80%',
+      width:'80%',
+      margin: '0 auto',
       border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
       }}>
 

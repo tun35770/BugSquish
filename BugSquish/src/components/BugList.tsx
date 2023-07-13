@@ -145,6 +145,21 @@ const BugList = ( {project_id = undefined}: props ) => {
           }}> Bugs </h1>
 
           <ListGroup>
+
+            <ListGroupItem style={{
+              display: 'flex',
+              flexDirection: 'row',
+              margin: '0 auto',
+              justifyContent: 'space-between',
+              width:'80%',
+              
+            }}>
+              <h3 id="bug_title" style={{width:'20%'}}> Title </h3>
+              <h3 id="project_title" style={{width:'13.33%', paddingRight:'1.5em'}}> Project </h3>
+              <h3 id="username" style={{width:'13.33%'}}> Username </h3>
+              <h3 id="date" style={{width:'13.33%', paddingLeft:'1.5em'}}> Date </h3>
+              <h3 id="options"> Options </h3>
+            </ListGroupItem>
             {bugList()}
           </ListGroup>
           
