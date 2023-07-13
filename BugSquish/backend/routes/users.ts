@@ -34,7 +34,7 @@ router.route('/:id').delete((req: any, res: any) => {
 
 
 const createToken = (_id:any) => {
-    return jwt.sign({_id}, process.env.SECRET as string, { expiresIn: '1d'});
+    return jwt.sign({_id}, process.env.SECRET as string, { expiresIn: '7d'});
 }
 
 router.route('/login').post((req: any, res: any) => {

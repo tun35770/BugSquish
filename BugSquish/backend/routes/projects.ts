@@ -39,9 +39,7 @@ router.use(requireAuth);
 
 //Get projects
 router.route('/').post( async (req: any, res: any) => {
-    console.log(req.body)
     const user_id = req.body.user.user_id;
-    console.log(user_id)
     //console.log(req.user._id);
     /* Project.find( {user_id} ).sort({createdAt: -1})
         .then((projects: any) => res.json(projects))
@@ -189,7 +187,6 @@ router.route('/deletebug/:id').post((req: any, res: any) => {
             for(let i = 0; i < project.bugs.length; i++){
                 if(project.bugs[i]["_id"] === bugId){
                     project.bugs.splice(i, 1);
-                    console.log("Bug deleted");
                     break;
                 }
             }
