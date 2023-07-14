@@ -51,7 +51,7 @@ const EditProject = () => {
         }
 
         const project = {
-            username: user.username ?? '',
+            user: user,
             title: title,
             description: description,
             date: new Date()

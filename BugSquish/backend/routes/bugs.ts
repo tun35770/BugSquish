@@ -156,4 +156,22 @@ router.route('/byproject/:id').get((req: any, res: any) => {
         .catch((err: any) => res.status(400).json("Error: ' + err"));
 });
 
+router.route('/updateprojecttitle/:id').post((req: any, res: any) => {
+
+    const project_id = req.params.id.toString();
+    const new_project_title = req.body.title;
+    //console.log(req.user._id);
+    Bug.find( {project_id} )
+        .then((bugs: any) => {
+            
+            for(let i = 0; i < bugs.length; i++){
+                bugs[i].project = new_project_title;
+                bugs[i].save();
+            }
+
+            
+        })
+        .catch((err: any) => res.status(400).json("Error: " + err));
+});
+
 export default router;

@@ -16,7 +16,7 @@ const sendInviteMail = async (receiverEmail: string,
         }
     });
 
-    const info = transporter.sendMail({
+    transporter.sendMail({
         from: 'BugSquish <BugSquish@outlook.com',
         to: receiverEmail,
         subject: `You've been invited to a BugSquish project`,
@@ -101,14 +101,66 @@ router.route('/:id').delete((req: any, res: any) => {
 });
 
 router.route('/update/:id').post((req: any, res: any) => {
-    Project.findById(req.params.id)
+    const user = req.body.user;
+    const project_id = req.params.id;
+
+    Project.findById(project_id)
         .then((project: any) => {
-            project.title = req.body.title;
+            const new_title = req.body.title;
+            const old_title = project.title;
+
+            project.title = new_title;
             project.description = req.body.description;
             project.date = Date.parse(req.body.date);
             
             project.save()
-                .then(() => res.json('Project updated'))
+                .then(() => {
+
+                    //update all bugs in bug collection
+                    if(old_title !== new_title){
+                        
+                        const data = {
+                            title: new_title,
+                        }
+        
+                        fetch('http://localhost:5000/bugs/updateprojecttitle/' + project_id, {
+                            method: 'POST',
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json;charset=UTF-8",
+                                'Authorization': `Bearer ${user.token}`
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(() => {
+                            res.json('Bugs updated');
+                        })
+                        .catch((err:any) => res.status(400).json('Error: ' + err));
+
+
+                        //update bugs in project's bugs[]
+                        fetch('http://localhost:5000/bugs/byproject/' + project_id, {
+                            method: 'GET',
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json;charset=UTF-8",
+                                'Authorization': `Bearer ${user.token}`
+                            }
+                        })
+                        .then( async (response) => {
+                            const bugs =  await response.json();
+                            for(let i = 0; i < bugs.length; i++){
+                                bugs[i].project = new_title;
+                            }
+
+                            project.bugs = bugs;
+                            project.save()
+                            .then(() => res.json("Bugs updated"))
+                            .catch((err: any) => res.status(400).json("Error: " + err));
+                        })
+                        .catch((err:any) => res.status(400).json('Error: ' + err));
+                    }
+                })
                 .catch((err: any) => res.status(400).json('Error: ' + err));
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
