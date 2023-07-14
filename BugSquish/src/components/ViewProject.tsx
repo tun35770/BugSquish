@@ -42,7 +42,6 @@ const ViewProject = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-
         if(!user){
             return;
         }
@@ -70,7 +69,7 @@ const ViewProject = () => {
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
-        if (user) window.location.href = document.referrer;
+        if (user) window.history.go(-1);
         else      window.location.href = "/";
         
     } 

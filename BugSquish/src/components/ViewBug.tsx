@@ -73,10 +73,8 @@ const ViewBug = () => {
             body: JSON.stringify(bug)
         })
         .then((res) => res.json())
-        .then((data) => {}/* console.log(data) */)
+        .then((data) => window.history.go(-1))
         .catch((err) => console.log(err))
-
-        window.location.href= document.referrer;
     }
 
   return (
@@ -129,7 +127,7 @@ const ViewBug = () => {
                             type="button"
                             value="Back"
                             className="btn btn-primary"
-                            onClick={() => window.location.href = "/"}
+                            onClick={() => window.history.go(-1)}
                             style={{maxWidth:'10em'}}>
                         </Form.Control>
                     </Form.Group>

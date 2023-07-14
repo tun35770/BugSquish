@@ -35,6 +35,7 @@ const BugList = ( {project_id = undefined}: props ) => {
   const [bugs, setBugs] = useState<BugType[]>([]);
   const [bugsLength, setBugsLength] = useState(0);
 
+  const [isLoaded, setIsLoaded] = useState(false);
   /*
     TODO: Implement localStorage for bugs.
   */
@@ -65,7 +66,8 @@ const BugList = ( {project_id = undefined}: props ) => {
           .then((data) => {
               setBugs(data);
               setBugsLength(data.length);
-              console.log(data)
+              console.log(data);
+              setIsLoaded(true);
           })
           .catch((err) => console.log(err));
       }
@@ -84,7 +86,8 @@ const BugList = ( {project_id = undefined}: props ) => {
             .then((data) => {
                 setBugs(data);
                 setBugsLength(data.length);
-                console.log(data)
+                console.log(data);
+                setIsLoaded(true);
             })
             .catch((err) => console.log(err));
       }
@@ -136,46 +139,52 @@ const BugList = ( {project_id = undefined}: props ) => {
   }
   
   return (
-    <div>
-      { (bugsLength > 0) && 
-        <>
-          <h1 className='dark-text' style={{
-            marginTop: '0.5em',
-            fontFamily: 'Montserrat',
-          }}> Bugs </h1>
+    <>
+    {isLoaded && 
+    <>
+      <div>
+        { (bugsLength > 0) && 
+          <>
+            <h1 className='dark-text' style={{
+              marginTop: '0.5em',
+              fontFamily: 'Montserrat',
+            }}> Bugs </h1>
 
-          <ListGroup>
+            <ListGroup>
 
-            <ListGroupItem style={{
-              display: 'flex',
-              flexDirection: 'row',
-              margin: '0 auto',
-              justifyContent: 'space-between',
-              width:'80%',
-              
-            }}>
-              <h3 id="bug_title" style={{width:'20%'}}> Title </h3>
-              <h3 id="project_title" style={{width:'13.33%', paddingRight:'1.5em'}}> Project </h3>
-              <h3 id="username" style={{width:'13.33%'}}> Username </h3>
-              <h3 id="date" style={{width:'13.33%', paddingLeft:'1.5em'}}> Date </h3>
-              <h3 id="options"> Options </h3>
-            </ListGroupItem>
-            {bugList()}
-          </ListGroup>
-          
-        </>
-      }
+              <ListGroupItem style={{
+                display: 'flex',
+                flexDirection: 'row',
+                margin: '0 auto',
+                justifyContent: 'space-between',
+                width:'80%',
+                
+              }}>
+                <h3 id="bug_title" style={{width:'20%'}}> Title </h3>
+                <h3 id="project_title" style={{width:'13.33%', paddingRight:'1.5em'}}> Project </h3>
+                <h3 id="username" style={{width:'13.33%'}}> Username </h3>
+                <h3 id="date" style={{width:'13.33%', paddingLeft:'1.5em'}}> Date </h3>
+                <h3 id="options"> Options </h3>
+              </ListGroupItem>
+              {bugList()}
+            </ListGroup>
+            
+          </>
+        }
 
-      { (bugsLength === 0) && 
-        <>
-          <br />
-            <h3 className='dark-text' style={{
-                textAlign: 'left',
-                marginLeft: '1em', 
-                fontFamily: 'Montserrat'}}> No bugs to display </h3>
-        </>
-      }
-    </div>
+        { (bugsLength === 0) && 
+          <>
+            <br />
+              <h3 className='dark-text' style={{
+                  textAlign: 'left',
+                  marginLeft: '1em', 
+                  fontFamily: 'Montserrat'}}> No bugs to display </h3>
+          </>
+        }
+      </div>
+    </>
+    }
+    </>
   )
 }
 

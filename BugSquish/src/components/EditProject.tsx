@@ -70,7 +70,7 @@ const EditProject = () => {
         .then((data) => {}/* console.log(data) */)
         .catch((err) => console.log(err))
 
-        if (user) window.location.href = document.referrer;
+        if (user) window.history.go(-1);
         else      window.location.href = "/";
     }
 

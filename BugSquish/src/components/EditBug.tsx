@@ -73,7 +73,7 @@ const EditBug = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
-            window.location.href= document.referrer;
+            window.history.go(-1);
         })
         .catch((err) => console.log(err))
 
