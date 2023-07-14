@@ -67,11 +67,11 @@ const EditProject = () => {
             body: JSON.stringify(project)
         })
         .then((res) => res.json())
-        .then((data) => {}/* console.log(data) */)
+        .then((data) => {
+            if (user) window.history.go(-1);
+            else      window.location.href = "/";
+        })
         .catch((err) => console.log(err))
-
-        if (user) window.history.go(-1);
-        else      window.location.href = "/";
     }
 
   return (
