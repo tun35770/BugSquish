@@ -28,9 +28,10 @@ const Bug = ( {bug, deleteBug, id} ) => {
         }}>
           
           <Card.Title className='light-text' style=
-          {{fontSize: '1.25em',
+          {{fontSize: '0.75em',
             color: '#CCC',
             width: '20%',
+            marginBottom: '0',
             paddingRight: '0.5em',
             borderRight: '1px solid white'}}>
             {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
@@ -41,7 +42,8 @@ const Bug = ( {bug, deleteBug, id} ) => {
             flexDirection: 'row',
             width:'40%',
             padding: '0',
-            lineHeight:'1em'}}>
+            lineHeight:'1em',
+            fontSize: '0.75em'}}>
 
             <div className='light-text' style={{
                 textAlign: 'center',
