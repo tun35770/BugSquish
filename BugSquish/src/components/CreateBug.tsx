@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -13,10 +13,13 @@ const CreateBug = () => {
 
     const [projects, setProjects] = useState<any[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const userInputRef = useRef();
 
     useEffect(() => {
-
+        
+        if(!user){
+            return;
+        }
+        
         const data = {
             user: user
         }
@@ -95,19 +98,6 @@ const CreateBug = () => {
             completed: false,
         };
 
-        /* fetch('http://localhost:5000/projects/addbug' + projectId, {
-            method: 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify(bug)
-        })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err)) */
-
         fetch('http://localhost:5000/bugs/add', {
             method: 'POST',
             headers: {
@@ -118,11 +108,12 @@ const CreateBug = () => {
             body: JSON.stringify(bug)
         })
         .then((res) => res.json())
-        .then((data) => {console.log(data);
-                            window.location.href= "/";})
+        .then((data) => {
+            console.log(data);
+            window.history.go(-1);
+        })
         .catch((err) => console.log(err))
 
-        
     }
 
   return (

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import Home from './components/Home.tsx'
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -99,7 +98,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
-          <Route path="/createbug" element={user ? <CreateBug /> : <Navigate to="/login" />} />
+          <Route path="/createbug" element={<CreateBug /> } />
           <Route path="/edit/:id" element={<EditBug />} />
           <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />

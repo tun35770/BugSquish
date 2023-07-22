@@ -1,34 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Form } from 'react-bootstrap'
+import { Button, Card, Form } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import BugList from './BugList'
 
 import { useAuthContext } from '../hooks/useAuthContext';
-import Bug from './Bug'; 
 
 const ViewProject = () => {
-
-    class BugType {
-        _id: string;
-        username: string;
-        title: string;
-        description: string;
-        project: string;
-        project_id: string;
-        date: Date;
-        completed: boolean;
-
-        constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, completed = false){
-            this._id = id;
-            this.username = username;
-            this.title = title;
-            this.description = description;
-            this.project = project;
-            this.project_id = project_id;
-            this.date = date;
-            this.completed = completed;
-        }
-    }
 
     const { user } = useAuthContext();
     const { id } = useParams();
@@ -36,8 +13,6 @@ const ViewProject = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [users, setUsers] = useState();
-    const [bugs, setBugs] = useState<BugType[]>([]);
-    const [bugsLength, setBugsLength] = useState(0);
     
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -66,8 +41,12 @@ const ViewProject = () => {
 
     }, [user])
 
-    function onSubmit(e: React.FormEvent){
-        e.preventDefault();
+
+    function AddBug(){
+        window.location.href = "/createbug";
+    }
+
+    function GoBack(){
 
         if (user) window.history.go(-1);
         else      window.location.href = "/";
@@ -96,17 +75,14 @@ const ViewProject = () => {
                 </Card.Text>
 
         
-                <Form onSubmit={onSubmit}>
-                    <Form.Group className='mb-3'>
-                        <Form.Control
-                            type="submit"
-                            value="Back"
-                            className="btn btn-primary"
-                            onSubmit={onSubmit}
-                            style={{maxWidth:'10em'}}>
-                        </Form.Control>
+                <Form>
+                    <Form.Group>
+                        <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={AddBug}>Add Bug</Button>
                     </Form.Group>
-                </Form>
+                    <Form.Group>
+                        <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={GoBack}>Back</Button>
+                    </Form.Group> 
+               </Form>
             </Card>
             
             <br />
