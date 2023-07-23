@@ -96,22 +96,27 @@ function App() {
         
         </Navbar> 
 
-        <Routes>
-          <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
-          <Route path="/createbug" element={<CreateBug /> } />
-          <Route path="/edit/:id" element={<EditBug />} />
-          <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-          <Route path="/viewbug/:id" element={<ViewBug />} />
-          <Route path="/projects" element={<ProjectList />} />
-          <Route path="/createproject/" element={<CreateProject />} />
-          <Route path="/viewproject/:id" element={<ViewProject />} />
-          <Route path="/editproject/:id" element={<EditProject />} />
-          <Route path="/inviteuser/" element={<InviteUser />} />
-          <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
+        { user ? 
+          (
+            <Routes>
+              <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
+              <Route path="/createbug" element={user ? <CreateBug /> : <Login />} />
+              <Route path="/edit/:id" element={<EditBug />} />
+              <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
+              <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+              <Route path="/viewbug/:id" element={<ViewBug />} />
+              <Route path="/projects" element={<ProjectList />} />
+              <Route path="/createproject/" element={<CreateProject />} />
+              <Route path="/viewproject/:id" element={<ViewProject />} />
+              <Route path="/editproject/:id" element={<EditProject />} />
+              <Route path="/inviteuser/" element={<InviteUser />} />
+              <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
 
-        </Routes>
-      
+            </Routes>
+          ) 
+          : <></>
+        }
+        
       </div>
     </Router>
   )

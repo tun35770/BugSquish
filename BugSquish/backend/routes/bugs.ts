@@ -84,6 +84,7 @@ router.route('/:id').get((req: any, res: any) => {
 });
 
 router.route('/:id').delete((req: any, res: any) => {
+
     const user = req.body.user;
     const project_id = req.body.project_id;
 
@@ -103,8 +104,13 @@ router.route('/:id').delete((req: any, res: any) => {
                 },
                 body: JSON.stringify(data)
             })
-            .then(() => res.json('Bug deleted'))
-            .catch((err:any) => res.status(400).json('Error: ' + err));
+            .then(() => {
+                res.json('Bug deleted')
+            })
+            .catch((err:any) => {
+                console.error(err);
+                res.status(400).json('Error: ' + err)
+            });
 
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));

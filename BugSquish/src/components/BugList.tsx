@@ -38,6 +38,7 @@ const BugList = ( {project_id = undefined}: props ) => {
   const [sortBy, setSortBy] = useState('date');
   const [sortAscending, setSortAscending] = useState(true);
   const sortables = ['title', 'project', 'username', 'date'];
+
   const [isLoaded, setIsLoaded] = useState(false);
   /*
     TODO: Implement localStorage for bugs.
@@ -132,7 +133,7 @@ const BugList = ( {project_id = undefined}: props ) => {
     setBugs(sortedBugs);
   }, [sortBy, sortAscending]);
 
-  function deleteBug(id:string, project_id:string){
+  function deleteBug(id:string, bug_project_id:string){
 
     if(!user){
       return;
@@ -140,9 +141,15 @@ const BugList = ( {project_id = undefined}: props ) => {
 
     const data = {
       user: user,
-      project_id: project_id
+      project_id: bug_project_id
     }
 
+
+    /**
+     * TODO: Figure out why this throws an error when on main page, but not on
+     *       ViewProject page. 
+     *       Still deletes bug despite error thrown.
+     */
     fetch('http://localhost:5000/bugs/' + id, {
             method: 'delete',
             headers: {
@@ -159,12 +166,12 @@ const BugList = ( {project_id = undefined}: props ) => {
           setBugs(newBugs);
           setBugsLength(newBugs.length);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => /* console.error(err) */{})
   }
   
   function bugList(){
     return bugs.map((currentBug: BugType) => {
-      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug._id} id={currentBug._id} />
+      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]} id={currentBug["_id"]} />
     });
   }
   
