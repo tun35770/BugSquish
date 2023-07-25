@@ -23,7 +23,9 @@ const Signup = () => {
         e.preventDefault();
 
         //TODO: Add error text on database error
-        const response = await signup(username, email, password);
+        await signup(username, email, password);
+
+        window.location.href = '/';
     }
 
 

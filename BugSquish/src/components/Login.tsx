@@ -3,7 +3,6 @@ import { Card, Form } from 'react-bootstrap';
 import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, error, isLoading } = useLogin();
@@ -19,12 +18,9 @@ const Login = () => {
     async function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
-        const user = {
-            username: username,
-            password: password,
-        };
-
         await login(username, password);
+
+        window.location.href = '/';
     }
 
 

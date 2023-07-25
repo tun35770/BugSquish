@@ -102,8 +102,6 @@ function App() {
               <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
               <Route path="/createbug" element={user ? <CreateBug /> : <Login />} />
               <Route path="/edit/:id" element={<EditBug />} />
-              <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
-              <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
               <Route path="/viewbug/:id" element={<ViewBug />} />
               <Route path="/projects" element={<ProjectList />} />
               <Route path="/createproject/" element={<CreateProject />} />
@@ -112,10 +110,19 @@ function App() {
               <Route path="/inviteuser/" element={<InviteUser />} />
               <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
 
+              <Route path="/signup" element={ <Navigate to="/" /> } />
+              <Route path="/login" element={ <Navigate to="/" /> } />
+
             </Routes>
           ) 
-          : <></>
-        }
+          : (
+            <Routes>
+              <Route path="/" element={ <Navigate to="/login"/>} />
+              <Route path="/signup" element={<Signup /> } />
+              <Route path="/login" element={<Login /> } />
+            </Routes>
+            )
+        } 
         
       </div>
     </Router>
