@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Bug from './Bug';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 interface props {
   project_id?: string | undefined
@@ -240,6 +241,13 @@ const BugList = ( {project_id = undefined}: props ) => {
       </div>
     </>
     }
+
+    {!isLoaded && 
+      <>
+        <Loading />
+      </>
+    }
+    
     </>
   )
 }
