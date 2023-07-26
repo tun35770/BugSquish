@@ -5,7 +5,7 @@ import { useLogin } from '../hooks/useLogin'
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login, error, isLoading } = useLogin();
+    const { login, ok, error, isLoading } = useLogin();
 
     function onChangeUsername(e: React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
@@ -19,8 +19,9 @@ const Login = () => {
         e.preventDefault();
 
         await login(username, password);
-
-        window.location.href = '/';
+        
+        if(ok)
+            window.location.href = '/';
     }
 
 

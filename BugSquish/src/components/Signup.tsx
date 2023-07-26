@@ -7,7 +7,7 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {signup, error, isLoading} = useSignup();
+    const {signup, ok, error, isLoading} = useSignup();
 
     function onChangeUsername(e: React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
@@ -25,7 +25,8 @@ const Signup = () => {
         //TODO: Add error text on database error
         await signup(username, email, password);
 
-        window.location.href = '/';
+        if(ok)
+            window.location.href = '/';
     }
 
 

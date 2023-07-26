@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 const ViewBug = () => {
 
@@ -134,6 +135,12 @@ const ViewBug = () => {
                 </Form>
             
         </Card>
+        }
+
+        {!isLoaded && 
+        <>
+            <Loading />
+        </>
         }
     </>
   )

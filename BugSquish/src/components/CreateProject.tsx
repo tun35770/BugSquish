@@ -9,7 +9,6 @@ const CreateProject = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
-    const userInputRef = useRef();
 
     function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.currentTarget.value);
@@ -63,15 +62,15 @@ const CreateProject = () => {
   return (
     <Card className='blue-gradient' style=
         {{maxWidth: '75%', 
-          margin: '3rem auto', 
-          padding:'1rem',
-          border:'1px solid white',
-          color:'#fff'}}>
+        margin: '3rem auto', 
+        padding:'1rem',
+        border:'1px solid white',
+        color:'#fff'}}>
         <h3>Create New Project</h3>
         <br/>
         <Form onSubmit={onSubmit} style=
             {{width:'80%',
-              margin:'0 auto'}}>
+            margin:'0 auto'}}>
 
             <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
             <Form.Label>Title: </Form.Label>

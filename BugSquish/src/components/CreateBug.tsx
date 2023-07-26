@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 const CreateBug = () => {
 
@@ -186,7 +187,15 @@ const CreateBug = () => {
             </Form.Group>
         </Form>
     </Card>
-}</> )
+    }
+
+    {!isLoaded && 
+      <>
+        <Loading />
+      </>
+    }
+    </> 
+    )
 }
 
 export default CreateBug

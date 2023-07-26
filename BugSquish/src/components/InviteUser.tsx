@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 const InviteUser = () => {
 
@@ -159,7 +160,14 @@ const InviteUser = () => {
                 </Form.Group>
             </Form>
         </Card>
-    }</>
+    }
+    
+    {!isLoaded && 
+      <>
+        <Loading />
+      </>
+    }
+    </>
 )}
 
 export default InviteUser

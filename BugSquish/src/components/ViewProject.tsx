@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BugList from './BugList'
 
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 const ViewProject = () => {
 
@@ -88,6 +89,12 @@ const ViewProject = () => {
             <br />
 
             <BugList project_id={id}/>
+        </>
+        }
+
+        {!isLoaded && 
+        <>
+            <Loading />
         </>
         }
     </>

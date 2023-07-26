@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Loading from './Loading';
 
 const ProjectList = () => {
   class ProjectType {
@@ -130,6 +131,12 @@ const ProjectList = () => {
           </>
         }
       </div>
+    }
+
+    {!isLoaded && 
+      <>
+        <Loading />
+      </>
     }
     </>
   )
