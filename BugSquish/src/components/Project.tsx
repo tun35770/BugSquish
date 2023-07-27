@@ -3,7 +3,7 @@ import { Card, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 
-const Project = ( {project, deleteProject, id} ) => {
+const Project = ( {project, deleteProject, id, user} ) => {
 
   return (
     <ListGroupItem className='my-3 mx-3 light-text blue-gradient'style=
@@ -26,9 +26,10 @@ const Project = ( {project, deleteProject, id} ) => {
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                 <Link to={"/viewproject/" + id} style={{color: 'white'}}> <BsEye /> </Link>
                 <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                <a href="/projects" onClick={() => {deleteProject(id)}}><BsXCircle style={{color:'red'}} /></a>
+                <a href="/projects" onClick={() => {deleteProject(id, user)}}><BsXCircle style={{color:'red'}} /></a>
               </div>
             </Card.Body>
+            
             <Card.Text className='light-text'>
               {project.description}
             </Card.Text>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import BugList from './BugList'
 
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
+import { BsEye, BsPencil, BsXCircle } from 'react-icons/bs';
+import DeleteProject from './DeleteProject';
 
 const ViewProject = () => {
 
@@ -64,8 +66,18 @@ const ViewProject = () => {
                 padding:'1rem',
                 border:'1px solid white'
                 }}>
-                <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
                 
+                <Card.Body style={{
+                    display:'flex', 
+                    justifyContent:'space-between',
+                    padding:'0'}}>
+                    <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
+                    
+                    <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
+                        <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
+                        <a href="/projects" onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
+                    </div>
+                </Card.Body>
                 <Card.Text className="mb-3 leftAlign light-text">
                     {description}
                 </Card.Text>

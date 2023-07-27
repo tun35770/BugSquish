@@ -3,6 +3,7 @@ import { Button, Card, ListGroup } from 'react-bootstrap';
 import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
+import DeleteProject from './DeleteProject';
 
 const ProjectList = () => {
   class ProjectType {
@@ -69,32 +70,10 @@ const ProjectList = () => {
     }
   }, [user])
 
-  function deleteProject(id:string){
-
-    if(!user){
-      return;
-    }
-
-    fetch('http://localhost:5000/projects/' + id, {
-            method: 'delete',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          const newProjects = [...projects].filter((project: ProjectType) => project._id !== id)
-          setProjects(newProjects);
-        })
-        .catch((err) => console.log(err))
-  }
   
   function projectList(){
     return projects.map((currentProject: ProjectType) => {
-      return <Project project={currentProject} deleteProject={deleteProject} key={currentProject._id} id={currentProject._id} />
+      return <Project project={currentProject} deleteProject={DeleteProject} key={currentProject._id} id={currentProject._id} user={user}/>
     });
   }
   
