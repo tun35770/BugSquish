@@ -16,7 +16,8 @@ const ViewProject = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [users, setUsers] = useState();
-    
+    const [error, setError] = useState<string | undefined>(undefined);
+
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -38,9 +39,10 @@ const ViewProject = () => {
                 setDescription(data.description);
                 setTitle(data.title);
                 setUsers(data.users);
-                setIsLoaded(true);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => setError(err));
+
+            setIsLoaded(true);
 
     }, [user])
 
@@ -60,47 +62,59 @@ const ViewProject = () => {
     <>
         {isLoaded && 
         <>
-            <Card className='light-text blue-gradient' style=
-                {{maxWidth: '75%', 
-                margin: '3rem auto', 
-                padding:'1rem',
-                border:'1px solid white'
-                }}>
-                
-                <Card.Body style={{
-                    display:'flex', 
-                    justifyContent:'space-between',
-                    padding:'0'}}>
-                    <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
+            {error === undefined && 
+            <>
+                <Card className='light-text blue-gradient' style=
+                    {{maxWidth: '75%', 
+                    margin: '3rem auto', 
+                    padding:'1rem',
+                    border:'1px solid white'
+                    }}>
                     
-                    <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                        <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                        <a href="/projects" onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
-                    </div>
-                </Card.Body>
-                <Card.Text className="mb-3 leftAlign light-text">
-                    {description}
-                </Card.Text>
-                <br/>
+                    <Card.Body style={{
+                        display:'flex', 
+                        justifyContent:'space-between',
+                        padding:'0'}}>
+                        <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
+                        
+                        <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
+                            <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
+                            <a href="/projects" onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
+                        </div>
+                    </Card.Body>
+                    <Card.Text className="mb-3 leftAlign light-text">
+                        {description}
+                    </Card.Text>
+                    <br/>
 
-                <Card.Text className="mb-3 leftAlign light-text">
-                    <b>Owner: </b>{username}
-                </Card.Text>
+                    <Card.Text className="mb-3 leftAlign light-text">
+                        <b>Owner: </b>{username}
+                    </Card.Text>
 
-        
-                <Form>
-                    <Form.Group>
-                        <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={AddBug}>Add Bug</Button>
-                    </Form.Group>
-                    <Form.Group>
-                        <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={GoBack}>Back</Button>
-                    </Form.Group> 
-               </Form>
-            </Card>
             
-            <br />
+                    <Form>
+                        <Form.Group>
+                            <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={AddBug}>Add Bug</Button>
+                        </Form.Group>
+                        <Form.Group>
+                            <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={GoBack}>Back</Button>
+                        </Form.Group> 
+                </Form>
+                </Card>
+                
+                <br />
 
-            <BugList project_id={id}/>
+                <BugList project_id={id}/>
+            </>
+            }
+            
+            {error !== undefined && 
+                <h3 style={{
+                    marginTop: '1em'
+                }}>
+                    Failed to fetch project. Try refreshing
+                </h3>
+            }
         </>
         }
 
