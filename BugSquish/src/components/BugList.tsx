@@ -198,8 +198,9 @@ const BugList = ( {project_id = undefined}: props ) => {
   return (
     <>
     {isLoaded && 
-    <>
-      <div>
+      <div style={{
+        width:'55%',
+      }}>
         { (bugsLength > 0) && 
           <>
             <h1 className='dark-text' style={{
@@ -212,16 +213,16 @@ const BugList = ( {project_id = undefined}: props ) => {
               <ListGroupItem style={{
                 display: 'flex',
                 flexDirection: 'row',
-                margin: '0 auto',
+                margin: '0',
                 justifyContent: 'space-between',
-                width:'80%',
+                width:'100%',
                 
               }}>
-                <h3 id="bug_title" style={{width:'20%', cursor:'pointer'}} onClick={() => sortByAttr('title')}> Title </h3>
-                <h3 id="project_title" style={{width:'13.33%', paddingRight:'1.5em', cursor:'pointer'}} onClick={() => sortByAttr('project')}> Project </h3>
-                <h3 id="username" style={{width:'13.33%', cursor:'pointer'}} onClick={() => sortByAttr('username')}> Username </h3>
-                <h3 id="date" style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer'}} onClick={() => sortByAttr('date')}> Date </h3>
-                <h3 id="options"> Options </h3>
+                <h5 id="bug_title" style={{width:'20%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('title')}> Title </h5>
+                <h5 id="project_title" style={{width:'13.33%', paddingRight:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('project')}> Project </h5>
+                <h5 id="username" style={{width:'13.33%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}> Username </h5>
+                <h5 id="date" style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}> Date </h5>
+                <h5 id="options" style={{userSelect: 'none'}}> Options </h5>
               </ListGroupItem>
               {bugList()}
             </ListGroup>
@@ -239,7 +240,6 @@ const BugList = ( {project_id = undefined}: props ) => {
           </>
         }
       </div>
-    </>
     }
 
     {!isLoaded && 
@@ -247,7 +247,7 @@ const BugList = ( {project_id = undefined}: props ) => {
         <Loading />
       </>
     }
-    
+
     </>
   )
 }

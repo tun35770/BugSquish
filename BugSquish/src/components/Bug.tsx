@@ -9,8 +9,8 @@ const Bug = ( {bug, deleteBug, id} ) => {
     <ListGroupItem className='my-0 light-text blue-gradient' style=
     {{display: 'flex',
       flexDirection:'row',
-      width:'80%',
-      margin: '0 auto',
+      width:'100%',
+      margin: '0',
       border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
       }}>
 

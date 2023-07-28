@@ -7,6 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 import { BsEye, BsPencil, BsXCircle } from 'react-icons/bs';
 import DeleteProject from './DeleteProject';
+import { UserList } from './UserList';
 
 const ViewProject = () => {
 
@@ -99,12 +100,19 @@ const ViewProject = () => {
                         <Form.Group>
                             <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={GoBack}>Back</Button>
                         </Form.Group> 
-                </Form>
+                    </Form>
                 </Card>
-                
                 <br />
 
-                <BugList project_id={id}/>
+                <div style={{
+                    display: 'flex',
+                    flexDirection:'row',
+                    justifyContent:'space-between',
+                }}>
+                    <BugList project_id={id}/>
+
+                    <UserList project_id={id} />
+                </div>
             </>
             }
             

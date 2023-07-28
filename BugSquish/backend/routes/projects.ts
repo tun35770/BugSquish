@@ -269,4 +269,15 @@ router.route('/updatebug/:id').post((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+
+//GET list of users for a project
+router.route('/users/:id').get((req: any, res: any) => {
+    Project.findById(req.params.id)
+        .then((project :any) => {
+            const users = project.users;
+            res.json(users)
+        })
+        .catch((err: any) => res.status(400).json('Error: ' + err));
+});
+
 export default router;
