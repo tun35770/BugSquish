@@ -25,8 +25,12 @@ const Project = ( {project, deleteProject, id, user} ) => {
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                 <Link to={"/viewproject/" + id} style={{color: 'white'}}> <BsEye /> </Link>
-                <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                <a href="/projects" onClick={() => {deleteProject(id, user)}}><BsXCircle style={{color:'red'}} /></a>
+                { user.username === project.username && 
+                  <>
+                    <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
+                    <a href="/projects" onClick={() => {deleteProject(id, user)}}><BsXCircle style={{color:'red'}} /></a>
+                  </>
+                }
               </div>
             </Card.Body>
             

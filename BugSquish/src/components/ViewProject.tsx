@@ -13,7 +13,7 @@ const ViewProject = () => {
 
     const { user } = useAuthContext();
     const { id } = useParams();
-    const [username, setUsername] = useState('');
+    const [projectOwner, setProjectOwner] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [users, setUsers] = useState();
@@ -36,7 +36,7 @@ const ViewProject = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                setUsername(data.username);
+                setProjectOwner(data.username);
                 setDescription(data.description);
                 setTitle(data.title);
                 setUsers(data.users);
@@ -78,10 +78,12 @@ const ViewProject = () => {
                         padding:'0'}}>
                         <Card.Title className="mb-3 leftAlign light-text" style={{fontSize: '1.5em', color:'#CCC'}}> {title} </Card.Title>
                         
-                        <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                            <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                            <a href="/projects" onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
-                        </div>
+                        { user.username === projectOwner && 
+                            <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
+                                <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
+                                <a href="/projects" onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
+                            </div>
+                        }
                     </Card.Body>
                     <Card.Text className="mb-3 leftAlign light-text">
                         {description}
@@ -89,7 +91,7 @@ const ViewProject = () => {
                     <br/>
 
                     <Card.Text className="mb-3 leftAlign light-text">
-                        <b>Owner: </b>{username}
+                        <b>Owner: </b>{projectOwner}
                     </Card.Text>
 
             

@@ -69,6 +69,7 @@ const EditProject = () => {
         })
         .then((res) => res.json())
         .then((data) => {
+            console.log(data);
             if (user) window.history.go(-1);
             else      window.location.href = "/";
         })
@@ -86,7 +87,7 @@ const EditProject = () => {
             color:'#fff'}}>
             <h3>Edit Project</h3>
             <br/>
-            <Form onSubmit={onSubmit} style=
+            <Form style=
                 {{width:'80%',
                 margin:'0 auto'}}>
 
@@ -118,7 +119,7 @@ const EditProject = () => {
                         type="submit"
                         value="Update Project"
                         className="btn btn-primary"
-                        onSubmit={onSubmit}
+                        onClick={onSubmit}
                         style={{maxWidth:'10em'}}>
                     </Form.Control>
                 </Form.Group>

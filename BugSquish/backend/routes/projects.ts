@@ -122,7 +122,7 @@ router.route('/update/:id').post((req: any, res: any) => {
                         const data = {
                             title: new_title,
                         }
-        
+                        
                         fetch('http://localhost:5000/bugs/updateprojecttitle/' + project_id, {
                             method: 'POST',
                             headers: {
@@ -133,7 +133,7 @@ router.route('/update/:id').post((req: any, res: any) => {
                             body: JSON.stringify(data)
                         })
                         .then(() => {
-                            res.json('Bugs updated');
+                            
                         })
                         .catch((err:any) => res.status(400).json('Error: ' + err));
 
@@ -147,8 +147,9 @@ router.route('/update/:id').post((req: any, res: any) => {
                                 'Authorization': `Bearer ${user.token}`
                             }
                         })
-                        .then( async (response) => {
-                            const bugs =  await response.json();
+                        .then( (response) => response.json())
+                        .then((bugs) => {
+                            
                             for(let i = 0; i < bugs.length; i++){
                                 bugs[i].project = new_title;
                             }
@@ -159,6 +160,9 @@ router.route('/update/:id').post((req: any, res: any) => {
                             .catch((err: any) => res.status(400).json("Error: " + err));
                         })
                         .catch((err:any) => res.status(400).json('Error: ' + err));
+                    }
+                    else{
+                        res.json("Bugs updated")
                     }
                 })
                 .catch((err: any) => res.status(400).json('Error: ' + err));

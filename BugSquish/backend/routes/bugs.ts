@@ -159,7 +159,7 @@ router.route('/byproject/:id').get((req: any, res: any) => {
     //console.log(req.user._id);
     Bug.find( {project_id} ).sort({createdAt: -1})
         .then((bugs: any) => res.json(bugs))
-        .catch((err: any) => res.status(400).json("Error: ' + err"));
+        .catch((err: any) => res.status(400).json("Error: " + err));
 });
 
 router.route('/updateprojecttitle/:id').post((req: any, res: any) => {
@@ -175,7 +175,7 @@ router.route('/updateprojecttitle/:id').post((req: any, res: any) => {
                 bugs[i].save();
             }
 
-            
+            res.json('Bugs updated')
         })
         .catch((err: any) => res.status(400).json("Error: " + err));
 });
