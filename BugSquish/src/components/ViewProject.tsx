@@ -109,6 +109,7 @@ const ViewProject = () => {
                 <div style={{
                     display: 'flex',
                     flexDirection:'row',
+                    flexWrap: 'wrap',
                     justifyContent:'space-between',
                 }}>
                     <BugList project_id={id}/>

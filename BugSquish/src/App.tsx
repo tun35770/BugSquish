@@ -101,7 +101,7 @@ function App() {
           (
             <Routes>
               <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
-              <Route path="/createbug" element={user ? <CreateBug /> : <Login />} />
+              <Route path="/createbug" element={<CreateBug /> } />
               <Route path="/edit/:id" element={<EditBug />} />
               <Route path="/viewbug/:id" element={<ViewBug />} />
               <Route path="/projects" element={<ProjectList />} />

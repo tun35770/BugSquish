@@ -97,6 +97,8 @@ export const UserList = ( {project_id} ) => {
                 flexDirection:'column',
                 padding:'0',
                 width:'35%',
+                minWidth:'350px',
+                margin:'0 1em 0 1em',
             }}>
                 <h1 className='dark-text' style={{
                     marginTop: '0.5em',

@@ -20,11 +20,12 @@ const Bug = ( {bug, deleteBug, id} ) => {
           width: '100%',
           textAlign:'left', 
           backgroundImage: 'linear-gradient(#2962FF , #6088f4)'
-          }}>
+        }}>
         <Card.Body className='light-text' style={{
           display:'flex',
           flexDirection: 'row',
-          padding: '0.5em'
+          padding: '0.5em',
+          width:'100%'
         }}>
           
           <Card.Title className='light-text' style=
@@ -50,7 +51,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
                 marginLeft: '0',
-                width:'33%'
+                minWidth:'33%'
               }}>
 
               <Card.Text>
@@ -65,7 +66,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
                 marginLeft: '0',
-                width:'33%'
+                minWidth:'33%'
               }}>
 
               <Card.Text>
@@ -80,7 +81,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
                 borderRight: '1px solid white',
                 padding: '0 0.5em 0 0.5em',
                 marginLeft: '0',
-                width:'33%'
+                minWidth:'33%'
               }}>
 
               <Card.Text>
@@ -90,16 +91,17 @@ const Bug = ( {bug, deleteBug, id} ) => {
             </div>
           </Card.Body>
           
-          <div style=
-          {{display:'flex', 
+          <div style={{
+            display:'flex', 
+            flexFlow:'wrap',
+            flexDirection:'column',
             justifyContent: 'space-evenly',
-            padding: '0 0.5em',
-            gap:'1em', 
+            padding: '0 0.5em', 
             textAlign:'right'}} >
 
+            <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}> <BsXCircle style={{color:'red'}} /> </a>
             <Link to={"/viewbug/" + id} style={{color: 'white'}}> <BsEye /> </Link>
             <Link to={"/edit/" + id} style={{color:'gold'}}> <BsPencil /> </Link>
-            <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}> <BsXCircle style={{color:'red'}} /> </a>
          
           </div>
         </Card.Body>

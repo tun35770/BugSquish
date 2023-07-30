@@ -28,7 +28,8 @@ export const User = ( {username, email, id}: props ) => {
                 fontSize: '0.75em',
                 display:'flex',
                 flexDirection: 'row',
-                padding: '0.5em'
+                padding: '0.5em',
+                width:'100%'
             }}>
                 <div className='light-text' style={{
                     textAlign: 'center',

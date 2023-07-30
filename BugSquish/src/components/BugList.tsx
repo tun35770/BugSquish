@@ -199,7 +199,9 @@ const BugList = ( {project_id = undefined}: props ) => {
     <>
     {isLoaded && 
       <div style={{
-        width:'55%',
+        width:'60%',
+        minWidth:'500px',
+        margin: '0 0 0 1em',
       }}>
         { (bugsLength > 0) && 
           <>
@@ -208,7 +210,9 @@ const BugList = ( {project_id = undefined}: props ) => {
               fontFamily: 'Montserrat',
             }}> Bugs </h1>
 
-            <ListGroup>
+            <ListGroup style={{
+              width: '100%'
+            }}>
 
               <ListGroupItem style={{
                 display: 'flex',
@@ -218,11 +222,21 @@ const BugList = ( {project_id = undefined}: props ) => {
                 width:'100%',
                 
               }}>
-                <h5 id="bug_title" style={{width:'20%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('title')}> Title </h5>
-                <h5 id="project_title" style={{width:'13.33%', paddingRight:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('project')}> Project </h5>
-                <h5 id="username" style={{width:'13.33%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}> Username </h5>
-                <h5 id="date" style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}> Date </h5>
-                <h5 id="options" style={{userSelect: 'none'}}> Options </h5>
+                <div style={{width:'20%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('title')}>
+                  <h5 id="bug_title"> Title </h5> 
+                </div> 
+                <div style={{width:'13.33%', paddingRight:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('project')}>
+                  <h5 id="project_title"> Project </h5>
+                </div>
+                <div style={{width:'13.33%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}>
+                  <h5 id="username"> Username </h5>
+                </div>
+                <div style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}>
+                  <h5 id="date"> Date </h5>
+                </div>
+                <div style={{userSelect:'none'}}>
+                  <h5 id="options" > Options </h5>
+                </div>
               </ListGroupItem>
               {bugList()}
             </ListGroup>
