@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
+import { Alert } from 'react-bootstrap';
 
 const EditProject = () => {
 
@@ -12,7 +13,8 @@ const EditProject = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
-    
+    const [alert, setAlert] = useState(false);
+
     useEffect(() => {
         if(!user){
             return;
@@ -70,8 +72,12 @@ const EditProject = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
-            if (user) window.history.go(-1);
-            else      window.location.href = "/";
+            setAlert(true);
+            setTimeout(() => {
+                if (user) window.history.go(-1);
+                else      window.location.href = "/";
+            }, 1000);
+           
         })
         .catch((err) => console.log(err))
     }
@@ -79,59 +85,66 @@ const EditProject = () => {
   return (
     <>
     {isLoaded && 
-        <Card className='blue-gradient' style=
-            {{maxWidth: '75%', 
-            margin: '3rem auto', 
-            padding:'1rem',
-            border:'1px solid white',
-            color:'#fff'}}>
-            <h3>Edit Project</h3>
-            <br/>
-            <Form style=
-                {{width:'80%',
-                margin:'0 auto'}}>
-
-                <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
-                <Form.Label>Title: </Form.Label>
-                    <Form.Control
-                    type="text"
-                        required
-                        className="form-control"
-                        value={title}
-                        onChange={onChangeTitle}>
-                    </Form.Control>
-                </Form.Group>
-
-                <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
-                <Form.Label>Description: </Form.Label>
-                    <Form.Control
-                    as="textarea"
-                        required
-                        className="form-control"
-                        value={description}
-                        onChange={onChangeDescription}>
-                    </Form.Control>
-                </Form.Group>
-
+        <>
+            {alert &&  <Alert key='success' variant='success'>
+                Project updated!
+                </Alert>
+            }
+            
+            <Card className='blue-gradient' style=
+                {{maxWidth: '75%', 
+                margin: '3rem auto', 
+                padding:'1rem',
+                border:'1px solid white',
+                color:'#fff'}}>
+                <h3>Edit Project</h3>
                 <br/>
-                <Form.Group className='mb-3'>
-                    <Form.Control
-                        type="submit"
-                        value="Update Project"
-                        className="btn btn-primary"
-                        onClick={onSubmit}
-                        style={{maxWidth:'10em'}}>
-                    </Form.Control>
-                </Form.Group>
-            </Form>
-        </Card>
+                <Form style=
+                    {{width:'80%',
+                    margin:'0 auto'}}>
+
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
+                    <Form.Label>Title: </Form.Label>
+                        <Form.Control
+                        type="text"
+                            required
+                            className="form-control"
+                            value={title}
+                            onChange={onChangeTitle}>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
+                    <Form.Label>Description: </Form.Label>
+                        <Form.Control
+                        as="textarea"
+                            required
+                            className="form-control"
+                            value={description}
+                            onChange={onChangeDescription}>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <br/>
+                    <Form.Group className='mb-3'>
+                        <Form.Control
+                            type="submit"
+                            value="Update Project"
+                            className="btn btn-primary"
+                            onClick={onSubmit}
+                            style={{maxWidth:'10em'}}>
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
+            </Card>
+        </>
     }
 
-        {!isLoaded && 
+    {!isLoaded && 
         <>
             <Loading />
         </>
-        }
+    }
     </>
   )
 }

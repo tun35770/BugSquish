@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Form } from 'react-bootstrap';
+import { Alert, Button, Card, Form } from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 
@@ -9,6 +9,7 @@ const InviteUser = () => {
     const [project, setProject] = useState<any | undefined>(undefined);
     const [email, setEmail] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
+    const [alert, setAlert] = useState(false);
 
     const [projects, setProjects] = useState<any[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -94,9 +95,12 @@ const InviteUser = () => {
             body: JSON.stringify(data)
         })
         .then((res) => res.json())
-        .then((data) => {console.log(data);
-                        //window.location.href= "/projects";
-                        })
+        .then((data) => {
+            console.log(data);
+            setError(data);
+            setAlert(true);
+            window.location.href = '/';
+        })
         .catch((err) => console.log(err));
     }
 
@@ -105,64 +109,71 @@ const InviteUser = () => {
     {isLoaded && 
         <>
             {projects.length > 0 &&
-            <Card className='blue-gradient' style=
-                {{maxWidth: '75%', 
-                margin: '3rem auto', 
-                padding:'1rem',
-                border:'1px solid white',
-                color:'#fff'}}>
-                <h3>Invite a new user to your project</h3>
-                <br/>
-                <Form onSubmit={onSubmit} style=
-                    {{width:'80%',
-                    margin:'0 auto'}}>
+            <>
+                {alert &&  <Alert key='success' variant='success'>
+                        Email sent!
+                        </Alert>
+                }
 
-                    <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
-                    <Form.Label>User's email: </Form.Label>
-                        <Form.Control
-                            type="text"
-                            required
-                            className="form-control"
-                            value={email}
-                            onChange={onChangeEmail}>
-                        </Form.Control>
-                    </Form.Group>
-
+                <Card className='blue-gradient' style=
+                    {{maxWidth: '75%', 
+                    margin: '3rem auto', 
+                    padding:'1rem',
+                    border:'1px solid white',
+                    color:'#fff'}}>
+                    <h3>Invite a new user to your project</h3>
                     <br/>
+                    <Form onSubmit={onSubmit} style=
+                        {{width:'80%',
+                        margin:'0 auto'}}>
 
-                    <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
-                    <Form.Label>Project Name: </Form.Label>
-                    <select
-                            required
-                            className="form-control"
-                            value={project["_id"]}
-                            onChange={onChangeProject}>
-                            {
-                                projects.map((proj, i) => {
-                                    return <option
-                                            key={i}
-                                            value={proj["_id"]}>
-                                                {proj.title}
-                                        </option>
-                                })
-                            
-                            }
-                        </select>
-                    </Form.Group>
+                        <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
+                        <Form.Label>User's email: </Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                className="form-control"
+                                value={email}
+                                onChange={onChangeEmail}>
+                            </Form.Control>
+                        </Form.Group>
 
-                    <Form.Group className='mb-3'>
-                        <Form.Control
-                            type="submit"
-                            value="Send Invite"
-                            className="btn btn-primary"
-                            onSubmit={onSubmit}
-                            style={{maxWidth:'10em'}}>
-                        </Form.Control>
+                        <br/>
 
-                        {error && <div className="error">{error}</div>}
-                    </Form.Group>
-                </Form>
-            </Card>
+                        <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
+                        <Form.Label>Project Name: </Form.Label>
+                        <select
+                                required
+                                className="form-control"
+                                value={project["_id"]}
+                                onChange={onChangeProject}>
+                                {
+                                    projects.map((proj, i) => {
+                                        return <option
+                                                key={i}
+                                                value={proj["_id"]}>
+                                                    {proj.title}
+                                            </option>
+                                    })
+                                
+                                }
+                            </select>
+                        </Form.Group>
+
+                        <Form.Group className='mb-3'>
+                            <Form.Control
+                                type="submit"
+                                value="Send Invite"
+                                className="btn btn-primary"
+                                onSubmit={onSubmit}
+                                style={{maxWidth:'10em'}}>
+                            </Form.Control>
+
+                            {error && <div className="error">{error}</div>}
+                        </Form.Group>
+                    </Form>
+                </Card>`
+            </>
             }
 
             { (projects.length === 0) && 

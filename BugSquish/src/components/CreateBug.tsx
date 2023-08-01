@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
-import { Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 
 const CreateBug = () => {
 
@@ -12,6 +12,7 @@ const CreateBug = () => {
     const [description, setDescription] = useState('');
     const [project, setProject] = useState<any | undefined>(undefined);
     const [error, setError] = useState<String | undefined>(undefined);
+    const [alert, setAlert] = useState(false);
 
     const [projects, setProjects] = useState<any[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -112,7 +113,10 @@ const CreateBug = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
-            window.history.go(-1);
+            setAlert(true);
+            setTimeout(() => {
+                window.history.go(-1);
+            }, 1000);
         })
         .catch((err) => console.log(err))
 
@@ -123,73 +127,80 @@ const CreateBug = () => {
     {isLoaded && 
     <>
         {projects.length > 0 &&
-        <Card className='blue-gradient' style=
-            {{maxWidth: '75%', 
-            margin: '3rem auto', 
-            padding:'1rem',
-            border:'1px solid white',
-            color:'#fff'}}>
-            <h3>Create New Bug Ticket</h3>
-            <br/>
-            <Form onSubmit={onSubmit} style=
-                {{width:'80%',
-                margin:'0 auto'}}>
+        <>
+            {alert &&  <Alert key='success' variant='success'>
+                Bug ticket created!
+                </Alert>
+            }
 
-                <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
-                <Form.Label>Title: </Form.Label>
-                    <Form.Control
-                    type="text"
-                        required
-                        className="form-control"
-                        value={title}
-                        onChange={onChangeTitle}>
-                    </Form.Control>
-                </Form.Group>
-
-                <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
-                <Form.Label>Description: </Form.Label>
-                    <Form.Control
-                    as="textarea"
-                        required
-                        className="form-control"
-                        value={description}
-                        onChange={onChangeDescription}>
-                    </Form.Control>
-                </Form.Group>
-
-                <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
-                <Form.Label>Project Name: </Form.Label>
-                    <select
-                        required
-                        className="form-control"
-                        value={project["_id"]}
-                        onChange={onChangeProject}>
-                        {
-                            projects.map((proj, i) => {
-                                return <option
-                                        key={i}
-                                        value={proj["_id"]}>
-                                            {proj.title}
-                                    </option>
-                            })
-                        
-                        }
-                    </select>
-                </Form.Group>
+            <Card className='blue-gradient' style=
+                {{maxWidth: '75%', 
+                margin: '3rem auto', 
+                padding:'1rem',
+                border:'1px solid white',
+                color:'#fff'}}>
+                <h3>Create New Bug Ticket</h3>
                 <br/>
-                <Form.Group className='mb-3'>
-                    <Form.Control
-                        type="submit"
-                        value="Create Bug Ticket"
-                        className="btn btn-primary"
-                        onSubmit={onSubmit}
-                        style={{maxWidth:'10em'}}>
-                    </Form.Control>
+                <Form onSubmit={onSubmit} style=
+                    {{width:'80%',
+                    margin:'0 auto'}}>
 
-                    {error && <div className="error">{error}</div>}
-                </Form.Group>
-            </Form>
-        </Card>
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupTitle">
+                    <Form.Label>Title: </Form.Label>
+                        <Form.Control
+                        type="text"
+                            required
+                            className="form-control"
+                            value={title}
+                            onChange={onChangeTitle}>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupDescription">
+                    <Form.Label>Description: </Form.Label>
+                        <Form.Control
+                        as="textarea"
+                            required
+                            className="form-control"
+                            value={description}
+                            onChange={onChangeDescription}>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupProject">
+                    <Form.Label>Project Name: </Form.Label>
+                        <select
+                            required
+                            className="form-control"
+                            value={project["_id"]}
+                            onChange={onChangeProject}>
+                            {
+                                projects.map((proj, i) => {
+                                    return <option
+                                            key={i}
+                                            value={proj["_id"]}>
+                                                {proj.title}
+                                        </option>
+                                })
+                            
+                            }
+                        </select>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group className='mb-3'>
+                        <Form.Control
+                            type="submit"
+                            value="Create Bug Ticket"
+                            className="btn btn-primary"
+                            onSubmit={onSubmit}
+                            style={{maxWidth:'10em'}}>
+                        </Form.Control>
+
+                        {error && <div className="error">{error}</div>}
+                    </Form.Group>
+                </Form>
+            </Card>
+        </>
         }
 
         { (projects.length === 0) && 

@@ -7,11 +7,11 @@ const Bug = ( {bug, deleteBug, id} ) => {
 
   return (
     <ListGroupItem className='my-0 light-text blue-gradient' style=
-    {{display: 'flex',
-      flexDirection:'row',
-      width:'100%',
-      margin: '0',
-      border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
+      {{display: 'flex',
+        flexDirection:'row',
+        width:'100%',
+        margin: '0',
+        border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
       }}>
 
       <Card className='light-text' key={id} style=
