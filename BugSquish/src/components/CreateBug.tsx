@@ -42,7 +42,7 @@ const CreateBug = () => {
             if(response.ok){
               setProjects(json);
               if(json.length > 0){
-                console.log(json);
+                //console.log(json);
                 setProject(json[0]);
                 //console.log(json[0]);
               }
@@ -112,7 +112,7 @@ const CreateBug = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            //console.log(data);
             setAlert(true);
             setTimeout(() => {
                 window.history.go(-1);

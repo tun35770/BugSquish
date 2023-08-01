@@ -33,7 +33,7 @@ const EditBug = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-        console.log(data);
+        //console.log(data);
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
@@ -78,7 +78,7 @@ const EditBug = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            //console.log(data);
             setAlert(true);
             setTimeout(() => {
                 window.history.go(-1);  

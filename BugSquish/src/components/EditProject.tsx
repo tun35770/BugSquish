@@ -71,7 +71,7 @@ const EditProject = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+           //console.log(data);
             setAlert(true);
             setTimeout(() => {
                 if (user) window.history.go(-1);

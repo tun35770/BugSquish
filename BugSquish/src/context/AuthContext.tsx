@@ -1,4 +1,3 @@
-import React from 'react'
 import { createContext, useReducer, useEffect } from 'react'
 
 export const AuthContext = createContext(this)
@@ -30,7 +29,6 @@ export const AuthContextProvider = ({ children }) => {
         }
     }, [])
     
-    if(state && state.user) console.log('AuthContext state: ', state);
 
     return (
         <AuthContext.Provider value={{...state, dispatch}}>

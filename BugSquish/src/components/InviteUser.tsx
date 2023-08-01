@@ -38,10 +38,9 @@ const InviteUser = () => {
       
             const json = await response.json();
             if(response.ok){
-                console.log(json)
+                //console.log(json)
                 setProjects(json);
                 if(json.length > 0){
-                    console.log(json);
                     setProject(json[0]);
                 }
               //console.log(projects);

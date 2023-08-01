@@ -19,12 +19,12 @@ import ProjectList from './components/ProjectList.tsx'
 import EditProject from './components/EditProject.tsx'
 import InviteUser from './components/InviteUser.tsx'
 import AcceptInvite from './components/AcceptInvite.tsx'
-import Loading from './components/Loading.tsx'
 
 
 function App() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+
 
   const handleClick = () => {
     logout();

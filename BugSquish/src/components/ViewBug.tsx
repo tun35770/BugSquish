@@ -33,7 +33,7 @@ const ViewBug = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 setUsername(data.username);
                 setDescription(data.description);
                 setTitle(data.title);

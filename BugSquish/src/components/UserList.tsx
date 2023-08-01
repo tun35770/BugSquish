@@ -36,9 +36,8 @@ export const UserList = ( {project_id} ) => {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setUsers(data);
-                console.log(data);
+                //console.log(data);
             })
             .catch((err) => setError(err));
 

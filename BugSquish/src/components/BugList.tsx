@@ -71,7 +71,7 @@ const BugList = ( {project_id = undefined}: props ) => {
           .then((data) => {
               setBugs(data);
               setBugsLength(data.length);
-              console.log(data);
+              //console.log(data);
               setIsLoaded(true);
           })
           .catch((err) => console.log(err));
@@ -91,7 +91,7 @@ const BugList = ( {project_id = undefined}: props ) => {
             .then((data) => {
                 setBugs(data);
                 setBugsLength(data.length);
-                console.log(data);
+                //console.log(data);
                 setIsLoaded(true);
             })
             .catch((err) => console.log(err));

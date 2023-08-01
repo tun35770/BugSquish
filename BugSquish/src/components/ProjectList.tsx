@@ -56,7 +56,7 @@ const ProjectList = () => {
       const json = await response.json();
       if(response.ok){
         setProjects(json);
-        console.log(json)
+        //console.log(json)
         setIsLoaded(true);
       }
     }
