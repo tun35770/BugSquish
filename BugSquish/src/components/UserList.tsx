@@ -65,8 +65,8 @@ export const UserList = ( {project_id} ) => {
     }, [sortBy, sortAscending]);
 
     function userList(){
-        return users.map((currentUser: UserType, idx) => {
-            return <User username={currentUser.username} email={currentUser.email} key={currentUser["_id"]} id={currentUser["_id"]} />
+        return users.map((currentUser: UserType) => {
+            return <User username={currentUser.username} email={currentUser.email} key={currentUser["user_id"]} id={currentUser["_id"]} />
         });
     }
 

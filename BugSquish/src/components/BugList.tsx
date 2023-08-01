@@ -167,7 +167,7 @@ const BugList = ( {project_id = undefined}: props ) => {
           setBugs(newBugs);
           setBugsLength(newBugs.length);
         })
-        .catch((err) => /* console.error(err) */{})
+        .catch((err) => console.error(err))
   }
   
   function bugList(){
