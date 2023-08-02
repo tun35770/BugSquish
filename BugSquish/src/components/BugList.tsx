@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Bug from './Bug';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { BsCheckLg } from 'react-icons/bs'
 import Loading from './Loading';
 
 interface props {
@@ -34,12 +35,14 @@ const BugList = ( {project_id = undefined}: props ) => {
   const { user } = useAuthContext();
 
   const [bugs, setBugs] = useState<BugType[]>([]);
+  const [bugsDisplayed, setBugsDisplayed] = useState<BugType[]>([]);
   const [bugsLength, setBugsLength] = useState(0);
 
   const [sortBy, setSortBy] = useState('date');
   const [sortAscending, setSortAscending] = useState(true);
   const sortables = ['title', 'project', 'username', 'date'];
 
+  const [hideCompleted, setHideCompleted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   /*
     TODO: Implement localStorage for bugs.
@@ -134,6 +137,18 @@ const BugList = ( {project_id = undefined}: props ) => {
     setBugs(sortedBugs);
   }, [sortBy, sortAscending]);
 
+  useEffect(() => {
+    //if bugs is updated, bugsDisplayed may need to reflect change(s)
+    setBugsDisplayed([...bugs]);
+    console.log(hideCompleted);
+    //then filter only non-compelted bugs if required
+    if(hideCompleted){
+      let newBugsDisplayed = [...bugs];
+      newBugsDisplayed = newBugsDisplayed.filter((thisBug) => !thisBug.completed)
+      setBugsDisplayed(newBugsDisplayed);
+    }
+  }, [bugs, hideCompleted])
+
   function deleteBug(id:string, bug_project_id:string){
 
     if(!user){
@@ -171,7 +186,7 @@ const BugList = ( {project_id = undefined}: props ) => {
   }
   
   function bugList(){
-    return bugs.map((currentBug: BugType) => {
+    return bugsDisplayed.map((currentBug: BugType) => {
       return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]} id={currentBug["_id"]} />
     });
   }
@@ -195,6 +210,10 @@ const BugList = ( {project_id = undefined}: props ) => {
     setSortBy(attr);
   }
 
+  function toggleHideCompleted() {
+    setHideCompleted(!hideCompleted);
+  }
+
   return (
     <>
     {isLoaded && 
@@ -205,10 +224,37 @@ const BugList = ( {project_id = undefined}: props ) => {
       }}>
         { (bugsLength > 0) && 
           <>
-            <h1 className='dark-text' style={{
-              marginTop: '0.5em',
-              fontFamily: 'Montserrat',
-            }}> Bugs </h1>
+            <div id="title-and-toggle" className = 'dark-text' style={{
+              display:'flex',
+              flexDirection:'row',
+              justifyContent: 'flex-end',
+              textAlign: 'right',
+              width: '100%'
+            }}>
+              <h1 className='dark-text' style={{
+                margin: '0.5em auto 0.25em 42%', //it works so dont touch.
+                fontFamily: 'Montserrat',
+              }}> Bugs </h1>
+
+              <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                
+                fontSize: '1em'
+              }}> 
+                <div style={{
+                  cursor: 'pointer',
+                  margin: '3.25em 0.25em 0 auto', 
+                  width: '1em', 
+                  height: '1em',
+                  border: '1px solid black'}} onClick={toggleHideCompleted}>  
+                  { hideCompleted && <BsCheckLg style={{display:'block',margin:'auto'}} />}
+                </div>
+                <p style={{margin: '3em 0 0 auto'}}> Hide completed </p>
+              </div>
+
+            </div>
 
             <ListGroup style={{
               width: '100%'
