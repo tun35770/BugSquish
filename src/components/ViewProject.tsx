@@ -12,7 +12,7 @@ import { UserList } from './UserList';
 const ViewProject = () => {
 
     const { user } = useAuthContext();
-    const { id } = useParams();
+    const { project_id } = useParams();
     const [projectOwner, setProjectOwner] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -26,7 +26,7 @@ const ViewProject = () => {
             return;
         }
 
-        fetch('http://44.199.215.98:5000/projects/' + id, {
+        fetch('http://44.199.215.98:5000/projects/' + project_id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -80,8 +80,8 @@ const ViewProject = () => {
                         
                         { user.username === projectOwner && 
                             <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                                <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
-                                <a onClick={() => {DeleteProject(id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
+                                <Link to={"/editproject/" + project_id} style={{color:'gold'}}><BsPencil /></Link>
+                                <a onClick={() => {DeleteProject(project_id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
                             </div>
                         }
                     </Card.Body>
@@ -112,9 +112,9 @@ const ViewProject = () => {
                     flexWrap: 'wrap',
                     justifyContent:'space-between',
                 }}>
-                    <BugList project_id={id}/>
+                    <BugList project_id={project_id}/>
 
-                    <UserList project_id={id} />
+                    <UserList project_id={project_id} />
                 </div>
             </>
             }

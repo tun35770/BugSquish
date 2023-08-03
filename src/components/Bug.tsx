@@ -3,7 +3,7 @@ import { Card, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 
-const Bug = ( {bug, deleteBug, id} ) => {
+const Bug = ( {bug, deleteBug} ) => {
 
   return (
     <ListGroupItem className='my-0 light-text blue-gradient' style=
@@ -14,7 +14,7 @@ const Bug = ( {bug, deleteBug, id} ) => {
         border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
       }}>
 
-      <Card className='light-text' key={id} style=
+      <Card className='light-text' key={bug["_id"]} style=
         {{display: 'flex',
           flexDirection: 'row',
           width: '100%',
@@ -99,9 +99,9 @@ const Bug = ( {bug, deleteBug, id} ) => {
             padding: '0 0.5em', 
             textAlign:'right'}} >
 
-            <a href="/" onClick={() => {deleteBug(id, bug.project_id)}}> <BsXCircle style={{color:'red'}} /> </a>
-            <Link to={"/viewbug/" + id} style={{color: 'white'}}> <BsEye /> </Link>
-            <Link to={"/edit/" + id} style={{color:'gold'}}> <BsPencil /> </Link>
+            <a onClick={() => {deleteBug(bug["_id"], bug.project_id)}}> <BsXCircle style={{cursor: 'pointer', color:'red'}} /> </a>
+            <Link to={"/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
+            <Link to={"/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
          
           </div>
         </Card.Body>

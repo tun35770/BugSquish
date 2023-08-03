@@ -160,7 +160,6 @@ const BugList = ( {project_id = undefined}: props ) => {
       project_id: bug_project_id
     }
 
-
     /**
      * TODO: Figure out why this throws an error when on main page, but not on
      *       ViewProject page. 
@@ -187,7 +186,7 @@ const BugList = ( {project_id = undefined}: props ) => {
   
   function bugList(){
     return bugsDisplayed.map((currentBug: BugType) => {
-      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]} id={currentBug["_id"]} />
+      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]}  />
     });
   }
   
