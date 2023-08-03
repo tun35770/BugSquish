@@ -123,7 +123,7 @@ router.route('/update/:id').post((req: any, res: any) => {
                             title: new_title,
                         }
                         
-                        fetch('http://localhost:5000/bugs/updateprojecttitle/' + project_id, {
+                        fetch('http://44.199.215.98:5000/bugs/updateprojecttitle/' + project_id, {
                             method: 'POST',
                             headers: {
                                 Accept: "application/json",
@@ -139,7 +139,7 @@ router.route('/update/:id').post((req: any, res: any) => {
 
 
                         //update bugs in project's bugs[]
-                        fetch('http://localhost:5000/bugs/byproject/' + project_id, {
+                        fetch('http://44.199.215.98:5000/bugs/byproject/' + project_id, {
                             method: 'GET',
                             headers: {
                                 Accept: "application/json",

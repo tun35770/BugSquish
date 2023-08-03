@@ -11,7 +11,7 @@ router.route('/').post((req: any, res: any) => {
         user: user
     };
 
-    fetch('http://localhost:5000/projects', {
+    fetch('http://44.199.215.98:5000/projects', {
           method: 'POST',
           headers: {
               Accept: "application/json",
@@ -62,7 +62,7 @@ router.route('/add').post((req: any, res: any) => {
 
     newBug.save()
         .then(() => {
-            fetch('http://localhost:5000/projects/addbug/' + project_id, {
+            fetch('http://44.199.215.98:5000/projects/addbug/' + project_id, {
                 method: 'POST',
                 headers: {
                     Accept: "application/json",
@@ -95,7 +95,7 @@ router.route('/:id').delete((req: any, res: any) => {
                 bug_id: req.params.id
             }
 
-            fetch('http://localhost:5000/projects/deletebug/' + project_id, {
+            fetch('http://44.199.215.98:5000/projects/deletebug/' + project_id, {
                 method: 'POST',
                 headers: {
                     Accept: "application/json",
@@ -134,7 +134,7 @@ router.route('/update/:id').post((req: any, res: any) => {
                         bug_id: bug["_id"]
                     }
 
-                    fetch('http://localhost:5000/projects/updatebug/' + bug.project_id, {
+                    fetch('http://44.199.215.98:5000/projects/updatebug/' + bug.project_id, {
                         method: 'POST',
                         headers: {
                             Accept: "application/json",
