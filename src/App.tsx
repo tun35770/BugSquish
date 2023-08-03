@@ -106,7 +106,7 @@ function App() {
               <Route path="/viewbug/:id" element={<ViewBug />} />
               <Route path="/projects" element={<ProjectList />} />
               <Route path="/createproject/" element={<CreateProject />} />
-              <Route path="/viewproject/:id" element={<ViewProject />} />
+              <Route path="/viewproject/:project_id" element={<ViewProject />} />
               <Route path="/editproject/:id" element={<EditProject />} />
               <Route path="/inviteuser/" element={<InviteUser />} />
               <Route path="/acceptinvite/:id" element={<AcceptInvite />} />

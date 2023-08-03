@@ -9,7 +9,7 @@ interface props {
   project_id?: string | undefined
 }
 
-const BugList = ( {project_id = undefined}: props ) => {
+const BugList = ( {project_id}: props ) => {
   class BugType {
     _id: string;
     username: string;
@@ -140,7 +140,6 @@ const BugList = ( {project_id = undefined}: props ) => {
   useEffect(() => {
     //if bugs is updated, bugsDisplayed may need to reflect change(s)
     setBugsDisplayed([...bugs]);
-    console.log(hideCompleted);
     //then filter only non-compelted bugs if required
     if(hideCompleted){
       let newBugsDisplayed = [...bugs];
@@ -176,7 +175,7 @@ const BugList = ( {project_id = undefined}: props ) => {
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          //console.log(data);
           const newBugs = [...bugs].filter((bug: BugType) => bug._id !== id)
           setBugs(newBugs);
           setBugsLength(newBugs.length);

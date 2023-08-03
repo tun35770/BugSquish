@@ -24,7 +24,7 @@ const Project = ( {project, deleteProject, id, user} ) => {
                 {project.title} 
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                <Link to={"/viewproject/" + id} style={{color: 'white'}}> <BsEye /> </Link>
+                <Link to={"/viewproject/" + project._id} style={{color: 'white'}}> <BsEye /> </Link>
                 { user.username === project.username && 
                   <>
                     <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
