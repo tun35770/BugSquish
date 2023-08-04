@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const AcceptInvite = () => {
 
@@ -15,6 +16,8 @@ const AcceptInvite = () => {
             setError('Not logged in.');
             return;
         }
+
+        else    setError(undefined);
 
         const data = {
             username: user.username,
@@ -45,11 +48,49 @@ const AcceptInvite = () => {
   return (
     <div>
         {success && 
-            <div className='success'> 
-                <p> Successfully added to project! </p>
-                <p> Redirecting... </p>
+            <div className='success' style={{
+                display: 'flex', 
+                flexDirection: 'column',
+                justifyContent: 'center'}}> 
+                <h2 style={{margin: '1em auto'}}> Successfully added to project! </h2>
+                <h5> Redirecting... </h5>
             </div>}
-        {error && <div className="error">{error}</div>}
+        {error && 
+            <div style={{
+                display: 'flex', 
+                flexDirection: 'column',
+                justifyContent: 'center'}}>
+
+                <h2 style={{margin: '1em auto'}}> You've been invited to a project!</h2>
+                <div className="error" style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '1em',
+                    margin: '2em auto',
+                    width: '25%',
+                    justifyContent: 'space-evenly'
+                    
+                }}> 
+                    <Button
+                        href = '/login'
+                        variant='primary' >
+                        Login
+                    </Button>
+                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
+                        <h5> or </h5>
+                    </div>
+
+                    <Button
+                        variant='primary'
+                        onClick={(e) => window.location.pathname='signup'}>
+                        Sign up
+                    </Button>
+
+                </div>
+                    
+                <h4> to join. </h4>
+            </div>
+        }
     </div>
   )
 }

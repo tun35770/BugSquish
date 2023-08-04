@@ -240,13 +240,13 @@ const BugList = ( {project_id}: props ) => {
                 justifyContent: 'flex-end',
                 
                 fontSize: '1em'
-              }}> 
+              }} onClick={toggleHideCompleted}> 
                 <div style={{
                   cursor: 'pointer',
                   margin: '3.25em 0.25em 0 auto', 
                   width: '1em', 
                   height: '1em',
-                  border: '1px solid black'}} onClick={toggleHideCompleted}>  
+                  border: '1px solid black'}} >  
                   { hideCompleted && <BsCheckLg style={{display:'block',margin:'auto'}} />}
                 </div>
                 <p style={{margin: '3em 0 0 auto'}}> Hide completed </p>
@@ -294,7 +294,7 @@ const BugList = ( {project_id}: props ) => {
               <h3 className='dark-text' style={{
                   textAlign: 'left',
                   marginLeft: '1em', 
-                  fontFamily: 'Montserrat'}}> No bugs to display </h3>
+                  fontFamily: 'Montserrat'}}> Your bugs will be displayed here. </h3>
           </>
         }
       </div>

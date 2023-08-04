@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Form } from 'react-bootstrap';
 import { useSignup } from '../hooks/useSignup'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Signup = () => {
 
+    const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {signup, ok, error, isLoading} = useSignup();
+    const {signup, error, isLoading} = useSignup();
+
+    useEffect(() => {
+        if(user){
+            window.history.go(-1);
+        }
+    }, [user])
 
     function onChangeUsername(e: React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
@@ -24,9 +32,6 @@ const Signup = () => {
 
         //TODO: Add error text on database error
         await signup(username, email, password);
-
-        if(ok)
-            window.location.href = '/';
     }
 
 
@@ -39,7 +44,7 @@ const Signup = () => {
         color:'#fff'}}>
         <h3>Sign Up</h3>
         <br/>
-        <Form onSubmit={onSubmit} style=
+        <Form onSubmit={(e) => onSubmit(e)} style=
         {{width:'80%',
             margin:'0 auto'}}>
 
@@ -54,7 +59,7 @@ const Signup = () => {
             </Form.Control>
         </Form.Group>
 
-        <Form.Group className="mb-3 leftAlign" controlId="formGroupUsername">
+        <Form.Group className="mb-3 leftAlign" controlId="formGroupEmail">
         <Form.Label>Email: </Form.Label>
             <Form.Control
               type="email"
@@ -65,7 +70,7 @@ const Signup = () => {
             </Form.Control>
         </Form.Group>
 
-        <Form.Group className="mb-3 leftAlign" controlId="formGroupUsername">
+        <Form.Group className="mb-3 leftAlign" controlId="formGroupPassword">
         <Form.Label>Password: </Form.Label>
             <Form.Control
               type="password"
@@ -83,7 +88,7 @@ const Signup = () => {
                     type="submit"
                     value="Signup"
                     className="btn btn-primary"
-                    onSubmit={onSubmit}
+                    onSubmit={(e) => onSubmit(e)}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>
 

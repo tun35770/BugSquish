@@ -28,8 +28,6 @@ const CreateProject = () => {
             return;
         }
 
-        console.log(user);
-
         /**
          * REQUIRED: username,
          *           user_id,
@@ -56,7 +54,7 @@ const CreateProject = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            //console.log(data);
             setAlert(true);
             setTimeout(() => {
                 window.location.href= "/projects";

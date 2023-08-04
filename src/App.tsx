@@ -111,8 +111,8 @@ function App() {
               <Route path="/inviteuser/" element={<InviteUser />} />
               <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
 
-              <Route path="/signup" element={ <Navigate to="/" /> } />
-              <Route path="/login" element={ <Navigate to="/" /> } />
+              <Route path="/signup" element={ <Signup /> } />
+              <Route path="/login" element={ <Login /> } />
 
             </Routes>
           ) 
@@ -121,6 +121,7 @@ function App() {
               <Route path="/" element={ <Navigate to="/login"/>} />
               <Route path="/signup" element={<Signup /> } />
               <Route path="/login" element={<Login /> } />
+              <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
             </Routes>
             )
         } 
