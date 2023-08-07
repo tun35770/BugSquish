@@ -38,9 +38,9 @@ const AcceptInvite = () => {
         .then((data) => {console.log(data);
                         setSuccess(true);
                         setTimeout(() => {
-                            window.location.href = '/';
+                            window.location.href= "/BugSquish/projects";
                         }, 3000)
-                        //window.location.href= "/projects";
+                        
                         })
         .catch((err) => console.log(err));
     }, [user])
@@ -72,7 +72,7 @@ const AcceptInvite = () => {
                     
                 }}> 
                     <Button
-                        href = '/login'
+                        href = '/BugSquish/login'
                         variant='primary' >
                         Login
                     </Button>

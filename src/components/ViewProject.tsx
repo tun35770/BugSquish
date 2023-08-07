@@ -49,13 +49,13 @@ const ViewProject = () => {
 
 
     function AddBug(){
-        window.location.href = "/createbug";
+        window.location.href = "/BugSquish/createbug";
     }
 
     function GoBack(){
 
         if (user) window.history.go(-1);
-        else      window.location.href = "/";
+        else      window.location.href = "/BugSquish/";
         
     } 
 
@@ -80,7 +80,7 @@ const ViewProject = () => {
                         
                         { user.username === projectOwner && 
                             <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                                <Link to={"/editproject/" + project_id} style={{color:'gold'}}><BsPencil /></Link>
+                                <Link to={"/BugSquish/editproject/" + project_id} style={{color:'gold'}}><BsPencil /></Link>
                                 <a onClick={() => {DeleteProject(project_id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
                             </div>
                         }

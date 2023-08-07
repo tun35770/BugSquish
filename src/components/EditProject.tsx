@@ -75,7 +75,7 @@ const EditProject = () => {
             setAlert(true);
             setTimeout(() => {
                 if (user) window.history.go(-1);
-                else      window.location.href = "/";
+                else      window.location.href = "/BugSquish/";
             }, 1000);
            
         })
