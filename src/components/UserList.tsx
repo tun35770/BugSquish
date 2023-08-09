@@ -26,7 +26,7 @@ export const UserList = ( {project_id} ) => {
             return;
         }
 
-        fetch('http://44.199.215.98:5000/projects/users/' + project_id, {
+        fetch('https://44.199.215.98:5000/projects/users/' + project_id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",

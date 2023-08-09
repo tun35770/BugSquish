@@ -43,7 +43,7 @@ const ProjectList = () => {
     }
 
     const fetchProjects = async () => {
-      const response = await fetch('http://44.199.215.98:5000/projects', {
+      const response = await fetch('https://44.199.215.98:5000/projects', {
           method: 'POST',
           headers: {
               Accept: "application/json",
@@ -104,7 +104,7 @@ const ProjectList = () => {
             <br />
             <Button
               variant='primary'
-              onClick={(e)=>window.location.href='createproject'}>
+              onClick={(e)=>window.location.href='/BugSquish/createproject'}>
               Create your first Project
             </Button>
           </>

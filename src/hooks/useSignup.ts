@@ -11,7 +11,7 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://44.199.215.98:5000/users/signup', {
+        const response = await fetch('https://bugsquish.org/users/signup', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, email, password})

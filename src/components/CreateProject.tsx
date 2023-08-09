@@ -43,7 +43,7 @@ const CreateProject = () => {
             email: user.email,
         };
 
-        fetch('http://44.199.215.98:5000/projects/add', {
+        fetch('https://44.199.215.98:5000/projects/add', {
             method: 'POST',
             headers: {
                 Accept: "application/json",
@@ -57,7 +57,7 @@ const CreateProject = () => {
             //console.log(data);
             setAlert(true);
             setTimeout(() => {
-                window.location.href= "/projects";
+                window.location.href= "/BugSquish/projects";
             }, 1000);
         })
         .catch((err) => console.log(err))
