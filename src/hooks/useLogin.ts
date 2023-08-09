@@ -11,7 +11,7 @@ export const useLogin = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://44.199.215.98:5000/users/login', {
+        const response = await fetch('https://bugsquish.org/users/login', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password})

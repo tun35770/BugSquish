@@ -20,7 +20,7 @@ const EditProject = () => {
             return;
         }
 
-        fetch('http://44.199.215.98:5000/projects/' + id, {
+        fetch('https://44.199.215.98:5000/projects/' + id, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -60,7 +60,7 @@ const EditProject = () => {
             date: new Date()
         };
 
-        fetch('http://44.199.215.98:5000/projects/update/' + id, {
+        fetch('https://44.199.215.98:5000/projects/update/' + id, {
             method: 'POST',
             headers: {
                 Accept: "application/json",

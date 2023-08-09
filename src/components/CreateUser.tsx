@@ -17,7 +17,7 @@ const CreateUser = () => {
     };
 
     //TODO: Add error text on database error
-    fetch('http://44.199.215.98:5000/users/add', {
+    fetch('https://44.199.215.98:5000/users/add', {
       method: 'POST',
       headers: {
         Accept: "application/json",

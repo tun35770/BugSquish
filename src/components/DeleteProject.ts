@@ -7,7 +7,7 @@ const DeleteProject = (id: string, user: any) => {
     return;
   }
 
-  fetch('http://44.199.215.98:5000/projects/' + id, {
+  fetch('https://44.199.215.98:5000/projects/' + id, {
           method: 'delete',
           headers: {
               Accept: "application/json",

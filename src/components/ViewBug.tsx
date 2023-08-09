@@ -23,7 +23,7 @@ const ViewBug = () => {
             return;
         }
 
-        fetch('http://44.199.215.98:5000/bugs/' + id, {
+        fetch('https://44.199.215.98:5000/bugs/' + id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -64,7 +64,7 @@ const ViewBug = () => {
             
         };
 
-        fetch('http://44.199.215.98:5000/bugs/update/' + id, {
+        fetch('https://44.199.215.98:5000/bugs/update/' + id, {
             method: 'POST',
             headers: {
                 Accept: "application/json",

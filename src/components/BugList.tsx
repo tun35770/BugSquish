@@ -61,7 +61,7 @@ const BugList = ( {project_id}: props ) => {
       let fetchBugs: any;
 
       if(project_id === undefined){
-        fetchBugs = fetch('http://44.199.215.98:5000/bugs', {
+        fetchBugs = fetch('https://bugsquish.org/bugs', {
             method: 'POST',
             headers: {
                 Accept: "application/json",
@@ -82,7 +82,7 @@ const BugList = ( {project_id}: props ) => {
 
       //specific project
       else {
-        fetchBugs = fetch('http://44.199.215.98:5000/bugs/byproject/' + project_id, {
+        fetchBugs = fetch('https://44.199.215.98:5000/bugs/byproject/' + project_id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",
@@ -164,7 +164,7 @@ const BugList = ( {project_id}: props ) => {
      *       ViewProject page. 
      *       Still deletes bug despite error thrown.
      */
-    fetch('http://44.199.215.98:5000/bugs/' + id, {
+    fetch('https://44.199.215.98:5000/bugs/' + id, {
             method: 'delete',
             headers: {
                 Accept: "application/json",
