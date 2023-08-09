@@ -25,7 +25,7 @@ const AcceptInvite = () => {
             email: user.email
         }
 
-        fetch('http://44.199.215.98:5000/projects/adduser/' + id, {
+        fetch('https://bugsquish.org/projects/adduser/' + id, {
             method: 'POST',
             headers: {
                 Accept: "application/json",
