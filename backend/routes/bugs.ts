@@ -1,3 +1,4 @@
+
 const router = require('express').Router();
 let Bug = require('../models/bug.model');
 import requireAuth from '../middleware/requireAuth'
@@ -90,7 +91,7 @@ router.route('/:id').delete((req: any, res: any) => {
 
     Bug.findByIdAndDelete(req.params.id)
         .then(() => {
-
+	
             const data = {
                 bug_id: req.params.id
             }
@@ -105,7 +106,7 @@ router.route('/:id').delete((req: any, res: any) => {
                 body: JSON.stringify(data)
             })
             .then(() => {
-                res.json('Bug deleted')
+		    res.json('Bug deleted')
             })
             .catch((err:any) => {
                 console.error(err);
