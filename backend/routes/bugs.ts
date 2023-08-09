@@ -11,7 +11,7 @@ router.route('/').post((req: any, res: any) => {
         user: user
     };
 
-    fetch('http://44.199.215.98:5000/projects', {
+    fetch('http://bugsquish.org/projects', {
           method: 'POST',
           headers: {
               Accept: "application/json",
