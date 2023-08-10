@@ -7,7 +7,36 @@ import requireAuth from '../middleware/requireAuth'
 router.use(requireAuth);
 
 router.route('/').post((req: any, res: any) => {
-    res.json("Hello!");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const user = req.body.user;
+    const data = {
+        user: user
+    };
+
+    fetch('http://bugsquish.org/projects', {
+          method: 'POST',
+          headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              'Authorization': `Bearer ${user.token}`
+          },
+          body: JSON.stringify(data)
+      })
+      .then( async (response) => {
+        try{
+            const userProjects =  await response.json();
+            let userBugs: any[] = [];
+            for(let i = 0; i < userProjects.length; i++){
+                //console.log(userProjects[i].bugs)
+                userBugs = [...userBugs, ...userProjects[i].bugs];
+            }
+
+            //console.log(userBugs)
+            res.json(userBugs);
+        } catch(e){
+            res.status(400).json("Error: " + e);
+        }
+      })
 });
 
 router.route('/add').post((req: any, res: any) => {
