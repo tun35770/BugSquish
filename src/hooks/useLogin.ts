@@ -13,7 +13,9 @@ export const useLogin = () => {
 
         const response = await fetch('https://bugsquish.org/users/login', {
             method: "POST",
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({username, password})
         });
 

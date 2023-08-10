@@ -6,6 +6,7 @@ import requireAuth from '../middleware/requireAuth'
 router.use(requireAuth);
 
 router.route('/').post((req: any, res: any) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const user = req.body.user;
     const data = {
         user: user

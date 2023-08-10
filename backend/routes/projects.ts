@@ -39,6 +39,7 @@ router.use(requireAuth);
 
 //Get projects
 router.route('/').post( async (req: any, res: any) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const user_id = req.body.user.user_id;
     //console.log(req.user._id);
     /* Project.find( {user_id} ).sort({createdAt: -1})
