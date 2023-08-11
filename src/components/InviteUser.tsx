@@ -26,7 +26,7 @@ const InviteUser = () => {
         }
 
         const fetchProjects = async () => {
-            const response = await fetch('https://44.199.215.98:5000/projects', {
+            const response = await fetch('https://bugsquish.org/projects', {
                 method: 'POST',
                 headers: {
                     Accept: "application/json",
@@ -84,7 +84,7 @@ const InviteUser = () => {
             user: user,
         }
 
-        fetch('https://44.199.215.98:5000/projects/sendinvite/' + project["_id"], {
+        fetch('https://bugsquish.org/projects/sendinvite/' + project["_id"], {
             method: 'POST',
             headers: {
                 Accept: "application/json",

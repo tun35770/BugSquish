@@ -28,7 +28,7 @@ const CreateBug = () => {
         }
 
         const fetchProjects = async () => {
-            const response = await fetch('https://44.199.215.98:5000/projects', {
+            const response = await fetch('https://bugsquish.org/projects', {
                 method: 'POST',
                 headers: {
                     Accept: "application/json",
@@ -101,7 +101,7 @@ const CreateBug = () => {
             completed: false,
         };
 
-        fetch('https://44.199.215.98:5000/bugs/add', {
+        fetch('https://bugsquish.org/bugs/add', {
             method: 'POST',
             headers: {
                 Accept: "application/json",

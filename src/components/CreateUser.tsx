@@ -17,7 +17,7 @@ const CreateUser = () => {
     };
 
     //TODO: Add error text on database error
-    fetch('https://44.199.215.98:5000/users/add', {
+    fetch('https://bugsquish.org/users/add', {
       method: 'POST',
       headers: {
         Accept: "application/json",

@@ -124,7 +124,7 @@ router.route('/update/:id').post((req: any, res: any) => {
                             title: new_title,
                         }
                         
-                        fetch('http://44.199.215.98:5000/bugs/updateprojecttitle/' + project_id, {
+                        fetch('https://bugsquish.org/bugs/updateprojecttitle/' + project_id, {
                             method: 'POST',
                             headers: {
                                 Accept: "application/json",
@@ -140,7 +140,7 @@ router.route('/update/:id').post((req: any, res: any) => {
 
 
                         //update bugs in project's bugs[]
-                        fetch('http://44.199.215.98:5000/bugs/byproject/' + project_id, {
+                        fetch('https://bugsquish.org/bugs/byproject/' + project_id, {
                             method: 'GET',
                             headers: {
                                 Accept: "application/json",
@@ -184,7 +184,7 @@ router.route('/sendinvite/:id').post((req: any, res: any) => {
            const projectName = project.title;
            const senderUsername = req.body.user.username;
            //link should bring user to a page in client that will immediately fetch adduser hook
-           const inviteLink = 'http://localhost:5173/acceptinvite/' + req.params.id;
+           const inviteLink = 'https://tun35770.github.io/BugSquish/acceptinvite/' + req.params.id;
 
            sendInviteMail(receiverEmail, projectName, senderUsername, inviteLink)
            .then(() => res.json('Email sent!'))

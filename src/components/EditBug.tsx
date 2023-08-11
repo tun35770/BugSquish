@@ -23,7 +23,7 @@ const EditBug = () => {
             return;
         }
 
-        fetch('https://44.199.215.98:5000/bugs/' + id, {
+        fetch('https://bugsquish.org/bugs/' + id, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -67,7 +67,7 @@ const EditBug = () => {
             completed: completed,
         };
 
-        fetch('https://44.199.215.98:5000/bugs/update/' + id, {
+        fetch('https://bugsquish.org/bugs/update/' + id, {
             method: 'POST',
             headers: {
                 Accept: "application/json",

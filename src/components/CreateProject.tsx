@@ -43,7 +43,7 @@ const CreateProject = () => {
             email: user.email,
         };
 
-        fetch('https://44.199.215.98:5000/projects/add', {
+        fetch('https://bugsquish.org/projects/add', {
             method: 'POST',
             headers: {
                 Accept: "application/json",

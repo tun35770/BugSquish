@@ -26,7 +26,7 @@ const ViewProject = () => {
             return;
         }
 
-        fetch('https://44.199.215.98:5000/projects/' + project_id, {
+        fetch('https://bugsquish.org/projects/' + project_id, {
                 method: 'GET',
                 headers: {
                     Accept: "application/json",

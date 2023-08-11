@@ -20,7 +20,7 @@ const EditProject = () => {
             return;
         }
 
-        fetch('https://44.199.215.98:5000/projects/' + id, {
+        fetch('https://bugsquish.org/projects/' + id, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -60,7 +60,7 @@ const EditProject = () => {
             date: new Date()
         };
 
-        fetch('https://44.199.215.98:5000/projects/update/' + id, {
+        fetch('https://bugsquish.org/projects/update/' + id, {
             method: 'POST',
             headers: {
                 Accept: "application/json",
