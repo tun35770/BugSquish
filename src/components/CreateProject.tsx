@@ -57,7 +57,7 @@ const CreateProject = () => {
             //console.log(data);
             setAlert(true);
             setTimeout(() => {
-                window.location.href= "/BugSquish/projects";
+                window.location.href= "/projects";
             }, 1000);
         })
         .catch((err) => console.log(err))

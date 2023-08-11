@@ -3,7 +3,7 @@
   "name": "bugsquish",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://tun35770.github.io/BugSquish/",
+  "homepage": "https://tun35770.github.io/BugSquish/#",
   "type": "module",
   "scripts": {
     "dev": "vite",

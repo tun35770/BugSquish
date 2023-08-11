@@ -2,7 +2,7 @@ import './App.css'
 import { Button, Nav, Navbar } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom"
+import { HashRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom"
 import { useLogout } from './hooks/useLogout'
 import { useAuthContext } from './hooks/useAuthContext'
 import { useHomeContext } from './hooks/useHomeContext'
@@ -60,28 +60,28 @@ function App() {
             <Navbar.Toggle className="mx-2" aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
               <Nav className="me-3">
-                <Link to="/BugSquish/" className="nav-link white-text">Home</Link>
+                <Link to="/" className="nav-link white-text">Home</Link>
                 
                 {user && (
-                  <Link to="/BugSquish/createbug" className="nav-link white-text">Create Bug Ticket</Link>
+                  <Link to="/createbug" className="nav-link white-text">Create Bug Ticket</Link>
                 )}
 
                 {user && (
-                  <Link to="/BugSquish/projects" className="nav-link white-text">My Projects</Link>
+                  <Link to="/projects" className="nav-link white-text">My Projects</Link>
                 )}
 
                 {user && (
-                  <Link to="/BugSquish/createproject" className="nav-link white-text">Create Project</Link>
+                  <Link to="/createproject" className="nav-link white-text">Create Project</Link>
                 )}
 
                 {user && (
-                  <Link to="/BugSquish/inviteuser" className="nav-link white-text">Invite user</Link>
+                  <Link to="/inviteuser" className="nav-link white-text">Invite user</Link>
                 )}
 
                 {!user && (
                   <>
-                    <Link to="/BugSquish/login" className="nav-link white-text">Login</Link>
-                    <Link to="/BugSquish/signup" className="nav-link white-text">Sign up</Link>
+                    <Link to="/login" className="nav-link white-text">Login</Link>
+                    <Link to="/signup" className="nav-link white-text">Sign up</Link>
                   </>)}
                 {user && (
                   <div>
@@ -99,28 +99,28 @@ function App() {
           { user ? 
             (
               <Routes>
-                <Route path="/BugSquish" element={user ? <BugList /> : <Navigate to="/BugSquish/login"/>} />
-                <Route path="/BugSquish/createbug" element={<CreateBug /> } />
-                <Route path="/BugSquish/edit/:id" element={<EditBug />} />
-                <Route path="/BugSquish/viewbug/:id" element={<ViewBug />} />
-                <Route path="/BugSquish/projects" element={<ProjectList />} />
-                <Route path="/BugSquish/createproject/" element={<CreateProject />} />
-                <Route path="/BugSquish/viewproject/:project_id" element={<ViewProject />} />
-                <Route path="/BugSquish/editproject/:id" element={<EditProject />} />
-                <Route path="/BugSquish/inviteuser/" element={<InviteUser />} />
-                <Route path="/BugSquish/acceptinvite/:id" element={<AcceptInvite />} />
+                <Route path="/" element={user ? <BugList /> : <Navigate to="/BugSquish/login"/>} />
+                <Route path="/createbug" element={<CreateBug /> } />
+                <Route path="/edit/:id" element={<EditBug />} />
+                <Route path="/viewbug/:id" element={<ViewBug />} />
+                <Route path="/projects" element={<ProjectList />} />
+                <Route path="/createproject/" element={<CreateProject />} />
+                <Route path="/viewproject/:project_id" element={<ViewProject />} />
+                <Route path="/editproject/:id" element={<EditProject />} />
+                <Route path="/inviteuser/" element={<InviteUser />} />
+                <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
 
-                <Route path="/BugSquish/signup" element={ <Signup /> } />
-                <Route path="/BugSquish/login" element={ <Login /> } />
+                <Route path="/signup" element={ <Signup /> } />
+                <Route path="/login" element={ <Login /> } />
 
               </Routes>
             ) 
             : (
               <Routes>
-                <Route path="/BugSquish" element={ <Navigate to="/BugSquish/login"/>} />
-                <Route path="/BugSquish/signup" element={<Signup /> } />
-                <Route path="/BugSquish/login" element={<Login /> } />
-                <Route path="/BugSquish/acceptinvite/:id" element={<AcceptInvite />} />
+                <Route path="/" element={ <Navigate to="/BugSquish/login"/>} />
+                <Route path="/signup" element={<Signup /> } />
+                <Route path="/login" element={<Login /> } />
+                <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
               </Routes>
               )
           } 

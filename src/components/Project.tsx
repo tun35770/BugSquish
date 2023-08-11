@@ -24,10 +24,10 @@ const Project = ( {project, deleteProject, id, user} ) => {
                 {project.title} 
               </Card.Title>
               <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
-                <Link to={"/BugSquish/viewproject/" + project._id} style={{color: 'white'}}> <BsEye /> </Link>
+                <Link to={"/viewproject/" + project._id} style={{color: 'white'}}> <BsEye /> </Link>
                 { user.username === project.username && 
                   <>
-                    <Link to={"/BugSquish/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
+                    <Link to={"/editproject/" + id} style={{color:'gold'}}><BsPencil /></Link>
                     <a onClick={() => {deleteProject(id, user)}}><BsXCircle style={{cursor:'pointer',color:'red'}} /></a>
                   </>
                 }

@@ -98,7 +98,7 @@ const InviteUser = () => {
             console.log(data);
             setError(data);
             setAlert(true);
-            window.location.href = '/BugSquish/';
+            window.location.href = '/';
         })
         .catch((err) => console.log(err));
     }
@@ -185,7 +185,7 @@ const InviteUser = () => {
                     <br />
                     <Button
                     variant='primary'
-                    onClick={(e)=>window.location.href='/BugSquish/createproject'}>
+                    onClick={(e)=>window.location.href='/createproject'}>
                     Create your first Project
                     </Button>
                 </>

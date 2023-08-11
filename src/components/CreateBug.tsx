@@ -213,7 +213,7 @@ const CreateBug = () => {
             <br />
             <Button
               variant='primary'
-              onClick={(e)=>window.location.href='/BugSquish/createproject'}>
+              onClick={(e)=>window.location.href='/createproject'}>
               Create your first Project
             </Button>
           </>

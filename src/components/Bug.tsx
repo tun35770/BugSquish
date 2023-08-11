@@ -100,8 +100,8 @@ const Bug = ( {bug, deleteBug} ) => {
             textAlign:'right'}} >
 
             <a onClick={() => {deleteBug(bug["_id"], bug.project_id)}}> <BsXCircle style={{cursor: 'pointer', color:'red'}} /> </a>
-            <Link to={"/BugSquish/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
-            <Link to={"/BugSquish/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
+            <Link to={"/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
+            <Link to={"/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
          
           </div>
         </Card.Body>
