@@ -184,7 +184,7 @@ router.route('/sendinvite/:id').post((req: any, res: any) => {
            const projectName = project.title;
            const senderUsername = req.body.user.username;
            //link should bring user to a page in client that will immediately fetch adduser hook
-           const inviteLink = 'https://tun35770.github.io/BugSquish/acceptinvite/' + req.params.id;
+           const inviteLink = 'https://tun35770.github.io/BugSquish#/acceptinvite/' + req.params.id;
 
            sendInviteMail(receiverEmail, projectName, senderUsername, inviteLink)
            .then(() => res.json('Email sent!'))
