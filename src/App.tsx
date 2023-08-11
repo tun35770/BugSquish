@@ -99,7 +99,7 @@ function App() {
           { user ? 
             (
               <Routes>
-                <Route path="/" element={user ? <BugList /> : <Navigate to="/BugSquish/login"/>} />
+                <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
                 <Route path="/createbug" element={<CreateBug /> } />
                 <Route path="/edit/:id" element={<EditBug />} />
                 <Route path="/viewbug/:id" element={<ViewBug />} />
@@ -117,7 +117,7 @@ function App() {
             ) 
             : (
               <Routes>
-                <Route path="/" element={ <Navigate to="/BugSquish/login"/>} />
+                <Route path="/" element={ <Navigate to="/login"/>} />
                 <Route path="/signup" element={<Signup /> } />
                 <Route path="/login" element={<Login /> } />
                 <Route path="/acceptinvite/:id" element={<AcceptInvite />} />
