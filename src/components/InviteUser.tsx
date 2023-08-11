@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Button, Card, Form } from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
+import { useNavigate } from 'react-router-dom';
 
 const InviteUser = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const [project, setProject] = useState<any | undefined>(undefined);
     const [email, setEmail] = useState('');
@@ -98,7 +100,7 @@ const InviteUser = () => {
             console.log(data);
             setError(data);
             setAlert(true);
-            window.location.href = '/';
+            navigate('/');
         })
         .catch((err) => console.log(err));
     }
@@ -185,7 +187,7 @@ const InviteUser = () => {
                     <br />
                     <Button
                     variant='primary'
-                    onClick={(e)=>window.location.href='/createproject'}>
+                    onClick={(e)=>navigate('/createproject')}>
                     Create your first Project
                     </Button>
                 </>

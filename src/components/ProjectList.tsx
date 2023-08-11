@@ -4,6 +4,7 @@ import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 import DeleteProject from './DeleteProject';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectList = () => {
   class ProjectType {
@@ -24,6 +25,7 @@ const ProjectList = () => {
     }
   }
 
+  const navigate = useNavigate();
   const { user } = useAuthContext();
 
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -104,7 +106,7 @@ const ProjectList = () => {
             <br />
             <Button
               variant='primary'
-              onClick={(e)=>window.location.href='/createproject'}>
+              onClick={(e)=>navigate('/createproject')}>
               Create your first Project
             </Button>
           </>

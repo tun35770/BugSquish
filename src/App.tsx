@@ -2,10 +2,9 @@ import './App.css'
 import { Button, Nav, Navbar } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { HashRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom"
+import { HashRouter as Router, Route, Routes, Link, Navigate, useNavigate } from "react-router-dom"
 import { useLogout } from './hooks/useLogout'
 import { useAuthContext } from './hooks/useAuthContext'
-import { useHomeContext } from './hooks/useHomeContext'
 import BugList from './components/BugList'
 import CreateBug from './components/CreateBug'
 import EditBug from './components/EditBug'
@@ -20,7 +19,6 @@ import InviteUser from './components/InviteUser'
 import AcceptInvite from './components/AcceptInvite'
 
 function App() {
-  const home = useHomeContext();
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -52,7 +50,7 @@ function App() {
         <div className="App">
           <Navbar sticky="top" bg="dark" variant="dark" expand="lg" >
           
-            <Navbar.Brand className="mx-3 title" href="/" style={{color:'#fff'}}>
+            <Navbar.Brand className="mx-3 title" href="/BugSquish/" style={{color:'#fff'}}>
               <Bug style={{marginBottom:'4px'}} />
               BugSquish
             </Navbar.Brand>

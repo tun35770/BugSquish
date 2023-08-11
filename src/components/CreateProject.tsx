@@ -3,9 +3,11 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProject = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -57,7 +59,7 @@ const CreateProject = () => {
             //console.log(data);
             setAlert(true);
             setTimeout(() => {
-                window.location.href= "/projects";
+                navigate("/projects");
             }, 1000);
         })
         .catch((err) => console.log(err))

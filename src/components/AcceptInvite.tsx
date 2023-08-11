@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const AcceptInvite = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const { id } = useParams();
     const [error, setError] = useState<String | undefined>(undefined);
@@ -38,7 +39,7 @@ const AcceptInvite = () => {
         .then((data) => {console.log(data);
                         setSuccess(true);
                         setTimeout(() => {
-                            window.location.href= "/projects";
+                            navigate("/BugSquish/projects");
                         }, 3000)
                         
                         })
@@ -72,7 +73,7 @@ const AcceptInvite = () => {
                     
                 }}> 
                     <Button
-                        href = '/login'
+                        onClick={() => navigate('/login')}
                         variant='primary' >
                         Login
                     </Button>

@@ -4,9 +4,11 @@ import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 import { Alert, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CreateBug = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -213,7 +215,7 @@ const CreateBug = () => {
             <br />
             <Button
               variant='primary'
-              onClick={(e)=>window.location.href='/createproject'}>
+              onClick={(e)=>navigate('/createproject')}>
               Create your first Project
             </Button>
           </>

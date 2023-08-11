@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef} from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 import { Alert } from 'react-bootstrap';
 
 const EditProject = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const { id } = useParams();
     const [title, setTitle] = useState('');
@@ -75,7 +76,7 @@ const EditProject = () => {
             setAlert(true);
             setTimeout(() => {
                 if (user) window.history.go(-1);
-                else      window.location.href = "/";
+                else      navigate("/");
             }, 1000);
            
         })

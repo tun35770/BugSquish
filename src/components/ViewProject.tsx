@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import BugList from './BugList'
 
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -11,6 +11,7 @@ import { UserList } from './UserList';
 
 const ViewProject = () => {
 
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const { project_id } = useParams();
     const [projectOwner, setProjectOwner] = useState('');
@@ -49,13 +50,13 @@ const ViewProject = () => {
 
 
     function AddBug(){
-        window.location.href = "/createbug";
+        navigate("/createbug");
     }
 
     function GoBack(){
 
         if (user) window.history.go(-1);
-        else      window.location.href = "/";
+        else      navigate("/BugSquish");
         
     } 
 
