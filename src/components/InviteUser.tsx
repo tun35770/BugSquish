@@ -100,7 +100,10 @@ const InviteUser = () => {
             console.log(data);
             setError(data);
             setAlert(true);
-            navigate('/');
+            setTimeout(() => {
+               navigate('/'); 
+            }, 1000)
+            
         })
         .catch((err) => console.log(err));
     }

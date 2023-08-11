@@ -39,7 +39,7 @@ const AcceptInvite = () => {
         .then((data) => {console.log(data);
                         setSuccess(true);
                         setTimeout(() => {
-                            navigate("/BugSquish/projects");
+                            navigate("/projects");
                         }, 3000)
                         
                         })
