@@ -82,7 +82,9 @@ const ViewProject = () => {
                         { user.username === projectOwner && 
                             <div style={{display:'flex', gap:'1em', textAlign:'right'}} >
                                 <Link to={"/editproject/" + project_id} style={{color:'gold'}}><BsPencil /></Link>
-                                <a onClick={() => {DeleteProject(project_id as string, user)}}><BsXCircle style={{color:'red'}} /></a>
+                                <a onClick={() => {
+                                                DeleteProject(project_id as string, user);
+                                                navigate("/projects")}}><BsXCircle style={{color:'red', cursor:'pointer'}} /></a>
                             </div>
                         }
                     </Card.Body>
