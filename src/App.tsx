@@ -25,6 +25,7 @@ function App() {
 
   const handleClick = () => {
     logout();
+    window.location.href = '/';
   };  
 
   const parseJwt = (token:string) => {
