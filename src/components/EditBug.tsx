@@ -10,6 +10,7 @@ const EditBug = () => {
 
     const { user } = useAuthContext();
     const { id } = useParams();
+    const [bugUser, setBugUser] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
@@ -34,6 +35,7 @@ const EditBug = () => {
         .then((res) => res.json())
         .then((data) => {
         //console.log(data);
+        setBugUser(data.username);
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
@@ -59,7 +61,7 @@ const EditBug = () => {
         }
 
         const bug = {
-            user: user,
+            user: bugUser,
             title: title,
             description: description,
             project: project,

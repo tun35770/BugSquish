@@ -2,14 +2,18 @@ import { useState } from 'react'
 import { Card, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Bug = ( {bug, deleteBug} ) => {
 
+  const { user } = useAuthContext();
+  
   return (
     <ListGroupItem className='my-0 light-text blue-gradient' style=
       {{display: 'flex',
         flexDirection:'row',
         width:'100%',
+        minHeight: '100px',
         margin: '0',
         border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
       }}>
@@ -99,10 +103,21 @@ const Bug = ( {bug, deleteBug} ) => {
             padding: '0 0.5em', 
             textAlign:'right'}} >
 
-            <a onClick={() => {deleteBug(bug["_id"], bug.project_id)}}> <BsXCircle style={{cursor: 'pointer', color:'red'}} /> </a>
-            <Link to={"/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
-            <Link to={"/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
-         
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start'
+            }}>
+              {bug.username === user.username && 
+                <a onClick={() => {deleteBug(bug["_id"], bug.project_id)}}> <BsXCircle style={{cursor: 'pointer', color:'red'}} /> </a>
+              }
+              
+              <Link to={"/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
+
+              {bug.username === user.username && 
+                <Link to={"/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
+              }
+            </div>
           </div>
         </Card.Body>
       </Card>
