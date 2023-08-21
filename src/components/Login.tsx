@@ -30,6 +30,12 @@ const Login = () => {
         await login(username, password);
     }
 
+    async function onDemoLogin(e: React.FormEvent){
+        e.preventDefault();
+
+        await login('ryanmu1415', 'Password123456#');
+    }
+
 
     return (
     <Card className='blue-gradient' style=
@@ -68,17 +74,32 @@ const Login = () => {
 
         <br/>
         <Form.Group className='mb-3'>
-                <Form.Control
-                    disabled={isLoading}
-                    type="submit"
-                    value="Login"
-                    className="btn btn-primary"
-                    onClick={(e) => onLogin(e)}
-                    style={{maxWidth:'10em'}}>
-                </Form.Control>
+            <Form.Control
+                disabled={isLoading}
+                type="submit"
+                value="Login"
+                className="btn btn-primary"
+                onClick={(e) => onLogin(e)}
+                style={{maxWidth:'10em'}}>
+            </Form.Control>
 
-                {error && <div className="error">{error}</div>}
-            </Form.Group>
+            {error && <div className="error">{error}</div>}
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+            <Form.Control
+                disabled={isLoading}
+                type="submit"
+                value="Demo Login"
+                className="btn btn-primary"
+                onClick={(e) => onDemoLogin(e)}
+                style={{maxWidth:'10em'}}>
+            </Form.Control>
+
+            {error && <div className="error">{error}</div>}
+        </Form.Group>
+
+
         </Form>
 
     </Card>
