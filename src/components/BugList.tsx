@@ -215,7 +215,7 @@ const BugList = ( {project_id}: props ) => {
   return (
     <>
     {isLoaded && 
-      <div style={{
+      <div className='buglist' style={{
         width:'60%',
         minWidth:'500px',
         margin: '0 0 0 1em',
@@ -272,10 +272,10 @@ const BugList = ( {project_id}: props ) => {
                 <div style={{width:'13.33%', paddingRight:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('project')}>
                   <h5 id="project_title"> Project </h5>
                 </div>
-                <div style={{width:'13.33%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}>
-                  <h5 className="mx-3" id="username"> Username </h5>
+                <div style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}>
+                  <h5 id="username"> Username </h5>
                 </div>
-                <div style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}>
+                <div style={{width:'13.33%', paddingLeft: '3em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}>
                   <h5 id="date"> Date </h5>
                 </div>
                 <div style={{userSelect:'none'}}>

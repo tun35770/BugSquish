@@ -26,3 +26,20 @@
   background-image: linear-gradient(#2962FF , #6088f4);
   color: #fff;
 }
+
+@media screen and (max-width: 994px){
+  h5 {
+    font-size: 1em !important;
+    margin: 0 auto !important;
+  }
+
+  .buglist {
+    width: 90% !important;
+    margin: 0 auto !important;
+  }
+
+  .userlist {
+    width: 50% !important;
+    margin: 0 auto !important;
+  }
+}

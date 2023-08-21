@@ -91,7 +91,7 @@ export const UserList = ( {project_id} ) => {
     return (
         <>
         {isLoaded && 
-            <div style={{
+            <div className='userlist' style={{
                 display:'flex',
                 flexDirection:'column',
                 padding:'0',
