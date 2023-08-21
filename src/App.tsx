@@ -25,7 +25,7 @@ function App() {
 
   const handleClick = () => {
     logout();
-    window.location.href = '/';
+    window.location.href = '/BugSquish';
   };  
 
   const parseJwt = (token:string) => {
