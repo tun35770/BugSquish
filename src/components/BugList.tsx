@@ -218,7 +218,7 @@ const BugList = ( {project_id}: props ) => {
       <div className='buglist' style={{
         width:'60%',
         minWidth:'500px',
-        margin: '0 0 0 1em',
+        margin: '0 auto',
       }}>
         { (bugsLength > 0) && 
           <>
