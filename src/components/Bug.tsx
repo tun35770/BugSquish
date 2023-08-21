@@ -15,7 +15,7 @@ const Bug = ( {bug, deleteBug} ) => {
         width:'100%',
         minHeight: '100px',
         margin: '0',
-        border: (bug.completed ? '3px solid #60ee90' : '1px solid #fff')
+        border: '1px solid #fff'
       }}>
 
       <Card className='light-text' key={bug["_id"]} style=
@@ -39,7 +39,15 @@ const Bug = ( {bug, deleteBug} ) => {
             marginBottom: '0',
             paddingRight: '0.5em',
             borderRight: '1px solid white'}}>
-            {bug.title} {bug.completed && <p style={{color:'#90ee90'}}>(Completed)</p> }
+            <div style={{
+              display:'flex',
+              flexDirection:'column',
+              justifyContent:'space-between',
+              height: '100%'
+            }}>
+              {bug.title} 
+              {bug.completed && <p style={{color:'#90ee90', fontSize:'1.1em', margin:'0'}}>(Completed)</p> }
+            </div>
           </Card.Title>
 
           <Card.Body style=
