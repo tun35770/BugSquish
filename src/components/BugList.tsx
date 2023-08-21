@@ -273,7 +273,7 @@ const BugList = ( {project_id}: props ) => {
                   <h5 id="project_title"> Project </h5>
                 </div>
                 <div style={{width:'13.33%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('username')}>
-                  <h5 id="username"> Username </h5>
+                  <h5 className="mx-3" id="username"> Username </h5>
                 </div>
                 <div style={{width:'13.33%', paddingLeft:'1.5em', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('date')}>
                   <h5 id="date"> Date </h5>
