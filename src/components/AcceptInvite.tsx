@@ -80,7 +80,7 @@ const AcceptInvite = () => {
                     </div>
 
                     <button className="btn btn-bug-primary silver-gradient"
-                        onClick={(e) => window.location.pathname='signup'}>
+                        onClick={(e) => navigate('/signup')}>
                         Sign up
                     </button>
 
