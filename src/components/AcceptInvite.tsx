@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 const AcceptInvite = () => {
 
@@ -46,22 +47,32 @@ const AcceptInvite = () => {
     }, [user])
 
   return (
-    <div>
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: '70%',
+        margin: '0 auto',
+        minHeight: '80vh'
+    }}>
         {success && 
-            <div className='success' style={{
+            <div className='success blue-gradient' style={{
                 display: 'flex', 
                 flexDirection: 'column',
-                justifyContent: 'center'}}> 
+                justifyContent: 'center',
+                height: '40vh'
+            }}> 
                 <h2 style={{margin: '1em auto'}}> Successfully added to project! </h2>
                 <h5> Redirecting... </h5>
             </div>}
         {error && 
-            <div style={{
+            <div className='blue-gradient' style={{
                 display: 'flex', 
                 flexDirection: 'column',
-                justifyContent: 'center'}}>
-
-                <h2 style={{margin: '1em auto'}}> You've been invited to a project!</h2>
+                justifyContent: 'center',
+                height: '40vh'
+            }}>
+                <h2 className='mb-3' > You've been invited to a project!</h2>
                 <div className="error" style={{
                     display: 'flex',
                     flexDirection: 'row',
