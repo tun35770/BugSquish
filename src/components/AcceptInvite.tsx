@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 
 const AcceptInvite = () => {
 
@@ -72,20 +71,18 @@ const AcceptInvite = () => {
                     justifyContent: 'space-evenly'
                     
                 }}> 
-                    <Button
-                        onClick={() => navigate('/login')}
-                        variant='primary' >
+                    <button className="btn btn-bug-primary silver-gradient"
+                        onClick={() => navigate('/login')} >
                         Login
-                    </Button>
+                    </button>
                     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
                         <h5> or </h5>
                     </div>
 
-                    <Button
-                        variant='primary'
+                    <button className="btn btn-bug-primary silver-gradient"
                         onClick={(e) => window.location.pathname='signup'}>
                         Sign up
-                    </Button>
+                    </button>
 
                 </div>
                     

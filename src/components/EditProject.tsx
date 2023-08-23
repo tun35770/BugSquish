@@ -131,7 +131,7 @@ const EditProject = () => {
                         <Form.Control
                             type="submit"
                             value="Update Project"
-                            className="btn btn-primary"
+                            className="btn btn-bug-primary silver-gradient"
                             onClick={onSubmit}
                             style={{maxWidth:'10em'}}>
                         </Form.Control>

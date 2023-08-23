@@ -140,7 +140,7 @@ const EditBug = () => {
                             <Form.Control
                                 type="submit"
                                 value="Update Bug Ticket"
-                                className="btn btn-primary"
+                                className="btn btn-bug-primary silver-gradient"
                                 onSubmit={onSubmit}
                                 style={{maxWidth:'11em'}}>
                             </Form.Control>

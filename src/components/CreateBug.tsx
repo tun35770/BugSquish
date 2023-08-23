@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const CreateBug = () => {
@@ -193,7 +193,7 @@ const CreateBug = () => {
                         <Form.Control
                             type="submit"
                             value="Create Bug Ticket"
-                            className="btn btn-primary"
+                            className="btn btn-bug-primary silver-gradient"
                             onSubmit={onSubmit}
                             style={{maxWidth:'10em'}}>
                         </Form.Control>
@@ -213,11 +213,10 @@ const CreateBug = () => {
             }}> You have no projects</h1>
 
             <br />
-            <Button
-              variant='primary'
+            <button className="btn btn-bug-primary silver-gradient"
               onClick={(e)=>navigate('/createproject')}>
               Create your first Project
-            </Button>
+            </button>
           </>
         }
     </>

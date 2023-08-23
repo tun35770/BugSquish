@@ -87,7 +87,7 @@ const Signup = () => {
                     disabled={isLoading}
                     type="submit"
                     value="Signup"
-                    className="btn btn-primary"
+                    className="btn btn-bug-primary silver-gradient"
                     onSubmit={(e) => onSubmit(e)}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>

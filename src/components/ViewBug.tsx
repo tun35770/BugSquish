@@ -117,7 +117,7 @@ const ViewBug = () => {
                             <Form.Control
                                 type="submit"
                                 value="Mark as Complete"
-                                className="btn btn-primary"
+                                className="btn btn-bug-primary silver-gradient"
                                 onSubmit={onSubmit}
                                 style={{maxWidth:'10em'}}>
                             </Form.Control>
@@ -127,7 +127,7 @@ const ViewBug = () => {
                         <Form.Control
                             type="button"
                             value="Back"
-                            className="btn btn-primary"
+                            className="btn btn-bug-primary silver-gradient"
                             onClick={() => window.history.go(-1)}
                             style={{maxWidth:'10em'}}>
                         </Form.Control>

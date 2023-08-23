@@ -78,12 +78,10 @@ const Login = () => {
                 disabled={isLoading}
                 type="submit"
                 value="Login"
-                className="btn btn-primary"
+                className="btn btn-bug-primary silver-gradient"
                 onClick={(e) => onLogin(e)}
                 style={{maxWidth:'10em'}}>
             </Form.Control>
-
-            {error && <div className="error">{error}</div>}
         </Form.Group>
 
         <Form.Group className='mb-3'>
@@ -91,11 +89,10 @@ const Login = () => {
                 disabled={isLoading}
                 type="submit"
                 value="Demo Login"
-                className="btn btn-primary"
+                className="btn btn-bug-primary silver-gradient" 
                 onClick={(e) => onDemoLogin(e)}
                 style={{maxWidth:'10em'}}>
             </Form.Control>
-
             {error && <div className="error">{error}</div>}
         </Form.Group>
 

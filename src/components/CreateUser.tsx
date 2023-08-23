@@ -61,7 +61,7 @@ const CreateUser = () => {
                 <Form.Control
                     type="submit"
                     value="Create User"
-                    className="btn btn-primary"
+                    className="btn btn-bug-primary silver-gradient"
                     onSubmit={onSubmit}
                     style={{maxWidth:'10em'}}>
                 </Form.Control>

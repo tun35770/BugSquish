@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import Project from './Project';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
@@ -104,11 +104,10 @@ const ProjectList = () => {
             }}> You have no projects</h1>
 
             <br />
-            <Button
-              variant='primary'
+            <button className="btn btn-bug-primary silver-gradient"
               onClick={(e)=>navigate('/createproject')}>
               Create your first Project
-            </Button>
+            </button>
           </>
         }
       </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Form } from 'react-bootstrap'
+import { Card, Form } from 'react-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import BugList from './BugList'
 
@@ -66,7 +66,7 @@ const ViewProject = () => {
         <>
             {error === undefined && 
             <>
-                <Card className='light-text blue-gradient' style=
+                <Card className='view-project light-text blue-gradient' style=
                     {{maxWidth: '75%', 
                     margin: '3rem auto', 
                     padding:'1rem',
@@ -100,10 +100,10 @@ const ViewProject = () => {
             
                     <Form>
                         <Form.Group>
-                            <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={AddBug}>Add Bug</Button>
+                            <button className="btn btn-bug-primary silver-gradient mb-3" style={{width:'10em'}} onClick={AddBug}>Add Bug</button>
                         </Form.Group>
                         <Form.Group>
-                            <Button className='mb-3' style={{width:'10em'}} variant="primary" onClick={GoBack}>Back</Button>
+                            <button className="btn btn-bug-primary silver-gradient mb-3" style={{width:'10em'}} onClick={GoBack}>Back</button>
                         </Form.Group> 
                     </Form>
                 </Card>

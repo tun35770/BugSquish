@@ -1,5 +1,5 @@
 import './App.css'
-import { Button, Nav, Navbar } from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 import { Bug } from 'react-bootstrap-icons' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { HashRouter as Router, Route, Routes, Link, Navigate, useNavigate } from "react-router-dom"
@@ -17,6 +17,7 @@ import ProjectList from './components/ProjectList'
 import EditProject from './components/EditProject'
 import InviteUser from './components/InviteUser'
 import AcceptInvite from './components/AcceptInvite'
+import Home from './components/Home'
 
 function App() {
   const { logout } = useLogout();
@@ -83,12 +84,12 @@ function App() {
                     <Link to="/signup" className="nav-link white-text">Sign up</Link>
                   </>)}
                 {user && (
-                  <div>
-                    <span className='mt-2' style={{color:'#fff'}}>{user.username}</span>
-                    <Button className="btn btn-primary" 
+                  <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <span className='mt-2 me-2' style={{color:'#fff'}}>{user.username}</span>
+                    <button className="btn btn-bug-primary silver-gradient"
                             onClick={handleClick} 
                             style={{maxWidth:'10em', margin:'0 auto'}}
-                            >Log out</Button>
+                            >Log out</button>
                 </div>)}
               </Nav>
             </Navbar.Collapse>
@@ -116,7 +117,7 @@ function App() {
             ) 
             : (
               <Routes>
-                <Route path="/" element={ <Navigate to="/login"/>} />
+                <Route path="/" element={ <Home /> } />
                 <Route path="/signup" element={<Signup /> } />
                 <Route path="/login" element={<Login /> } />
                 <Route path="/acceptinvite/:id" element={<AcceptInvite />} />

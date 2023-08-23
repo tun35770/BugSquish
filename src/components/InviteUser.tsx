@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Card, Form } from 'react-bootstrap';
+import { Alert, Card, Form } from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
@@ -168,7 +168,7 @@ const InviteUser = () => {
                             <Form.Control
                                 type="submit"
                                 value="Send Invite"
-                                className="btn btn-primary"
+                                className="btn btn-bug-primary silver-gradient"
                                 onSubmit={onSubmit}
                                 style={{maxWidth:'10em'}}>
                             </Form.Control>
@@ -188,11 +188,10 @@ const InviteUser = () => {
                     }}> You have no projects</h1>
 
                     <br />
-                    <Button
-                    variant='primary'
+                    <button className="btn btn-bug-primary silver-gradient"
                     onClick={(e)=>navigate('/createproject')}>
                     Create your first Project
-                    </Button>
+                    </button>
                 </>
             }
         </>
