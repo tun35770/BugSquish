@@ -55,7 +55,7 @@ const ViewProject = () => {
 
     function GoBack(){
 
-        if (user) window.history.go(-1);
+        if (user) navigate("/projects");
         else      navigate("/BugSquish");
         
     } 
