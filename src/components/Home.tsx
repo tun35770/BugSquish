@@ -36,7 +36,7 @@ const Home = () => {
                     <div style={{
                         display: 'flex'
                     }}>
-                        <Bug size='3.5em' style={{alignSelf: 'center'}} />
+                        <Bug className='mt-2' size='3.5em' />
                         <Card.Title className='home-title'> BugSquish </Card.Title>
                     </div>
                 </div>
