@@ -42,12 +42,12 @@ const Home = () => {
                 </div>
 
                 <div className='home-description-container'>
-                    <h5> Manage all of your bug tickets in one place </h5>
+                    <h4> Manage all of your bug tickets in one place </h4>
                     <br />
-                    <h5> Collaborate with fellow developers to stay on track </h5>
+                    <h4> Collaborate with fellow developers to stay on track </h4>
                     <br />
                     <br />
-                    <h5> Start by logging in or signing up, then create your first project </h5>
+                    <h4> Start by logging in or signing up, then create your first project </h4>
                 </div>
                 
             </Card.Body>
