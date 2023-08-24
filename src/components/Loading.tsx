@@ -35,7 +35,7 @@ const Loading = () => {
     }
 
     return (
-    <Card style={{
+    <div style={{
         position: 'absolute',
         top:'50%',
         left: '50%',
@@ -44,22 +44,22 @@ const Loading = () => {
         flexDirection:'column', 
         width: '10em',
         margin: '0 auto',
-        backgroundColor: '#F9FAFB',
+        backgroundColor: 'rbga(0,0,0,0)',
         border: 'none'}}>
 
-        <Card style={{
+        <div style={{
             display:'flex', 
             flexDirection:'row', 
             justifyContent: 'space-evenly',
             width: '100%',
             margin: '0 auto',
-            backgroundColor: '#F9FAFB',
+            backgroundColor: 'rbga(0,0,0,0)',
             border: 'none'}}>
 
             { circles }
 
-        </Card>
-    </Card>
+        </div>
+    </div>
     )
 }
 
