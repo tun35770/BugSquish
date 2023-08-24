@@ -102,7 +102,7 @@ router.route('/:id').delete((req: any, res: any) => {
     console.log("Begin")
     Project.findByIdAndDelete(project_id)
         .then(() => {
-
+            console.log("LOL")
             fetch('https://bugsquish.org/bugs/deleteall/' + project_id, {
                     method: 'DELETE',
                     headers: {
