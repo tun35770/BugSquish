@@ -123,7 +123,7 @@ router.route('/deleteall/:id').delete((req: any, res: any) => {
     console.log("Bug");
     const project_id = req.params.id;
 
-    Bug.remove( {project_id} )
+    Bug.deleteMany( {project_id} )
         .then(() => {
             console.log("Bug removed")
             res.json("Project deleted.");
