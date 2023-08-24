@@ -120,10 +120,11 @@ router.route('/:id').delete((req: any, res: any) => {
 
 router.route('/deleteall/:id').delete((req: any, res: any) => {
 
-    const project_id = req.params.id;
+    const projectId = req.params.id;
 
-    Bug.remove( {project_id} ).sort({createdAt: -1})
-        .then((bugs: any) => {
+    Bug.remove( { $expr: { $eq: [ "$project_id", "$$targetProject" ] } },
+                { let : { targetProject: projectId } } )
+        .then(() => {
             res.json("Project deleted.");
         })
         .catch((err: any) => res.status(400).json("Error: " + err));
