@@ -99,26 +99,26 @@ router.route('/:id').delete((req: any, res: any) => {
 
     const user = req.body.user;
     const project_id = req.params.id;
-    console.log("Begin")
+
     Project.findByIdAndDelete(project_id)
         .then(() => {
-            console.log("LOL")
+
             fetch('https://bugsquish.org/bugs/deleteall/' + project_id, {
-                    method: 'DELETE',
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        'Authorization': `Bearer ${user.token}`
-                    }
-                })
-                .then(() => {
-                    console.log("Success!")
-                    res.json('Project deleted.');
-                })
-                .catch((err:any) => {
-                    console.log(err)
-                    res.status(400).json('Error: ' + err)
-                })
+                method: 'DELETE',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            .then(() => {
+                console.log("Success!")
+                res.json('Project deleted.');
+            })
+            .catch((err:any) => {
+                console.log(err)
+                res.status(400).json('Error: ' + err)
+            })
                     
             
         })
