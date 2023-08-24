@@ -118,6 +118,19 @@ router.route('/:id').delete((req: any, res: any) => {
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/deleteall/:id').delete((req: any, res: any) => {
+
+    const project_id = req.params.id;
+
+    Bug.find( {project_id} ).sort({createdAt: -1})
+        .then((bugs: any) => {
+            bugs.forEach((bugToDelete:any) => {
+                Bug.findByIdAndDelete(bugToDelete["_id"]);
+            })
+        })
+        .catch((err: any) => res.status(400).json("Error: " + err));
+});
+
 router.route('/update/:id').post((req: any, res: any) => {
     const user = req.body.user;
     
