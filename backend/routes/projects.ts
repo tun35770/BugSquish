@@ -114,7 +114,11 @@ router.route('/:id').delete((req: any, res: any) => {
                     console.log("Success!")
                     res.json('Project deleted.');
                 })
-                .catch((err:any) => res.status(400).json('Error: ' + err));
+                .catch((err:any) => {
+                    console.log(err)
+                    res.status(400).json('Error: ' + err)
+                })
+                    
             
         })
         .catch((err: any) => res.status(400).json('Error: ' + err));
