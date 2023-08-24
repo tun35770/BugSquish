@@ -46,39 +46,7 @@ const ViewBug = () => {
             .catch((err) => console.log(err))
     }, [user])
 
-    function onSubmit(e: React.FormEvent){
-        e.preventDefault();
-
-        if (!user){
-            return;
-        }
-
-        const bug = {
-            user: user,
-            title: title,
-            description: description,
-            date: date,
-
-            /** ONLY VALUE BEING CHANGED */
-            status: "closed",
-            
-        };
-
-        fetch('https://bugsquish.org/bugs/update/' + id, {
-            method: 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify(bug)
-        })
-        .then((res) => res.json())
-        .then((data) => window.history.go(-1))
-        .catch((err) => console.log(err))
-    }
-
-  return (
+    return (
     <>
         {isLoaded && 
             <Card className='blue-gradient' style=
@@ -103,36 +71,24 @@ const ViewBug = () => {
             </Card.Text>
 
             <Card.Text className="mb-3 leftAlign">
-                <b>Status: </b> {status}
-            </Card.Text>
-
-            <Card.Text className="mb-3 leftAlign">
             <b>Date: </b> {new Date(date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
             </Card.Text>
 
-            
-                <Form onSubmit={onSubmit}>
-                    {(status !== 'closed') && 
-                        <Form.Group className='mb-3'>
-                            <Form.Control
-                                type="submit"
-                                value="Mark as Complete"
-                                className="btn btn-bug-primary silver-gradient"
-                                onSubmit={onSubmit}
-                                style={{maxWidth:'10em'}}>
-                            </Form.Control>
-                        </Form.Group>
-                    }
-                    <Form.Group className='mb-3'>
-                        <Form.Control
-                            type="button"
-                            value="Back"
-                            className="btn btn-bug-primary silver-gradient"
-                            onClick={() => window.history.go(-1)}
-                            style={{maxWidth:'10em'}}>
-                        </Form.Control>
-                    </Form.Group>
-                </Form>
+            <Card.Text className="mb-3 leftAlign">
+                <b>Status: </b> {status}
+            </Card.Text>
+
+            <Form>
+                <Form.Group className='mb-3'>
+                    <Form.Control
+                        type="button"
+                        value="Back"
+                        className="btn btn-bug-primary silver-gradient"
+                        onClick={() => window.history.go(-1)}
+                        style={{maxWidth:'10em'}}>
+                    </Form.Control>
+                </Form.Group>
+            </Form>
             
         </Card>
         }

@@ -10,11 +10,11 @@ const EditBug = () => {
 
     const { user } = useAuthContext();
     const { id } = useParams();
-    const [bugUser, setBugUser] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [status, setStatus] = useState('');
+    const [date, setDate] = useState();
     const [alert, setAlert] = useState(false);
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -35,11 +35,11 @@ const EditBug = () => {
         .then((res) => res.json())
         .then((data) => {
         //console.log(data);
-        setBugUser(data.username);
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
         setStatus(data.status);
+        setDate(data.date);
         setIsLoaded(true);
         })
         .catch((err) => console.log(err))
@@ -53,6 +53,17 @@ const EditBug = () => {
         setDescription(e.currentTarget.value);
     }
 
+    function onChangeStatus(e: React.ChangeEvent<HTMLSelectElement>){
+        e.preventDefault();
+
+        if (!user){
+            return;
+        }
+
+        setStatus(e.target.value);
+    }
+
+
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
@@ -61,7 +72,7 @@ const EditBug = () => {
         }
 
         const bug = {
-            user: bugUser,
+            user: user,
             title: title,
             description: description,
             project: project,
@@ -133,6 +144,33 @@ const EditBug = () => {
                                 value={description}
                                 onChange={onChangeDescription}>
                             </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minWidth: '130px',
+                        width: '10%',
+                        height: '2em'
+                        }}>
+                        <Form.Label className="mt-1"> Status: </Form.Label>
+                            <select
+                                required
+                                className="form-control ps-3 py-0"
+                                value={status}
+                                onChange={onChangeStatus}>
+                                
+                                <option value={"open"}>
+                                    Open
+                                </option>
+                                <option value={"in progress"}>
+                                    In Progress
+                                </option>
+                                <option value={"closed"}>
+                                    Closed
+                                </option>
+
+                            </select>
                         </Form.Group>
 
                         <br/>
