@@ -122,11 +122,9 @@ router.route('/deleteall/:id').delete((req: any, res: any) => {
 
     const project_id = req.params.id;
 
-    Bug.find( {project_id} ).sort({createdAt: -1})
+    Bug.remove( {project_id} ).sort({createdAt: -1})
         .then((bugs: any) => {
-            bugs.forEach((bugToDelete:any) => {
-                Bug.findByIdAndDelete(bugToDelete["_id"]);
-            })
+            res.json("Project deleted.");
         })
         .catch((err: any) => res.status(400).json("Error: " + err));
 });
