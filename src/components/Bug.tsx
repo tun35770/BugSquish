@@ -11,8 +11,8 @@ const Bug = ( {bug, deleteBug} ) => {
   const getStatusColor = () => {
     switch (bug.status) {
       case "open": return '#90ee90';
-      case "closed": return '#ee9090';
-      case "in progress": return '#eeee90'
+      case "closed": return '#ff6090';
+      case "in progress": return 'gold'
     }
   }
 
