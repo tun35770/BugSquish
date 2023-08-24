@@ -111,6 +111,7 @@ router.route('/:id').delete((req: any, res: any) => {
                     }
                 })
                 .then(() => {
+                    console.log("Success!")
                     res.json('Project deleted.');
                 })
                 .catch((err:any) => res.status(400).json('Error: ' + err));
