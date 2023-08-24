@@ -99,6 +99,7 @@ router.route('/:id').delete((req: any, res: any) => {
 
     const user = req.body.user;
     const project_id = req.params.id;
+    console.log("Begin")
     Project.findByIdAndDelete(project_id)
         .then(() => {
 
