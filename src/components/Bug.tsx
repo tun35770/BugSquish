@@ -7,7 +7,15 @@ import { useAuthContext } from '../hooks/useAuthContext'
 const Bug = ( {bug, deleteBug} ) => {
 
   const { user } = useAuthContext();
-  
+
+  const getStatusColor = () => {
+    switch (bug.status) {
+      case "open": return '#90ee90';
+      case "closed": return '#ee9090';
+      case "in progress": return '#eeee90'
+    }
+  }
+
   return (
     <ListGroupItem className='my-0 light-text blue-gradient' style=
       {{display: 'flex',
@@ -46,7 +54,7 @@ const Bug = ( {bug, deleteBug} ) => {
               height: '100%'
             }}>
               {bug.title} 
-              {bug.completed && <p style={{color:'#90ee90', fontSize:'1.1em', margin:'0'}}>(Completed)</p> }
+              <p style={{color:getStatusColor(), fontSize:'1.1em', margin:'0'}}> {bug.status} </p>
             </div>
           </Card.Title>
 

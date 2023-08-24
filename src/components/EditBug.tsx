@@ -14,7 +14,7 @@ const EditBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
-    const [completed, setCompleted] = useState(false);
+    const [status, setStatus] = useState('');
     const [alert, setAlert] = useState(false);
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -39,7 +39,7 @@ const EditBug = () => {
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
-        setCompleted(data.completed);
+        setStatus(data.status);
         setIsLoaded(true);
         })
         .catch((err) => console.log(err))
@@ -66,7 +66,7 @@ const EditBug = () => {
             description: description,
             project: project,
             date: new Date(),
-            completed: completed,
+            status: status,
         };
 
         fetch('https://bugsquish.org/bugs/update/' + id, {

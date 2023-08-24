@@ -49,7 +49,7 @@ router.route('/add').post((req: any, res: any) => {
     const project = req.body.project;
     const project_id = req.body.project_id;
     const date = Date.parse(req.body.date);
-    const completed = req.body.completed || false;
+    const status = req.body.status || "open";
 
     const newBug = new Bug({
         username,
@@ -59,7 +59,7 @@ router.route('/add').post((req: any, res: any) => {
         project,
         project_id,
         date,
-        completed,
+        status,
     });
 
     newBug.save()
@@ -127,7 +127,7 @@ router.route('/update/:id').post((req: any, res: any) => {
             bug.title = req.body.title;
             bug.description = req.body.description;
             bug.date = Date.parse(req.body.date);
-            bug.completed = req.body.completed ?? false;
+            bug.status = req.body.status ?? false;
 
             bug.save()
                 .then(() => {

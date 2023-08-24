@@ -13,7 +13,7 @@ const ViewBug = () => {
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [date, setDate] = useState('');
-    const [completed, setCompleted] = useState('');
+    const [status, setStatus] = useState('');
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -39,7 +39,7 @@ const ViewBug = () => {
                 setTitle(data.title);
                 setProject(data.project);
                 setDate(data.date);
-                setCompleted(data.completed);
+                setStatus(data.status);
 
                 setIsLoaded(true);  
             })
@@ -60,7 +60,7 @@ const ViewBug = () => {
             date: date,
 
             /** ONLY VALUE BEING CHANGED */
-            completed: true,
+            status: "closed",
             
         };
 
@@ -95,15 +95,15 @@ const ViewBug = () => {
             <br/>
 
             <Card.Text className="mb-3 leftAlign">
-            <b>Project: </b>{project}
+            <b>Project: </b> {project}
             </Card.Text>
 
             <Card.Text className="mb-3 leftAlign">
-                <b>Submitted by: </b>{username}
+                <b>Submitted by: </b> {username}
             </Card.Text>
 
             <Card.Text className="mb-3 leftAlign">
-                {completed ? 'This bug has been completed' : 'This bug has not been completed'}
+                <b>Status: </b> {status}
             </Card.Text>
 
             <Card.Text className="mb-3 leftAlign">
@@ -112,7 +112,7 @@ const ViewBug = () => {
 
             
                 <Form onSubmit={onSubmit}>
-                    {!completed && 
+                    {(status !== 'closed') && 
                         <Form.Group className='mb-3'>
                             <Form.Control
                                 type="submit"

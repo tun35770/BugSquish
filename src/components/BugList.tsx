@@ -18,9 +18,9 @@ const BugList = ( {project_id}: props ) => {
     project: string;
     project_id: string;
     date: Date;
-    completed: boolean;
+    status: String;
 
-    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, completed = false){
+    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'open'){
         this._id = id;
         this.username = username;
         this.title = title;
@@ -28,7 +28,7 @@ const BugList = ( {project_id}: props ) => {
         this.project = project;
         this.project_id = project_id;
         this.date = date;
-        this.completed = completed;
+        this.status = status;
     }
   }
 
@@ -42,7 +42,7 @@ const BugList = ( {project_id}: props ) => {
   const [sortAscending, setSortAscending] = useState(true);
   const sortables = ['title', 'project', 'username', 'date'];
 
-  const [hideCompleted, setHideCompleted] = useState(false);
+  const [hideClosed, setHideClosed] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   /*
     TODO: Implement localStorage for bugs.
@@ -141,12 +141,12 @@ const BugList = ( {project_id}: props ) => {
     //if bugs is updated, bugsDisplayed may need to reflect change(s)
     setBugsDisplayed([...bugs]);
     //then filter only non-compelted bugs if required
-    if(hideCompleted){
+    if(hideClosed){
       let newBugsDisplayed = [...bugs];
-      newBugsDisplayed = newBugsDisplayed.filter((thisBug) => !thisBug.completed)
+      newBugsDisplayed = newBugsDisplayed.filter((thisBug) => thisBug.status !== 'closed')
       setBugsDisplayed(newBugsDisplayed);
     }
-  }, [bugs, hideCompleted])
+  }, [bugs, hideClosed])
 
   function deleteBug(id:string, bug_project_id:string){
 
@@ -208,8 +208,8 @@ const BugList = ( {project_id}: props ) => {
     setSortBy(attr);
   }
 
-  function toggleHideCompleted() {
-    setHideCompleted(!hideCompleted);
+  function toggleHideClosed() {
+    setHideClosed(!hideClosed);
   }
 
   return (
@@ -240,16 +240,16 @@ const BugList = ( {project_id}: props ) => {
                 justifyContent: 'flex-end',
                 
                 fontSize: '1em'
-              }} onClick={toggleHideCompleted}> 
+              }} onClick={toggleHideClosed}> 
                 <div style={{
                   cursor: 'pointer',
                   margin: '3.25em 0.25em 0 auto', 
                   width: '1em', 
                   height: '1em',
                   border: '1px solid black'}} >  
-                  { hideCompleted && <BsCheckLg style={{display:'block',margin:'auto'}} />}
+                  { hideClosed && <BsCheckLg style={{display:'block',margin:'auto'}} />}
                 </div>
-                <p style={{margin: '3em 0 0 auto'}}> Hide completed </p>
+                <p style={{margin: '3em 0 0 auto'}}> Hide closed tickets </p>
               </div>
 
             </div>
