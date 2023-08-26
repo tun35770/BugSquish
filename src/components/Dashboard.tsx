@@ -95,7 +95,7 @@ const Dashboard = () => {
         setStatusData({
             labels: ["Open", "In Progress", "Closed"],
             datasets: [{
-                label: "Tickets Status",
+                label: "Tickets",
                 data: counts,
                 backgroundColor: [
                     '#90ee90',
