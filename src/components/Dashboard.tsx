@@ -36,7 +36,7 @@ const Dashboard = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const [statusData, setStatusData] = useState({
-        labels: ["open", "in progress", "closed"],
+        labels: ["Open", "In Progress", "Closed"],
         datasets: [{
             label: "Tickets Status",
             data: [0,0,0],
@@ -93,7 +93,7 @@ const Dashboard = () => {
 
         const counts = getStatusCounts();
         setStatusData({
-            labels: ["open", "in progress", "closed"],
+            labels: ["Open", "In Progress", "Closed"],
             datasets: [{
                 label: "Tickets Status",
                 data: counts,
@@ -112,11 +112,11 @@ const Dashboard = () => {
         const counts = [0,0,0] //open, in progress, closed
         for(let i = 0; i < bugsLength; i++){
             switch(bugs[i].status){
-                case "open": counts[0]++;
+                case "Open": counts[0]++;
                     break;
-                case "in progress": counts[1]++;
+                case "In progress": counts[1]++;
                     break;
-                case "closed": counts[2]++;
+                case "Closed": counts[2]++;
                     break;
                 default: break;
             }
