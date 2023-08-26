@@ -30,6 +30,13 @@ button:hover, .btn-bug-primary:hover {
   transition: all 0.25s;
 }
 
+.buglist-select-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5em;
+  padding-bottom: 2em;
+}
+
 .error {
   margin-top: 1em;
 }

@@ -159,59 +159,63 @@ const EditBug = () => {
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minWidth: '130px',
-                        width: '10%',
-                        height: '2em'
-                        }}>
-                        <Form.Label className="mt-1"> Status: </Form.Label>
-                            <select
-                                required
-                                className="form-control ps-3 py-0"
-                                value={status}
-                                onChange={onChangeStatus}>
-                                
-                                <option value={"Open"}>
-                                    Open
-                                </option>
-                                <option value={"In Progress"}>
-                                    In Progress
-                                </option>
-                                <option value={"Closed"}>
-                                    Closed
-                                </option>
+                        <div className="buglist-select-container">
+                            <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            minWidth: '130px',
+                            width: '10%',
+                            height: '2em'
+                            }}>
 
-                            </select>
-                        </Form.Group>
+                            
+                            <Form.Label className="mt-1"> Status: </Form.Label>
+                                <select
+                                    required
+                                    className="form-control ps-3 py-0"
+                                    value={status}
+                                    onChange={onChangeStatus}>
+                                    
+                                    <option value={"Open"}>
+                                        Open
+                                    </option>
+                                    <option value={"In Progress"}>
+                                        In Progress
+                                    </option>
+                                    <option value={"Closed"}>
+                                        Closed
+                                    </option>
 
-                        <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minWidth: '130px',
-                        width: '10%',
-                        height: '2em'
-                        }}>
-                        <Form.Label className="mt-1"> Priority: </Form.Label>
-                            <select
-                                required
-                                className="form-control ps-3 py-0"
-                                value={priority}
-                                onChange={onChangePriority}>
-                                
-                                <option value={"Low"}>
-                                    Low
-                                </option>
-                                <option value={"Medium"}>
-                                    Medium
-                                </option>
-                                <option value={"High"}>
-                                    High
-                                </option>
+                                </select>
+                            </Form.Group>
 
-                            </select>
-                        </Form.Group>
+                            <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            minWidth: '130px',
+                            width: '10%',
+                            height: '2em'
+                            }}>
+                            <Form.Label className="mt-1"> Priority: </Form.Label>
+                                <select
+                                    required
+                                    className="form-control ps-3 py-0"
+                                    value={priority}
+                                    onChange={onChangePriority}>
+                                    
+                                    <option value={"Low"}>
+                                        Low
+                                    </option>
+                                    <option value={"Medium"}>
+                                        Medium
+                                    </option>
+                                    <option value={"High"}>
+                                        High
+                                    </option>
+
+                                </select>
+                            </Form.Group>
+                        </div>
 
                         <br/>
                         <Form.Group className='mb-3'>

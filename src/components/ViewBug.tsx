@@ -76,6 +76,7 @@ const ViewBug = () => {
             <b>Date: </b> {new Date(date).toLocaleString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
             </Card.Text>
 
+            <br />
             <Card.Text className="mb-3 leftAlign">
                 <b>Status: </b> {status}
             </Card.Text>
