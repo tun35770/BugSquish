@@ -14,6 +14,7 @@ const EditBug = () => {
     const [description, setDescription] = useState('');
     const [project, setProject] = useState('');
     const [status, setStatus] = useState('');
+    const [priority, setPriority] = useState('');
     const [date, setDate] = useState();
     const [alert, setAlert] = useState(false);
 
@@ -39,6 +40,7 @@ const EditBug = () => {
         setTitle(data.title);
         setProject(data.project);
         setStatus(data.status);
+        setPriority(data.priority);
         setDate(data.date);
         setIsLoaded(true);
         })
@@ -63,6 +65,16 @@ const EditBug = () => {
         setStatus(e.target.value);
     }
 
+    function onChangePriority(e: React.ChangeEvent<HTMLSelectElement>){
+        e.preventDefault();
+
+        if (!user){
+            return;
+        }
+
+        setPriority(e.target.value);
+        console.log(priority);
+    }
 
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
@@ -78,6 +90,7 @@ const EditBug = () => {
             project: project,
             date: new Date(),
             status: status,
+            priority: priority,
         };
 
         fetch('https://bugsquish.org/bugs/update/' + id, {
@@ -160,14 +173,41 @@ const EditBug = () => {
                                 value={status}
                                 onChange={onChangeStatus}>
                                 
-                                <option value={"open"}>
+                                <option value={"Open"}>
                                     Open
                                 </option>
-                                <option value={"in progress"}>
+                                <option value={"In Progress"}>
                                     In Progress
                                 </option>
-                                <option value={"closed"}>
+                                <option value={"Closed"}>
                                     Closed
+                                </option>
+
+                            </select>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minWidth: '130px',
+                        width: '10%',
+                        height: '2em'
+                        }}>
+                        <Form.Label className="mt-1"> Priority: </Form.Label>
+                            <select
+                                required
+                                className="form-control ps-3 py-0"
+                                value={priority}
+                                onChange={onChangePriority}>
+                                
+                                <option value={"Low"}>
+                                    Low
+                                </option>
+                                <option value={"Medium"}>
+                                    Medium
+                                </option>
+                                <option value={"High"}>
+                                    High
                                 </option>
 
                             </select>

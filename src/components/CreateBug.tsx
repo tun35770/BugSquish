@@ -100,7 +100,7 @@ const CreateBug = () => {
             project: project["title"],
             project_id: project["_id"],
             date: new Date(),
-            status: "open",
+            status: "Open",
         };
 
         fetch('https://bugsquish.org/bugs/add', {

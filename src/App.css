@@ -34,6 +34,24 @@ button:hover, .btn-bug-primary:hover {
   margin-top: 1em;
 }
 
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: top;
+  gap: 3em;
+  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
 .home-container {
   display: flex !important;
   flex-direction: column;

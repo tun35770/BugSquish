@@ -14,6 +14,7 @@ const ViewBug = () => {
     const [project, setProject] = useState('');
     const [date, setDate] = useState('');
     const [status, setStatus] = useState('');
+    const [priority, setPriority] = useState('');
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -40,6 +41,7 @@ const ViewBug = () => {
                 setProject(data.project);
                 setDate(data.date);
                 setStatus(data.status);
+                setPriority(data.priority);
 
                 setIsLoaded(true);  
             })
@@ -76,6 +78,10 @@ const ViewBug = () => {
 
             <Card.Text className="mb-3 leftAlign">
                 <b>Status: </b> {status}
+            </Card.Text>
+
+            <Card.Text className="mb-3 leftAlign">
+                <b>Priority: </b> {priority}
             </Card.Text>
 
             <Form>

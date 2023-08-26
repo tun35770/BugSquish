@@ -10,6 +10,7 @@ const bugSchema = new Schema({
     project_id: {type: String, required: true},
     date: { type: Date, required: true },
     status: { type: String, required: true},
+    priority: { type: String, required: true},
 }, {
     timestamps: true,
 });

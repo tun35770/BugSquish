@@ -18,6 +18,7 @@ import EditProject from './components/EditProject'
 import InviteUser from './components/InviteUser'
 import AcceptInvite from './components/AcceptInvite'
 import Home from './components/Home'
+import Dashboard from './components/Dashboard'
 
 function App() {
   const { logout } = useLogout();
@@ -99,7 +100,7 @@ function App() {
           { user ? 
             (
               <Routes>
-                <Route path="/" element={user ? <BugList /> : <Navigate to="/login"/>} />
+                <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login"/>} />
                 <Route path="/createbug" element={<CreateBug /> } />
                 <Route path="/edit/:id" element={<EditBug />} />
                 <Route path="/viewbug/:id" element={<ViewBug />} />

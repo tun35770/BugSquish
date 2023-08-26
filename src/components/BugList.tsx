@@ -19,8 +19,9 @@ const BugList = ( {project_id}: props ) => {
     project_id: string;
     date: Date;
     status: String;
+    priority: String;
 
-    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'open'){
+    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'Open', priority='High'){
         this._id = id;
         this.username = username;
         this.title = title;
@@ -29,6 +30,7 @@ const BugList = ( {project_id}: props ) => {
         this.project_id = project_id;
         this.date = date;
         this.status = status;
+        this.priority = priority;
     }
   }
 
@@ -143,7 +145,7 @@ const BugList = ( {project_id}: props ) => {
     //then filter only non-compelted bugs if required
     if(hideClosed){
       let newBugsDisplayed = [...bugs];
-      newBugsDisplayed = newBugsDisplayed.filter((thisBug) => thisBug.status !== 'closed')
+      newBugsDisplayed = newBugsDisplayed.filter((thisBug) => thisBug.status !== 'Closed')
       setBugsDisplayed(newBugsDisplayed);
     }
   }, [bugs, hideClosed])

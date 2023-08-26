@@ -49,7 +49,8 @@ router.route('/add').post((req: any, res: any) => {
     const project = req.body.project;
     const project_id = req.body.project_id;
     const date = Date.parse(req.body.date);
-    const status = req.body.status || "open";
+    const status = req.body.status || "Open";
+    const priority = req.body.priority || "High";
 
     const newBug = new Bug({
         username,
@@ -60,6 +61,7 @@ router.route('/add').post((req: any, res: any) => {
         project_id,
         date,
         status,
+        priority,
     });
 
     newBug.save()
@@ -134,11 +136,12 @@ router.route('/update/:id').post((req: any, res: any) => {
     
     Bug.findById(req.params.id)
         .then((bug: any) => {
-            bug.username = user.username;
-            bug.title = req.body.title;
-            bug.description = req.body.description;
-            bug.date = Date.parse(req.body.date);
-            bug.status = req.body.status ?? false;
+            bug.username = user.username ?? bug.username;
+            bug.title = req.body.title ?? bug.title;
+            bug.description = req.body.description ?? bug.description;
+            bug.date = Date.parse(req.body.date) ?? bug.date;
+            bug.status = req.body.status ?? bug.status;
+            bug.priority = req.body.priority ?? bug.priority;
 
             bug.save()
                 .then(() => {
