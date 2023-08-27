@@ -44,7 +44,7 @@ router.route('/').post((req: any, res: any) => {
 router.route('/mybugs/:id').get((req: any, res: any) => {
     const user_id = req.params.id;
 
-    Bug.findById( {user_id} )
+    Bug.find( {user_id} )
         .then((bug :any) => res.json(bug))
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
