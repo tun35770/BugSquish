@@ -43,21 +43,23 @@ button:hover, .btn-bug-primary:hover {
 
 .dashboard-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: top;
   gap: 3em;
-  margin: 3em auto 0 auto;
-  width: 90%;
-  height: 100vh;
+  margin: 1em;
+  width: 100%;
+
 }
 
 .charts-container {
   display: flex;
-  justify-content: left;
-  flex-direction: row;
+  justify-content: space-around;
+  flex-direction: column;
   flex-wrap: wrap;
+  gap: 3em;
   margin: 0 auto;
+  width: 30%;
 }
 
 .chart-container {
@@ -66,7 +68,7 @@ button:hover, .btn-bug-primary:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 auto;
-  width: 26vw;
+  width: 60%;
 }
 
 .home-container {
@@ -186,4 +188,15 @@ button:hover, .btn-bug-primary:hover {
     flex-wrap: wrap;
   }
 
+}
+
+@media screen and (max-width: 994px){
+  .charts-container {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .chart-container {
+    width: 30%;
+  }
 }

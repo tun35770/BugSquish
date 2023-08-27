@@ -104,7 +104,11 @@ export const UserList = ( {project_id} ) => {
                     fontFamily: 'Montserrat',
                 }}> Users </h1>
 
-                <ListGroup>
+                <ListGroup style={{
+                    width: '100%',
+                    maxHeight: '25em',
+                    overflow: 'auto'
+                }}>
 
                     <ListGroupItem style={{
                         display: 'flex',

@@ -257,10 +257,16 @@ const BugList = ( {project_id}: props ) => {
             </div>
 
             <ListGroup style={{
-              width: '100%'
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              maxHeight: '25em',
+              overflow: 'auto'
             }}>
 
               <ListGroupItem style={{
+                position: "sticky",
+                top: '0',
                 display: 'flex',
                 flexDirection: 'row',
                 margin: '0',

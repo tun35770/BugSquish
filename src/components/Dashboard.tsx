@@ -3,6 +3,7 @@ import {Doughnut} from 'react-chartjs-2'
 import { ArcElement } from 'chart.js'
 import {Chart as ChartJS} from 'chart.js/auto'
 import { useAuthContext } from '../hooks/useAuthContext';
+import BugList from './BugList';
 
 const Dashboard = () => {
 
@@ -43,9 +44,9 @@ const Dashboard = () => {
             label: "Tickets",
             data: [0,0,0],
             backgroundColor: [
-                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)',
                 'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
+                'rgb(255, 99, 132)'
               ],
         }]
     })
@@ -114,9 +115,9 @@ const Dashboard = () => {
                 label: "Tickets",
                 data: statusCounts,
                 backgroundColor: [
-                    '#90ee90',
+                    '#ff6090',
                     'gold',
-                    '#ff6090'
+                    '#90ee90'
                   ],
             }]
         })
@@ -192,6 +193,9 @@ const Dashboard = () => {
                         
                     </div>
                 </div>
+
+
+                <BugList />
             </div>
         }
     </>
