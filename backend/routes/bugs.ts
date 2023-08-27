@@ -6,6 +6,7 @@ import requireAuth from '../middleware/requireAuth'
 //require authentication for all bug routes
 router.use(requireAuth);
 
+//get all bugs for all projects this user belongs to
 router.route('/').post((req: any, res: any) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const user = req.body.user;
@@ -37,6 +38,15 @@ router.route('/').post((req: any, res: any) => {
             res.status(400).json("Error: " + e);
         }
       })
+});
+
+//get all bugs belonging to this user
+router.route('/mybugs/:id').get((req: any, res: any) => {
+    const user_id = req.body.user["_id"];
+
+    Bug.findById( {user_id} )
+        .then((bug :any) => res.json(bug))
+        .catch((err: any) => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req: any, res: any) => {
