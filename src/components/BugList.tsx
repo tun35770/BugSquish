@@ -236,19 +236,19 @@ const BugList = ( {project_id, userBugs}: props ) => {
               display:'flex',
               flexDirection:'row',
               justifyContent: 'flex-end',
-              textAlign: 'right',
               width: '100%'
             }}>
               <h1 className='dark-text' style={{
-                margin: '0.5em auto 0.25em 40%', //it works so dont touch.
+                margin: '0.5em 5em 0.25em 0', //it works so dont touch.
                 fontFamily: 'Montserrat',
+                alignSelf: 'center'
               }}> {userBugs ? "My Bugs" : "Bugs"} </h1>
 
               <div style={{
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'flex-end',
-                
+                alignSelf: 'flex-end',
                 fontSize: '1em'
               }} onClick={toggleHideClosed}> 
                 <div style={{
@@ -280,7 +280,7 @@ const BugList = ( {project_id, userBugs}: props ) => {
                 margin: '0',
                 justifyContent: 'space-between',
                 width:'100%',
-                
+                zIndex: 10,
               }}>
                 <div style={{width:'20%', cursor:'pointer', userSelect: 'none'}} onClick={() => sortByAttr('title')}>
                   <h5 id="bug_title"> Title </h5> 
@@ -308,9 +308,10 @@ const BugList = ( {project_id, userBugs}: props ) => {
           <>
             <br />
               <h3 className='dark-text' style={{
-                  textAlign: 'left',
-                  marginLeft: '1em', 
-                  fontFamily: 'Montserrat'}}> Your bugs will be displayed here. </h3>
+                textAlign: 'left',
+                marginLeft: '1em', 
+                fontFamily: 'Montserrat'}}> Your bugs will be displayed here. 
+              </h3>
           </>
         }
       </div>

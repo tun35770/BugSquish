@@ -62,9 +62,11 @@ const Bug = ( {bug, deleteBug} ) => {
               height: '100%'
             }}>
               {bug.title} 
-              <p style={{color:getStatusColor(), fontSize:'1.1em', margin:'0'}}> {bug.status} </p>
-              <div className="mt-3 mb-0" style={{display:'flex', gap:'1em'}}>
-              <p style={{fontSize:'1.1em', margin:'0'}}>Priority: </p><p style={{color:getPriorityColor(), fontSize:'1.1em', margin:'0'}}> {bug.priority} </p>
+              <div style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+                <p style={{color:getStatusColor(), fontSize:'1.1em', margin:'0'}}> {bug.status} </p>
+                <div className="mt-0 mb-0" style={{display:'flex', gap:'1em'}}>
+                  <p style={{fontSize:'1.1em', margin:'0'}}>Priority: </p><p style={{color:getPriorityColor(), fontSize:'1.1em', margin:'0'}}> {bug.priority} </p>
+                </div>
               </div>
             </div>
           </Card.Title>
