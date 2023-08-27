@@ -161,7 +161,7 @@ const Dashboard = () => {
     function getPriorityCounts() {
         const counts = [0,0,0] //open, in progress, closed
         for(let i = 0; i < myBugsLength; i++){
-            if(myBugs[i].status === "Open"){
+            if(myBugs[i].status === "Open" || myBugs[i].status === "In Progress"){
                 switch(myBugs[i].priority){
                     case "Low": counts[0]++;
                         break;

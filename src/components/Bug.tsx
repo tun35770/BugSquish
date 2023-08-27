@@ -16,6 +16,14 @@ const Bug = ( {bug, deleteBug} ) => {
     }
   }
 
+  const getPriorityColor = () => {
+    switch (bug.priority) {
+      case "Low": return '#90ee90';
+      case "Medium": return 'gold';
+      case "High": return '#ff6090';
+    }
+  }
+
   return (
     <ListGroupItem className='my-0 light-text blue-gradient' style=
       {{display: 'flex',
@@ -55,6 +63,9 @@ const Bug = ( {bug, deleteBug} ) => {
             }}>
               {bug.title} 
               <p style={{color:getStatusColor(), fontSize:'1.1em', margin:'0'}}> {bug.status} </p>
+              <div className="mt-3 mb-0" style={{display:'flex', gap:'1em'}}>
+              <p style={{fontSize:'1.1em', margin:'0'}}>Priority: </p><p style={{color:getPriorityColor(), fontSize:'1.1em', margin:'0'}}> {bug.priority} </p>
+              </div>
             </div>
           </Card.Title>
 
@@ -63,7 +74,7 @@ const Bug = ( {bug, deleteBug} ) => {
             flexDirection: 'row',
             width:'40%',
             padding: '0',
-            lineHeight:'1em',
+            lineHeight:'2em',
             fontSize: '0.75em'}}>
 
             <div className='light-text' style={{

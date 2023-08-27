@@ -61,7 +61,7 @@ const ViewProject = () => {
     } 
 
   return (
-    <>
+    <div className='view-project-container'>
         {isLoaded && 
         <>
             {error === undefined && 
@@ -138,7 +138,7 @@ const ViewProject = () => {
             <Loading />
         </>
         }
-    </>
+    </div>
   )
 }
 
