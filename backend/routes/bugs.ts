@@ -42,7 +42,7 @@ router.route('/').post((req: any, res: any) => {
 
 //get all bugs belonging to this user
 router.route('/mybugs/:id').get((req: any, res: any) => {
-    const user_id = req.body.user["_id"];
+    const user_id = req.params.id;
 
     Bug.findById( {user_id} )
         .then((bug :any) => res.json(bug))
