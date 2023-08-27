@@ -232,38 +232,43 @@ const BugList = ( {project_id, userBugs}: props ) => {
       }}>
         { (bugsLength > 0) && 
           <>
-            <div id="title-and-toggle" className = 'dark-text' style={{
-              display:'flex',
-              flexDirection:'row',
-              justifyContent: 'flex-end',
-              width: '100%'
-            }}>
-              <h1 className='dark-text' style={{
-                margin: '0.5em 5em 0.25em 0', //it works so dont touch.
-                fontFamily: 'Montserrat',
-                alignSelf: 'center'
-              }}> {userBugs ? "My Bugs" : "Bugs"} </h1>
+            <div style={{display:'flex'}}>
+              <div style={{width:'30%'}}>
 
-              <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignSelf: 'flex-end',
-                fontSize: '1em'
-              }} onClick={toggleHideClosed}> 
+              </div>
+              <div id="title-and-toggle" className = 'dark-text' style={{
+                display:'flex',
+                flexDirection:'row',
+                justifyContent: 'space-between',
+                width: '70%'
+              }}>
+                <h1 className='dark-text' style={{
+                  margin: '0.5em 1em 0.25em 0', //it works so dont touch.
+                  fontFamily: 'Montserrat',
+                  width: '50%'
+                }}> {userBugs ? "My Bugs" : "Bugs"} </h1>
+
                 <div style={{
-                  cursor: 'pointer',
-                  margin: '3.25em 0.25em 0 auto', 
-                  width: '1em', 
-                  height: '1em',
-                  border: '1px solid black'}} >  
-                  { hideClosed && <BsCheckLg style={{display:'block',margin:'auto'}} />}
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignSelf: 'flex-end',
+                  fontSize: '1em'
+                }} onClick={toggleHideClosed}> 
+                  <div style={{
+                    cursor: 'pointer',
+                    margin: '3.25em 0.25em 0 auto', 
+                    width: '1em', 
+                    height: '1em',
+                    border: '1px solid black'}} >  
+                    { hideClosed && <BsCheckLg style={{display:'block',margin:'auto'}} />}
+                  </div>
+                  <p style={{margin: '3em 0 0 auto'}}> Hide closed tickets </p>
                 </div>
-                <p style={{margin: '3em 0 0 auto'}}> Hide closed tickets </p>
+
               </div>
 
             </div>
-
             <ListGroup style={{
               display: 'flex',
               flexDirection: 'column',
