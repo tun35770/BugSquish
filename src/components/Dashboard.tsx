@@ -195,7 +195,10 @@ const Dashboard = () => {
                 </div>
 
 
-                <BugList />
+                <div className='dashboard-buglist-container'>
+                     <BugList />
+                </div>
+               
             </div>
         }
     </>

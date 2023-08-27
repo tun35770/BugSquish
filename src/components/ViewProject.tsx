@@ -66,12 +66,7 @@ const ViewProject = () => {
         <>
             {error === undefined && 
             <>
-                <Card className='view-project light-text blue-gradient' style=
-                    {{maxWidth: '75%', 
-                    margin: '3rem auto', 
-                    padding:'1rem',
-                    border:'1px solid white'
-                    }}>
+                <Card className='view-project light-text blue-gradient'>
                     
                     <Card.Body style={{
                         display:'flex', 
@@ -115,7 +110,12 @@ const ViewProject = () => {
                     flexWrap: 'wrap',
                     justifyContent:'space-between',
                 }}>
-                    <BugList project_id={project_id}/>
+                    <div style={{
+                        margin: '0 auto 1em auto'
+                    }}>
+                      <BugList project_id={project_id}/>  
+                    </div>
+                    
 
                     <UserList project_id={project_id} />
                 </div>

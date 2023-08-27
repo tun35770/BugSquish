@@ -52,6 +52,11 @@ button:hover, .btn-bug-primary:hover {
 
 }
 
+.dashboard-buglist-container {
+  margin: 0 auto;
+  width: 60%;
+}
+
 .charts-container {
   display: flex;
   justify-content: space-around;
@@ -133,6 +138,13 @@ button:hover, .btn-bug-primary:hover {
 .home-button {
   width: 50%;
   margin: 0 auto;
+}
+
+.view-project {
+  max-width: 75%;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 1px solid white;
 }
 
 .title {

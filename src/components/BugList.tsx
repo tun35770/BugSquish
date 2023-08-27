@@ -218,7 +218,7 @@ const BugList = ( {project_id}: props ) => {
     <>
     {isLoaded && 
       <div className='buglist' style={{
-        width:'60%',
+        width:'100%',
         minWidth:'500px',
         margin: '0 auto',
       }}>
