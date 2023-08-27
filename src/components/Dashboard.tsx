@@ -15,8 +15,9 @@ const Dashboard = () => {
         project_id: string;
         date: Date;
         status: String;
+        priority: String;
     
-        constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'open'){
+        constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'open', priority: string){
             this._id = id;
             this.username = username;
             this.title = title;
@@ -25,6 +26,7 @@ const Dashboard = () => {
             this.project_id = project_id;
             this.date = date;
             this.status = status;
+            this.priority= priority;
         }
       }
     
@@ -38,7 +40,21 @@ const Dashboard = () => {
     const [statusData, setStatusData] = useState({
         labels: ["Open", "In Progress", "Closed"],
         datasets: [{
-            label: "Tickets Status",
+            label: "Tickets",
+            data: [0,0,0],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+              ],
+        }]
+    })
+
+
+    const [priorityData, setPriorityData] = useState({
+        labels: ["Low", "Medium", "High"],
+        datasets: [{
+            label: "Tickets",
             data: [0,0,0],
             backgroundColor: [
                 'rgb(255, 99, 132)',
@@ -91,12 +107,12 @@ const Dashboard = () => {
 
     useEffect(() => {
 
-        const counts = getStatusCounts();
+        const statusCounts = getStatusCounts();
         setStatusData({
             labels: ["Open", "In Progress", "Closed"],
             datasets: [{
                 label: "Tickets",
-                data: counts,
+                data: statusCounts,
                 backgroundColor: [
                     '#90ee90',
                     'gold',
@@ -105,6 +121,19 @@ const Dashboard = () => {
             }]
         })
 
+        const priorityCounts = getPriorityCounts();
+        setPriorityData({
+            labels: ["Low", "Medium", "High"],
+            datasets: [{
+                label: "Tickets",
+                data: priorityCounts,
+                backgroundColor: [
+                    '#90ee90',
+                    'gold',
+                    '#ff6090'
+                ],
+            }]
+        })
         setIsLoaded(true);
     }, [bugs])
 
@@ -114,7 +143,7 @@ const Dashboard = () => {
             switch(bugs[i].status){
                 case "Open": counts[0]++;
                     break;
-                case "In progress": counts[1]++;
+                case "In Progress": counts[1]++;
                     break;
                 case "Closed": counts[2]++;
                     break;
@@ -125,18 +154,43 @@ const Dashboard = () => {
         return counts;
     }
 
+    function getPriorityCounts() {
+        const counts = [0,0,0] //open, in progress, closed
+        for(let i = 0; i < bugsLength; i++){
+            if(bugs[i].status === "Open"){
+                switch(bugs[i].priority){
+                    case "Low": counts[0]++;
+                        break;
+                    case "Medium": counts[1]++;
+                        break;
+                    case "High": counts[2]++;
+                        break;
+                    default: break;
+                }
+            }
+        }
+        return counts;
+    }
+
   return (
     <>
         {isLoaded && 
             <div className="dashboard-container">
 
-                <h1 className='py-3'> My Dashboard </h1>
-                <div className='chart-container'>
-                    
-                        <Doughnut data={statusData} />
-
+                <div className="charts-container">
+                    <div className='chart-container'>
+                            <h2> Tickets Status </h2>
+                            <Doughnut data={statusData} />
                         
-                    
+                    </div>
+                
+
+              
+                    <div className='chart-container'>
+                            <h2> Open Tickets Priorities </h2>
+                            <Doughnut data={priorityData} />
+                        
+                    </div>
                 </div>
             </div>
         }

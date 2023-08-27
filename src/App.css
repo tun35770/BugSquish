@@ -47,16 +47,26 @@ button:hover, .btn-bug-primary:hover {
   flex-wrap: wrap;
   justify-content: top;
   gap: 3em;
-  margin: 0 auto;
-  width: 50%;
+  margin: 3em auto 0 auto;
+  width: 90%;
   height: 100vh;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .chart-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin: 0 auto;
+  width: 26vw;
 }
 
 .home-container {
