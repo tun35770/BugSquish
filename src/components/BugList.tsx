@@ -6,10 +6,11 @@ import { BsCheckLg } from 'react-icons/bs'
 import Loading from './Loading';
 
 interface props {
-  project_id?: string | undefined
+  project_id?: string | undefined,
+  userBugs?: Array<any> | undefined
 }
 
-const BugList = ( {project_id}: props ) => {
+const BugList = ( {project_id, userBugs}: props ) => {
   class BugType {
     _id: string;
     username: string;
@@ -36,7 +37,7 @@ const BugList = ( {project_id}: props ) => {
 
   const { user } = useAuthContext();
 
-  const [bugs, setBugs] = useState<BugType[]>([]);
+  const [bugs, setBugs] = (userBugs ? useState<BugType[]>([...userBugs]) : useState<BugType[]>([]));
   const [bugsDisplayed, setBugsDisplayed] = useState<BugType[]>([]);
   const [bugsLength, setBugsLength] = useState(0);
 
@@ -44,16 +45,23 @@ const BugList = ( {project_id}: props ) => {
   const [sortAscending, setSortAscending] = useState(true);
   const sortables = ['title', 'project', 'username', 'date'];
 
-  const [hideClosed, setHideClosed] = useState(false);
+  const [hideClosed, setHideClosed] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
-  /*
-    TODO: Implement localStorage for bugs.
-  */
+
   useEffect(() => {
     
     if(!user){
       return;
     }
+
+    if(userBugs){
+      setBugsLength(userBugs.length);
+      setIsLoaded(true);
+
+      return;
+    }
+
+
 
     const data = {
       user: user
@@ -232,9 +240,9 @@ const BugList = ( {project_id}: props ) => {
               width: '100%'
             }}>
               <h1 className='dark-text' style={{
-                margin: '0.5em auto 0.25em 42%', //it works so dont touch.
+                margin: '0.5em auto 0.25em 40%', //it works so dont touch.
                 fontFamily: 'Montserrat',
-              }}> Bugs </h1>
+              }}> {userBugs ? "My Bugs" : "Bugs"} </h1>
 
               <div style={{
                 display: 'flex',
@@ -260,7 +268,7 @@ const BugList = ( {project_id}: props ) => {
               display: 'flex',
               flexDirection: 'column',
               width: '100%',
-              maxHeight: '25em',
+              maxHeight: userBugs ? '35em' : '25em',
               overflow: 'auto'
             }}>
 

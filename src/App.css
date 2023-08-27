@@ -47,7 +47,7 @@ button:hover, .btn-bug-primary:hover {
   flex-wrap: wrap;
   justify-content: top;
   gap: 3em;
-  margin: 1em;
+  margin: 1em auto;
   width: 100%;
 
 }

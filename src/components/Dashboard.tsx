@@ -8,34 +8,34 @@ import BugList from './BugList';
 const Dashboard = () => {
 
     class BugType {
-        _id: string;
-        username: string;
-        title: string;
-        description: string;
-        project: string;
-        project_id: string;
-        date: Date;
-        status: String;
-        priority: String;
-    
-        constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'open', priority: string){
-            this._id = id;
-            this.username = username;
-            this.title = title;
-            this.description = description;
-            this.project = project;
-            this.project_id = project_id;
-            this.date = date;
-            this.status = status;
-            this.priority= priority;
-        }
-      }
+    _id: string;
+    username: string;
+    title: string;
+    description: string;
+    project: string;
+    project_id: string;
+    date: Date;
+    status: String;
+    priority: String;
+
+    constructor(id:string, username:string, title:string, description:string, project:string, project_id: string, date:Date, status = 'Open', priority='High'){
+        this._id = id;
+        this.username = username;
+        this.title = title;
+        this.description = description;
+        this.project = project;
+        this.project_id = project_id;
+        this.date = date;
+        this.status = status;
+        this.priority = priority;
+    }
+  }
     
 
     const { user } = useAuthContext();
 
-    const [bugs, setBugs] = useState<BugType[]>([]);
-    const [bugsLength, setBugsLength] = useState(0);
+    const [myBugs, setMyBugs] = useState<BugType[]>([]);
+    const [myBugsLength, setMyBugsLength] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
     const [statusData, setStatusData] = useState({
@@ -68,30 +68,28 @@ const Dashboard = () => {
     ChartJS.register(ArcElement)
 
     useEffect(() => {
+
         if(!user){
             return;
-        }
-
-        const data = {
-            user: user
         }
 
         const fetchBugs = async () => {
             let fetchBugs: any;
 
-            fetchBugs = fetch('https://bugsquish.org/bugs', {
-                method: 'POST',
+            fetchBugs = fetch('https://bugsquish.org/bugs/mybugs/' + user.user_id, {
+                method: 'GET',
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                     'Authorization': `Bearer ${user.token}`
                 },
-                body: JSON.stringify(data)
+
             })
             .then((res) => res.json())
             .then((data) => {
-                setBugs(data);
-                setBugsLength(data.length);
+                setMyBugs(data);
+                setMyBugsLength(data.length);
+                setIsLoaded(true);
                 //console.log(data);
             })
             .catch((err) => console.log(err));
@@ -107,6 +105,11 @@ const Dashboard = () => {
     }, [])
 
     useEffect(() => {
+
+        if(!user)
+            return;
+        if(myBugsLength === 0)
+            return;
 
         const statusCounts = getStatusCounts();
         setStatusData({
@@ -135,13 +138,13 @@ const Dashboard = () => {
                 ],
             }]
         })
-        setIsLoaded(true);
-    }, [bugs])
+
+    }, [myBugs])
 
     function getStatusCounts() {
         const counts = [0,0,0] //open, in progress, closed
-        for(let i = 0; i < bugsLength; i++){
-            switch(bugs[i].status){
+        for(let i = 0; i < myBugsLength; i++){
+            switch(myBugs[i].status){
                 case "Open": counts[0]++;
                     break;
                 case "In Progress": counts[1]++;
@@ -157,9 +160,9 @@ const Dashboard = () => {
 
     function getPriorityCounts() {
         const counts = [0,0,0] //open, in progress, closed
-        for(let i = 0; i < bugsLength; i++){
-            if(bugs[i].status === "Open"){
-                switch(bugs[i].priority){
+        for(let i = 0; i < myBugsLength; i++){
+            if(myBugs[i].status === "Open"){
+                switch(myBugs[i].priority){
                     case "Low": counts[0]++;
                         break;
                     case "Medium": counts[1]++;
@@ -175,28 +178,28 @@ const Dashboard = () => {
 
   return (
     <>
-        {isLoaded && 
+        {isLoaded && myBugsLength > 0 &&
             <div className="dashboard-container">
 
                 <div className="charts-container">
                     <div className='chart-container'>
-                            <h2> Tickets Status </h2>
-                            <Doughnut data={statusData} />
+                        <h2> Tickets Status </h2>
+                        <Doughnut data={statusData} />
                         
                     </div>
                 
 
               
                     <div className='chart-container'>
-                            <h2> Open Tickets Priorities </h2>
-                            <Doughnut data={priorityData} />
+                        <h2> Open Tickets Priorities </h2>
+                        <Doughnut data={priorityData} />
                         
                     </div>
                 </div>
 
 
                 <div className='dashboard-buglist-container'>
-                     <BugList />
+                     <BugList userBugs={[...myBugs]}/>
                 </div>
                
             </div>

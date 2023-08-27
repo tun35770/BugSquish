@@ -111,7 +111,8 @@ const ViewProject = () => {
                     justifyContent:'space-between',
                 }}>
                     <div style={{
-                        margin: '0 auto 1em auto'
+                        margin: '0 auto 1em auto',
+                        width: '60%'
                     }}>
                       <BugList project_id={project_id}/>  
                     </div>
