@@ -45,6 +45,8 @@ const BugList = ( {project_id, userBugs}: props ) => {
   const [sortAscending, setSortAscending] = useState(true);
   const sortables = ['title', 'project', 'username', 'date'];
 
+  const [projectOwner, setProjectOwner] = useState('');
+
   const [hideClosed, setHideClosed] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -93,21 +95,34 @@ const BugList = ( {project_id, userBugs}: props ) => {
       //specific project
       else {
         fetchBugs = fetch('https://bugsquish.org/bugs/byproject/' + project_id, {
-                method: 'GET',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json;charset=UTF-8",
-                    'Authorization': `Bearer ${user.token}`
-                },
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setBugs(data);
-                setBugsLength(data.length);
-                //console.log(data);
-                setIsLoaded(true);
-            })
-            .catch((err) => console.log(err));
+              method: 'GET',
+              headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json;charset=UTF-8",
+                  'Authorization': `Bearer ${user.token}`
+              },
+          })
+          .then((res) => res.json())
+          .then((data) => {
+              setBugs(data);
+              setBugsLength(data.length);
+              //console.log(data);
+              setIsLoaded(true);
+          })
+          .catch((err) => console.log(err));
+
+        //get project owner
+        fetch('https://bugsquish.org/projects/' + project_id, {
+          method: 'GET',
+          headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+              'Authorization': `Bearer ${user.token}`
+          },
+        })
+        .then(res => res.json())
+        .then((data) => setProjectOwner(data.username))
+        .catch((err) => console.log(err));
       }
     }
 
@@ -195,7 +210,7 @@ const BugList = ( {project_id, userBugs}: props ) => {
   
   function bugList(){
     return bugsDisplayed.map((currentBug: BugType) => {
-      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]}  />
+      return <Bug bug={currentBug} deleteBug={deleteBug} key={currentBug["_id"]} projectOwner={projectOwner}  />
     });
   }
   

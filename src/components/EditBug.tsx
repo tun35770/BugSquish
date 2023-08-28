@@ -12,6 +12,7 @@ const EditBug = () => {
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [username, setUsername] = useState('');
     const [project, setProject] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
@@ -36,6 +37,7 @@ const EditBug = () => {
         .then((res) => res.json())
         .then((data) => {
         //console.log(data);
+        setUsername(data.username);
         setDescription(data.description);
         setTitle(data.title);
         setProject(data.project);
@@ -84,7 +86,7 @@ const EditBug = () => {
         }
 
         const bug = {
-            user: user,
+            user: username,
             title: title,
             description: description,
             project: project,

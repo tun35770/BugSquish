@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import {BsXCircle, BsPencil, BsEye} from 'react-icons/bs'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const Bug = ( {bug, deleteBug} ) => {
+const Bug = ( {bug, deleteBug, projectOwner} ) => {
 
+  const admin = projectOwner ?? '';
   const { user } = useAuthContext();
 
   const getStatusColor = () => {
@@ -137,13 +138,13 @@ const Bug = ( {bug, deleteBug} ) => {
               flexDirection: 'column',
               justifyContent: 'flex-start'
             }}>
-              {bug.username === user.username && 
+              { (bug.username === user.username || user.username === admin) && 
                 <a onClick={() => {deleteBug(bug["_id"], bug.project_id)}}> <BsXCircle style={{cursor: 'pointer', color:'red'}} /> </a>
               }
               
               <Link to={"/viewbug/" + bug["_id"]} style={{color: 'white'}}> <BsEye /> </Link>
 
-              {bug.username === user.username && 
+              { (bug.username === user.username || user.username === admin) && 
                 <Link to={"/edit/" + bug["_id"]} style={{color:'gold'}}> <BsPencil /> </Link>
               }
             </div>
