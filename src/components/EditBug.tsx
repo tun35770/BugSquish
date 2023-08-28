@@ -90,7 +90,7 @@ const EditBug = () => {
             title: title,
             description: description,
             project: project,
-            date: new Date(),
+            date: date,
             status: status,
             priority: priority,
         };
