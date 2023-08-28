@@ -13,6 +13,7 @@ const CreateBug = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [project, setProject] = useState<any | undefined>(undefined);
+    const [priority, setPriority] = useState('');
     const [error, setError] = useState<String | undefined>(undefined);
     const [alert, setAlert] = useState(false);
 
@@ -76,6 +77,16 @@ const CreateBug = () => {
         setProject(newProject);
     }
 
+    function onChangePriority(e: React.ChangeEvent<HTMLSelectElement>){
+        e.preventDefault();
+
+        if (!user){
+            return;
+        }
+
+        setPriority(e.target.value);
+    }
+
     function onSubmit(e: React.FormEvent){
         e.preventDefault();
 
@@ -101,6 +112,7 @@ const CreateBug = () => {
             project_id: project["_id"],
             date: new Date(),
             status: "Open",
+            priority: priority,
         };
 
         fetch('https://bugsquish.org/bugs/add', {
@@ -188,6 +200,33 @@ const CreateBug = () => {
                             }
                         </select>
                     </Form.Group>
+
+                    <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            minWidth: '130px',
+                            width: '10%',
+                            height: '2em'
+                            }}>
+                            <Form.Label className="mt-1"> Priority: </Form.Label>
+                                <select
+                                    required
+                                    className="form-control ps-3 py-0"
+                                    value={priority}
+                                    onChange={onChangePriority}>
+                                    
+                                    <option value={"Low"}>
+                                        Low
+                                    </option>
+                                    <option value={"Medium"}>
+                                        Medium
+                                    </option>
+                                    <option value={"High"}>
+                                        High
+                                    </option>
+
+                                </select>
+                            </Form.Group>
                     <br/>
                     <Form.Group className='mb-3'>
                         <Form.Control
