@@ -204,6 +204,14 @@ const Dashboard = () => {
                
             </div>
         }
+
+        {myBugsLength <= 0 && 
+            <div className="dashboard-container">
+
+                <h1 className="mx-auto"> No bug tickets to display </h1>
+           
+            </div>
+        }
     </>
   )
 }
