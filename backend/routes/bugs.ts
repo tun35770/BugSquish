@@ -146,7 +146,7 @@ router.route('/update/:id').post((req: any, res: any) => {
     
     Bug.findById(req.params.id)
         .then((bug: any) => {
-            bug.username = user.username ?? bug.username;
+            bug.username = req.body.username ?? bug.username;
             bug.title = req.body.title ?? bug.title;
             bug.description = req.body.description ?? bug.description;
             bug.date = Date.parse(req.body.date) ?? bug.date;

@@ -14,9 +14,16 @@ const EditBug = () => {
     const [description, setDescription] = useState('');
     const [username, setUsername] = useState('');
     const [project, setProject] = useState('');
+    const [projectId, setProjectID] = useState('');
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
     const [date, setDate] = useState();
+
+    const [projectOwner, setProjectOwner] = useState('');
+    const [users, setUsers] = useState([]);
+
+    const [projectUsers, setProjectUsers] = useState();
+
     const [alert, setAlert] = useState(false);
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -36,18 +43,59 @@ const EditBug = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-        //console.log(data);
-        setUsername(data.username);
-        setDescription(data.description);
-        setTitle(data.title);
-        setProject(data.project);
-        setStatus(data.status);
-        setPriority(data.priority);
-        setDate(data.date);
-        setIsLoaded(true);
+            //console.log(data);
+            setUsername(data.username);
+            setDescription(data.description);
+            setTitle(data.title);
+            setProject(data.project);
+            setProjectID(data.project_id);
+            setStatus(data.status);
+            setPriority(data.priority);
+            setDate(data.date);
+            setIsLoaded(true);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
+
+        
     }, [user]);
+
+    useEffect(() => { 
+
+        if(!user) return;
+
+        if(projectId !== ''){
+            //get project owner
+            fetch('https://bugsquish.org/projects/' + projectId, {
+                method: 'GET',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                    'Authorization': `Bearer ${user.token}`
+                },
+            })
+            .then(res => res.json())
+            .then((data) => {
+                setProjectOwner(data.username)
+                if(user.username === data.username){
+                    fetch('https://bugsquish.org/projects/users/' + projectId, {
+                        method: 'GET',
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json;charset=UTF-8",
+                            'Authorization': `Bearer ${user.token}`
+                        }
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setUsers(data);
+                        //console.log(data);
+                    })
+                    .catch((err) => console.log(err));
+                }
+            })
+            .catch((err) => console.log(err));
+        }
+    }, [projectId]);
 
     function onChangeTitle(e: React.ChangeEvent<HTMLInputElement>){
         setTitle(e.currentTarget.value);
@@ -76,6 +124,18 @@ const EditBug = () => {
 
         setPriority(e.target.value);
         console.log(priority);
+    }
+
+
+    function onChangeUsername(e: React.ChangeEvent<HTMLSelectElement>){
+        e.preventDefault();
+
+        if (!user){
+            return;
+        }
+
+        setUsername(e.target.value);
+        console.log(username);
     }
 
     function onSubmit(e: React.FormEvent){
@@ -217,6 +277,36 @@ const EditBug = () => {
 
                                 </select>
                             </Form.Group>
+
+                            {user.username === projectOwner && 
+                                <Form.Group className="mb-3 leftAlign" controlId="formGroupProject" style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                minWidth: '130px',
+                                width: '10%',
+                                height: '2em'
+                                }}>
+                                <Form.Label className="mt-1"> User: </Form.Label>
+                                    <select
+                                        required
+                                        className="form-control ps-3 py-0"
+                                        value={username}
+                                        onChange={onChangeUsername}>
+                                        
+                                        {
+                                            users.map((thisUser, i) => {
+                                                return <option
+                                                        key={i}
+                                                        value={thisUser["username"]}>
+                                                            {thisUser["username"]}
+                                                    </option>
+                                            })
+                                        
+                                        }
+
+                                    </select>
+                                </Form.Group>
+                            }
                         </div>
 
                         <br/>
