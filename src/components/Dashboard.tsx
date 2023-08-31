@@ -81,7 +81,7 @@ const Dashboard = () => {
             let fetchBugs: any;
 
             fetchBugs = fetch('https://bugsquish.org/bugs/mybugs/' + user.user_id, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
