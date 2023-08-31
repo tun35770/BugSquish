@@ -73,6 +73,10 @@ const Dashboard = () => {
             return;
         }
 
+        const data = {
+            user: user
+        }
+
         const fetchBugs = async () => {
             let fetchBugs: any;
 
@@ -83,6 +87,7 @@ const Dashboard = () => {
                     "Content-Type": "application/json;charset=UTF-8",
                     'Authorization': `Bearer ${user.token}`
                 },
+                body: JSON.stringify(data)
 
             })
             .then((res) => res.json())

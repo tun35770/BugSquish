@@ -41,10 +41,11 @@ router.route('/').post((req: any, res: any) => {
 });
 
 //get all bugs belonging to this user
-router.route('/mybugs/:id').get((req: any, res: any) => {
+router.route('/mybugs/:id').post((req: any, res: any) => {
     const user_id = req.params.id;
+    const username = req.body.user.username;
 
-    Bug.find( {user_id} )
+    Bug.find( {username} )
         .then((bug :any) => res.json(bug))
         .catch((err: any) => res.status(400).json('Error: ' + err));
 });
