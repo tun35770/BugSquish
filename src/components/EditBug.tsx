@@ -123,7 +123,6 @@ const EditBug = () => {
         }
 
         setPriority(e.target.value);
-        console.log(priority);
     }
 
 
@@ -135,7 +134,6 @@ const EditBug = () => {
         }
 
         setUsername(e.target.value);
-        console.log(username);
     }
 
     function onSubmit(e: React.FormEvent){
@@ -146,7 +144,8 @@ const EditBug = () => {
         }
 
         const bug = {
-            user: username,
+            user: user,
+            username: username,
             title: title,
             description: description,
             project: project,
@@ -155,6 +154,7 @@ const EditBug = () => {
             priority: priority,
         };
 
+        console.log(user.token)
         fetch('https://bugsquish.org/bugs/update/' + id, {
             method: 'POST',
             headers: {
